@@ -1,0 +1,17 @@
+//registrarse e iniciar repositorio local
+	git init
+//ver estado archivos
+	git status
+//averiguar nombre del remoto
+	git remote
+//clonar repositorio
+ 	git clone https://github.com/FranciscoJCastellano/JuegoApMulti.git -v
+//coger archivos del remoto para empezar
+	git pull pb master --allow-unrelated-histories git pull pb master --allow-unrelated-histories
+//preparar todos los archivos para commit(-v para que salgan mas datos)
+	git add * -v
+//comprometer archivos xd
+	git commit -m "mensaje de commit" -v
+//subir archivos modificados
+	git push origin master
+
