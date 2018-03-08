@@ -19,7 +19,7 @@ function cargaContextoCanvas(idCanvas){
 }
 function gameOn(){
   player.show();
-  setInterval(draw,20);
+  setInterval(draw,80);
 }
 /*Guardamos el contexto sin nada y dibujamos al jugadxr en la posicion inicial*/
 function setup(){
@@ -41,13 +41,12 @@ function draw(){
     player.update();
   }
 }
-
 function borra_todo(){
   ctx = cargaContextoCanvas('myCanvas');
   if(ctx){
     //console.log("restore");
     ctx.restore();              // restaura el contexto sin efectos
-    ctx.clearRect(0,0,800,500); // borra las figuras
+    ctx.clearRect(0,0,ctx.width,ctx.height); // borra las figuras
     ctx.save();                 // guarda el contexto limpio de efectos
   }
 }
