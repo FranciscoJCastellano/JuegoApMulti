@@ -1,3 +1,8 @@
+/************************************
+Autor: Francisco Javier Castellano Farrak
+Fecha: 10/3/18
+Definición: constructor del objeto jugador
+*************************************/
 var w=800;
 var h=500;
 var step=10;
@@ -6,6 +11,8 @@ function Player(){
   this.y=h/2;
   this.len=20;
   this.velocity=0;
+
+  /*función que dibuja el jugador en el canvas*/
   this.show=function(){
     ctx = cargaContextoCanvas('myCanvas');
     if(ctx){
@@ -14,6 +21,11 @@ function Player(){
       ctx.fill();
     }
   }
+  /*función que se encarga alterar el movimiento del jugador*/
+
+  //nota: una vez esté implementado para coger eventos de
+  //flechas del teclado esto sería distinto
+
   this.update=function(){
     this.velocity=step;
     this.velocity*=0.92;
