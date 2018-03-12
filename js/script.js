@@ -1,4 +1,6 @@
 /*código del juego*/
+var step=10;
+
 window.onload = function(){
   setup();
   gameOn();
@@ -25,6 +27,8 @@ function gameOn(){
 /*Guardamos el contexto sin nada y dibujamos al jugadxr en la posicion inicial*/
 function setup(){
   player=new Player();
+  enemy=new Enemy();
+
   window.addEventListener('keydown', function(e){
     e.preventDefault();
     listenKeyPressed();
@@ -34,6 +38,8 @@ function setup(){
     //console.log("save");
     ctx.save();  // guarda el contexto limpio de efectos
     player.show();
+    enemy.show();
+
   }
 }
 /*borramos el canvas y dibujamos de nuevo al player*/
@@ -41,11 +47,19 @@ function draw(){
   ctx = cargaContextoCanvas('myCanvas');
   if(ctx){
 
-borra_todo();
+    borra_todo();
     // guarda el contexto limpio de efectos
+    enemy.update();
+    player.colision();
+    enemy.colision();
+    comer(player,enemy);
     player.show();
-    //player.update();
-}
+    enemy.show();
+    if(player.score>1){
+      console.log(player.score);
+
+    }
+  }
 
 }
 function borra_todo(){
@@ -58,29 +72,37 @@ function borra_todo(){
   }
 }
 
+/*funcion para ver si el player y el enemigo están en la misma posicion*/
+function comer(player,enemy){
+  if(player.x===enemy.x&&player.y===enemy.y){
+    player.score++;
+  }
+}
+
+
 
 function listenKeyPressed(){
   //Esta funcion se ejecuta al pulsar una tecla
   ////-->> window.addEventListener('keydown',listenKeyPressed,true);
-	keyCode=window.event.keyCode;//coge el codigo de la tecla pulsada
-	switch (keyCode){
-		case 40: //abajo
-    player.y+=30;
+  keyCode=window.event.keyCode;//coge el codigo de la tecla pulsada
+  switch (keyCode){
+    case 40: //abajo
+    player.y+=step;
     //alert("holaaaa abajo");
-			break;
-		case 39: //derecha
-    player.x+=30;
+    break;
+    case 39: //derecha
+    player.x+=step;
     //alert("holaaaa d");
-			break;
-		case 38: //arriba
-    player.y-=30;
+    break;
+    case 38: //arriba
+    player.y-=step;
     //alert("holaaaa arriba");
-			break;
-		case 37: //izquierda
-    player.x-=30;
+    break;
+    case 37: //izquierda
+    player.x-=step;
     //alert("holaaaa izq");
-			break;
-		default:
-			break;
-		}
+    break;
+    default:
+    break;
+  }
 }

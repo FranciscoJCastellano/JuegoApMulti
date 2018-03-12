@@ -5,26 +5,42 @@ Definición: constructor del objeto tipo para los enemigos
 *************************************/
 var w=800;
 var h=500;
-var step=5;
-var len=10;
-function Player(){
-  this.x=0;
-  this.y=0;
-  this.radio=10;
+function Enemy(){
+  this.x=Math.random()*w-1;
+  this.y=Math.random()*h-1;
+  this.len=5;
+  this.velx=Math.random()*10+1;
+ this.vely=Math.random()*10+1;
+this.score=0;
 
-  /*función que dibuja el jugador en el canvas*/
+  /*dibuja un enemigo*/
   this.show=function(){
+
     ctx = cargaContextoCanvas('myCanvas');
     if(ctx){
-      ctx.fillStyle = '#ffffff';
-      ctx.rect(this.x,this.y,len,len);
-      ctx.fill();
+      //alert("player show");
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(this.x,this.y,this.len,this.len);
+
     }
   }
-  /*función que se encarga alterar el movimiento de los enemigos*/
+/*actualiza la posicion del enemigo*/
   this.update=function(){
-    this.x=this.x+step;
-    this.y=this.y+step;
-    this.show();
+    // this.velx=Math.random()*10+1;
+    // this.vely=Math.random()*10+1;
+    this.x+=this.velx;
+    this.y+=this.vely;
   }
-}
+
+  /*deteccion de colisiones de los enemigos*/
+  this.colision=function(){
+    if(this.y>=h-this.len/2||this.y<=-this.len/2){//bottom threshold
+      this.vely=-this.vely;
+    }
+    if(this.x>=w-this.len/2||this.x<=-this.len/2){//bottom threshold
+      this.velx=-this.velx;
+    }
+  }
+
+
+  }

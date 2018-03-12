@@ -1,46 +1,38 @@
 var w=800;
 var h=500;
-var step=10;
 function Player(){
   this.x=50;
   this.y=50;
   this.len=20;
-  this.velocity=0;
+  this.score=0;
 
+  /*funcion que dibuja el player*/
   this.show=function(){
 
     ctx = cargaContextoCanvas('myCanvas');
     if(ctx){
-        //alert("player show");
+      //alert("player show");
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(this.x,this.y,this.len,this.len);
 
     }
   }
 
-/*
-  this.update=function(){
-    this.velocity=step;
-    this.velocity*=0.92;
-    this.y+=this.velocity;
-    //this.x+=this.velocity;
-    if(this.y>h){//bottom threshold
+/*funcion para cambiar posicion del jugador al llegar al final del canvas*/
+  this.colision=function(){
+    if(this.y>=h-this.len/2){//bottom threshold
       this.y=0;
-      this.velocity=0;
     }
-    if(this.y<0){//top threshold
-      this.y=h;
-      this.velocity=0;
+    if(this.y<=-this.len/2){//top threshold
+      this.y=h-this.len;
     }
-    if(this.x>w){//bottom threshold
+    if(this.x>=w-this.len/2){//bottom threshold
       this.x=0;
-      this.velocity=0;
     }
-    if(this.x<0){//top threshold
-      this.x=w;
-      this.velocity=0;
+    if(this.x<=-this.len/2){//top threshold
+      this.x=w-this.len;
     }
   }
-  */
+
 
 }
