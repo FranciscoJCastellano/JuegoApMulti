@@ -5,13 +5,14 @@ Definición: constructor del objeto tipo para los enemigos
 *************************************/
 var w=800;
 var h=500;
+var minVel=2;
+var maxVel=5;
 function Enemy(){
   this.x=Math.random()*w-1;
   this.y=Math.random()*h-1;
   this.len=5;
-  this.velx=Math.random()*10+1;
- this.vely=Math.random()*10+1;
-this.score=0;
+  this.velx=Math.floor(Math.random()*(maxVel-minVel+1)+minVel);
+ this.vely=Math.floor(Math.random()*(maxVel-minVel+1)+minVel);
 
   /*dibuja un enemigo*/
   this.show=function(){
@@ -26,10 +27,10 @@ this.score=0;
   }
 /*actualiza la posicion del enemigo*/
   this.update=function(){
-    // this.velx=Math.random()*10+1;
-    // this.vely=Math.random()*10+1;
+
     this.x+=this.velx;
     this.y+=this.vely;
+    this.colision();
   }
 
   /*deteccion de colisiones de los enemigos*/

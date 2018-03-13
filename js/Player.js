@@ -1,3 +1,8 @@
+/************************************
+Autor: Francisco Javier Castellano Farrak
+Fecha: 10/3/18
+Definición: constructor del objeto player
+*************************************/
 var w=800;
 var h=500;
 function Player(){
@@ -5,6 +10,7 @@ function Player(){
   this.y=50;
   this.len=20;
   this.score=0;
+  this.level=5;
 
   /*funcion que dibuja el player*/
   this.show=function(){

@@ -1,6 +1,6 @@
 /*código del juego*/
 var step=10;
-
+var enemies=[];
 window.onload = function(){
   setup();
   gameOn();
@@ -27,7 +27,8 @@ function gameOn(){
 /*Guardamos el contexto sin nada y dibujamos al jugadxr en la posicion inicial*/
 function setup(){
   player=new Player();
-  enemy=new Enemy();
+  //enemy=new Enemy();
+  enemies.push(new Enemy);
 
   window.addEventListener('keydown', function(e){
     e.preventDefault();
@@ -38,8 +39,11 @@ function setup(){
     //console.log("save");
     ctx.save();  // guarda el contexto limpio de efectos
     player.show();
-    enemy.show();
-
+    //enemy.show();
+    for(var i=enemies.length-1;i>=0;i--){
+      enemies[i].show();
+      enemies[i].update();
+    }
   }
 }
 /*borramos el canvas y dibujamos de nuevo al player*/
@@ -48,13 +52,17 @@ function draw(){
   if(ctx){
 
     borra_todo();
-    // guarda el contexto limpio de efectos
-    enemy.update();
     player.colision();
-    enemy.colision();
-    comer(player,enemy);
     player.show();
-    enemy.show();
+    for(var i=enemies.length-1;i>=0;i--){
+      comer(player,enemies[i]);
+
+      enemies[i].show();
+      enemies[i].update();
+    }
+    if(enemies.length<player.level){
+      enemies.push(new Enemy);
+    }
     if(player.score>1){
       console.log(player.score);
 
