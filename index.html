@@ -3,6 +3,7 @@
   <title>Juego</title>
   <meta charset="utf-8" >
   <meta name="author" content="Sergio Elola García-Jaime Moreno Quintanar-Francisco Javier Castellano Farrak-Alejandro Enrique Trigueros Álvarez">
+  <meta name="keywords" content="fruit,fruta,mermelada,destino,tienda,lady marmalade">
   <script src="js/conf.js" type="text/javascript"></script>
   <script src="js/script.js" type="text/javascript"></script>
   <script src="js/Enemy.js" type="text/javascript"></script>
@@ -30,14 +31,40 @@
         <li><a onclick="hacerVisible(1)"class="link" href="#descripcion">Descripcion</a></li>
         <li><a onclick="hacerVisible(2)"class="link" href="#proceso">Proceso Desarrollo</a></li>
         <li><a onclick="hacerVisible(3)"class="link" href="#autores">Autores</a></li>
-        <li><a onclick="hacerVisible(4)"class="link" href="#referencias">Cesta de la Compra</a></li>
+        <li><a onclick="hacerVisible(4)"class="link" href="#referencias">Referencias</a></li>
       </ul>
     </div>
   </nav>
+
+
   <section id="juego" class="visiblx">
     <h3>Juego</h3>
-    <canvas id="myCanvas" width="800" height="500">
-    </canvas>
+	<div>
+		<video loop
+			id='video'
+			type='video/mp4'
+			src="multimedia/Gazpacho.mp4"
+			onplaying="alerta('PLAY');"
+			onpause="alerta('PAUSE');"
+			>
+			Tu navegador no es compatible con la reproducción de este vídeo
+		</video>
+		<div id='buttons'>
+			<button onclick="getVideo().play()">Play</button>
+			<button onclick="getVideo().pause()">Pause</button>
+			<button onclick="getVideo().load()">Reload</button>
+			<button onclick="isEnded(video)">Is ended?</button>
+			<button onclick="getVideo().muted=true">Silenciar</button>
+			<button onclick="getVideo().muted=false">Volumen</button><br>
+			<button onclick="getVideo().volume+=0.1">Subir volumen</button>
+			<button onclick="getVideo().volume-=0.1">Bajar volumen</button>
+
+		</div>
+		<canvas id="myCanvas" width="800" height="500">
+		</canvas>
+	</div>
+
+
   </section>
   <section id="descripcion" class="ocultx">
     <h3>Descripcion</h3>
@@ -51,9 +78,12 @@
     <h3>Autores</h3>
     <p>afSEGFASDGASD34545GASDGS</p>
   </section>
+
+
   <section id="referencias" class="ocultx">
     <h3>Referencias</h3>
     <p>afSEGFASDGASDwerywer5646GASDGS</p>
+
   </section>
 </body>
 </html>

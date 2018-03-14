@@ -11,7 +11,8 @@ function Player(){
   this.speedY = 0;
   this.len=20;
   this.score=0;
-  this.level=4;
+  this.level=5;
+  this.hasCollided=false;
 
 /************************************
 Autor: Alejandro Enrique Trigueros Álvarez

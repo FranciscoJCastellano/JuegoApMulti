@@ -13,7 +13,7 @@ function Wall(){
   this.x=Math.random()*w-1;
   this.y=Math.random()*h-1;
   this.width=Math.floor(Math.random()*(maxW-minW+1)+minW);
-  this.height=Math.floor(Math.random()*(maxH-minH+1)+minH);;
+  this.height=Math.floor(Math.random()*(maxH-minH+1)+minH);
 
   /************************************
   Autor: Francisco Javier Castellano Farrak

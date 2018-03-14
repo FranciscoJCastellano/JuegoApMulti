@@ -39,11 +39,12 @@ function gameOn(){
 /*Guardamos el contexto sin nada y dibujamos al jugadxr en la posicion inicial*/
 function setup(){
   player=new Player();
-  //enemy=new Enemy();
-  enemies.push(new Enemy);
 
   for(var i=0;i<factor*player.level;i++){
     walls.push(new Wall);
+  }
+  for(var i=0;i<player.level*factor/2;i++){
+    enemies.push(new Enemy);
   }
   window.addEventListener('keydown', function(e){
     e.preventDefault();
@@ -54,16 +55,18 @@ function setup(){
   if(ctx){
     //console.log("save");
     ctx.save();  // guarda el contexto limpio de efectos
-    player.show();
+
+    //dibuja cada obstáculo
+    for(var i=walls.length-1;i>=0;i--){
+      walls[i].show();
+    }
     //dibuja y actualiza la posición de cada enemigo
     for(var i=enemies.length-1;i>=0;i--){
       enemies[i].update();
       enemies[i].show();
     }
-    //dibuja cada obstáculo
-    for(var i=walls.length-1;i>=0;i--){
-      walls[i].show();
-    }
+    player.show();
+
   }
 }
 /************************************
@@ -78,23 +81,16 @@ function draw(){
     borra_todo();
     player.colision();
     player.show();
-    for(var i=enemies.length-1;i>=0;i--){
-      comer(player,enemies[i]);
+    comer(player,enemies);
 
+    for(var i=enemies.length-1;i>=0;i--){
       enemies[i].show();
       enemies[i].update();
     }
     //dibuja
-    for(var i=walls.length-1;i>=0;i--){
-      walls[i].show();
-    }
-    if(enemies.length<player.level){
-      enemies.push(new Enemy);
-    }
-    /*if(player.score>=1){
-      console.log(player.score);
-    }*/
-    console.log(player.score);
+    //  for(var i=walls.length-1;i>=0;i--){
+    //    walls[i].show();
+    // }
 
   }
 
@@ -105,10 +101,28 @@ Fecha: 13/3/18
 Definición: función para ver si el player y el enemigo están en la misma posición
 Ref:https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
 *************************************/
-function comer(player,enemy){
-  if(enemy.x<player.x+this.len&&enemy.x+enemy.width>player.x&&enemy.y<player.y+this.len&&enemy.y+enemy.width>player.y){
-    player.score++;
+function comer(player,enemies){
+  for(var i=enemies.length-1;i>=0;i--){
+    if(player.hasCollided==false){
+      if (coincide(player,enemies[i])){
+        if(i>-1){
+          enemies.splice(i,1);
+        }
+        player.hasCollided=true;
+        player.score++;
+        console.log(player.score);
+      }
+    }else if(player.hasCollided==true&&!coincide(player,enemies[i])){
+        player.hasCollided=false;
+    }
   }
+}
+function coincide(player,enemy){
+  var coincide=player.x < enemy.x + enemy.len &&
+  player.x + player.len > enemy.x &&
+  player.y < enemy.y + enemy.len &&
+  player.len + player.y > enemy.y;
+  return coincide;
 }
 
 
@@ -132,7 +146,7 @@ function listenKeyPressed(key){
   }
   player.movePlayer();
   if(key==32){//ESPACIO
-    alert("eres un pipa :3");
+    alert("Eres un pipa :3");
   }
 
 

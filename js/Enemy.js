@@ -9,8 +9,8 @@ var limiter=0.32;
 function Enemy(){
   this.x=Math.random()*w-1;
   this.y=Math.random()*h-1;
-  this.len=5;
-  this.through=false;
+  this.len=10;
+  this.through=false;//propiedad para atravesar las paredes
   this.velx=Math.floor(Math.random()*(maxVel-minVel+1)+minVel)*limiter;
   this.vely=Math.floor(Math.random()*(maxVel-minVel+1)+minVel)*limiter;
 
