@@ -1,5 +1,5 @@
 /*código del juego*/
-var step=10;
+var step=15;
 var enemies=[];
 window.onload = function(){
   setup();
