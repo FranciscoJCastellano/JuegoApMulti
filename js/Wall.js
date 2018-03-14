@@ -5,20 +5,28 @@ Definición: constructor del objeto tipo obstáculo
 *************************************/
 var w=800;
 var h=500;
-function Wall(){
-  this.x=w/2;
-  this.y=h/3;
-  this.width=70;
-  this.height=10;
+var maxW=220;
+var maxH=100;
+var minW=10;
+var minH=10;
 
-  /*función que dibuja los obstáculos en el canvas*/
+function Wall(){
+  this.x=Math.random()*w-1;
+  this.y=Math.random()*h-1;
+  this.width=Math.floor(Math.random()*(maxW-minW+1)+minW);
+  this.height=Math.floor(Math.random()*(maxH-minH+1)+minH);;
+
+  /************************************
+  Autor: Francisco Javier Castellano Farrak
+  Fecha: 10/3/18
+  Definición: función que dibuja un obstáculo pared
+  *************************************/
   this.show=function(){
     ctx = cargaContextoCanvas('myCanvas');
     if(ctx){
-      ctx.fillStyle = '#ffffff';
-      ctx.rect(this.x,this.y,this.width,this.height);
+      ctx.fillStyle = randomRgb;
+      ctx.fillRect(this.x,this.y,this.width,this.height);
       ctx.fill();
     }
   }
-
 }
