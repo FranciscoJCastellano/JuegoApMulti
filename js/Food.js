@@ -1,18 +1,17 @@
 /************************************
 Autor: Francisco Javier Castellano Farrak
-Fecha: 10/3/18
-Definición: constructor del objeto tipo para los enemigos
+Fecha: 14/3/18
+Definición: constructor del objeto tipo para la comida que debe recoger el jugador
 *************************************/
-function Enemy(){
+function Food(){
   this.x=Math.random()*w-1;
   this.y=Math.random()*h-1;
-  this.len=10;
+  this.len=5;
   this.through=false;//propiedad para atravesar las paredes
-  this.minVel=2;
-  this.maxVel=5;
-  this.limiter=0.32;
-  this.life=factor*2;
-  this.power=factor/3;
+  this.minVel=1;
+  this.maxVel=4;
+  this.limiter=0.12;
+
   this.velx=Math.floor(Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
   this.vely=Math.floor(Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
 
@@ -26,7 +25,7 @@ function Enemy(){
     ctx = cargaContextoCanvas('myCanvas');
     if(ctx){
       ctx.save();
-      ctx.fillStyle = '#00f3f3';
+      ctx.fillStyle = '#f002ff';
       ctx.fillRect(this.x,this.y,this.len,this.len);
       ctx.restore();
     }
@@ -37,8 +36,7 @@ function Enemy(){
   Definición: función que actualiza la posición del enemigo
   *************************************/
   this.update=function(){
-    //si pierdes recarga la pagina
-  
+
     this.x+=this.velx;
     this.y+=this.vely;
     this.colision();

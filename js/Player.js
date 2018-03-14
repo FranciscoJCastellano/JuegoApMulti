@@ -3,7 +3,7 @@ Autor: Francisco Javier Castellano Farrak
 Fecha: 10/3/18
 Definición: constructor del objeto player
 *************************************/
-
+var minLife=10;
 function Player(){
   this.x=50;
   this.y=50;
@@ -11,7 +11,9 @@ function Player(){
   this.speedY = 0;
   this.len=20;
   this.score=0;
-  this.level=5;
+  this.level=1;
+  this.life=minLife+factor*this.level;
+  this.power=factor*this.level/2;
   this.hasCollided=false;
 
 /************************************
@@ -29,12 +31,17 @@ Definición: función que mueve el player: actualiza la posición
   Definición: función que dibuja al player
   *************************************/
   this.show=function(){
+    if(player.life<=0){
+      if(confirm('YOU LOSE')){
+          window.location.reload();
+      }
+    }
     ctx = cargaContextoCanvas('myCanvas');
     if(ctx){
-      //alert("player show");
+      ctx.save();
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(this.x,this.y,this.len,this.len);
-
+      ctx.restore();
     }
   }
 

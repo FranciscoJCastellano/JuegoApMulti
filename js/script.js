@@ -2,9 +2,11 @@
 var step=5;
 var enemies=[];
 var walls=[];
+var food=[];
 var factor=5;//factor de dificultad para generar enemigos y obstáculos.
 var w=800;
 var h=500;
+
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
   if(elemento && elemento.getContext){
@@ -36,7 +38,12 @@ function gameOn(){
   setInterval(draw,10);
   //alert("GAME ON");
 }
-/*Guardamos el contexto sin nada y dibujamos al jugadxr en la posicion inicial*/
+
+/************************************
+Autores: Alejandro Enrique Trigueros Álvarez y Francisco Javier Castellano Farrak
+Fecha: 14/3/18
+Definición: guardamos el ctx sin nada dibujado y dibujamos los enemigos, player, bloques y comida
+*************************************/
 function setup(){
   window.addEventListener('keydown', function(e){
     e.preventDefault();
@@ -48,12 +55,17 @@ function setup(){
     ctx.key = false;
   });
   player=new Player();
-
+  //generamos las paredes
   for(var i=0;i<factor*player.level;i++){
     walls.push(new Wall);
   }
+  //generamos los enemigos
   for(var i=0;i<player.level*factor/2;i++){
     enemies.push(new Enemy);
+  }
+  //generamos la comida
+  for(var i=0;i<player.level*factor/2;i++){
+    food.push(new Food);
   }
 
   ctx = cargaContextoCanvas('myCanvas');
@@ -70,6 +82,11 @@ function setup(){
       enemies[i].update();
       enemies[i].show();
     }
+    //dibuja y actualiza la posición de la comida
+    for(var i=food.length-1;i>=0;i--){
+      food[i].update();
+      food[i].show();
+    }
     player.show();
 
   }
@@ -77,21 +94,26 @@ function setup(){
 /************************************
 Autores: Alejandro Enrique Trigueros Álvarez y Francisco Javier Castellano Farrak
 Fecha: 10/3/18
-Definición: borramos canvas y redibujamos player, enemigo y obstáculos
+Definición: borramos canvas y redibujamos player, comida, enemigos y obstáculos
 *************************************/
 function draw(){
   ctx = cargaContextoCanvas('myCanvas');
-   listenKeyPressed(ctx);
+  listenKeyPressed(ctx);
   if(ctx){
 
     borra_todo();
     player.colision();
     player.show();
-    comer(player,enemies);
+    comer(player,food);
+    lucha(player,enemies);
 
     for(var i=enemies.length-1;i>=0;i--){
       enemies[i].show();
       enemies[i].update();
+    }
+    for(var i=food.length-1;i>=0;i--){
+      food[i].show();
+      food[i].update();
     }
     //dibuja
     //  for(var i=walls.length-1;i>=0;i--){
@@ -104,19 +126,50 @@ function draw(){
 /************************************
 Autor: Francisco Javier Castellano Farrak
 Fecha: 13/3/18
-Definición: función para ver si el player y el enemigo están en la misma posición
+Definición: función para ver si el player y la comida están en la misma posición
+aumenta la vida del player y elimina la comida
 Ref:https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
 *************************************/
-function comer(player,enemies){
+function comer(player,comida){
+  for(var i=comida.length-1;i>=0;i--){
+    if(player.hasCollided==false){
+      if (coincide(player,comida[i])){
+        if(i>-1){
+          comida.splice(i,1);
+        }
+        player.hasCollided=true;
+        player.life++;
+        console.log(player.life);
+      }
+    }else if(player.hasCollided==true&&!coincide(player,comida[i])){
+      player.hasCollided=false;
+    }
+  }
+}
+/************************************
+Autor: Francisco Javier Castellano Farrak
+Fecha: 13/3/18
+Definición: función para ver si el player y los enemigos están en la misma posición
+iDEA: poner
+Ref:https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+*************************************/
+function lucha(player,enemies){
   for(var i=enemies.length-1;i>=0;i--){
     if(player.hasCollided==false){
       if (coincide(player,enemies[i])){
+        //si quedan enemigos aun y ya no tienen vida los elimina
+        player.life-=enemies[i].power;
+        enemies[i].life-=player.power;
+
         if(i>-1){
-          enemies.splice(i,1);
+          if(enemies[i].life<=0){
+            enemies.splice(i,1);
+          }
         }
         player.hasCollided=true;
-        player.score++;
-        console.log(player.score);
+        console.log(player.life);
+        console.log(enemies[i].life);
+
       }
     }else if(player.hasCollided==true&&!coincide(player,enemies[i])){
       player.hasCollided=false;
