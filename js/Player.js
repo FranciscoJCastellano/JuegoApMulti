@@ -8,10 +8,17 @@ var h=500;
 function Player(){
   this.x=50;
   this.y=50;
+  this.speedX = 0;
+  this.speedY = 0;
   this.len=20;
   this.score=0;
   this.level=5;
 
+  /*funcion que mueve el player: actualiza la posicion*/
+  this.movePlayer=function(){
+    this.x+=this.speedX;
+    this.y+=this.speedY;
+  }
   /*funcion que dibuja el player*/
   this.show=function(){
 
@@ -24,7 +31,7 @@ function Player(){
     }
   }
 
-/*funcion para cambiar posicion del jugador al llegar al final del canvas*/
+  /*funcion para cambiar posicion del jugador al llegar al final del canvas*/
   this.colision=function(){
     if(this.y>=h-this.len/2){//bottom threshold
       this.y=0;

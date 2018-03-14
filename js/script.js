@@ -32,8 +32,9 @@ function setup(){
 
   window.addEventListener('keydown', function(e){
     e.preventDefault();
-    listenKeyPressed();
+    listenKeyPressed(e.keyCode);
   },true);//Evento:se pulsa una tecla
+
   ctx = cargaContextoCanvas('myCanvas');
   if(ctx){
     //console.log("save");
@@ -89,28 +90,25 @@ function comer(player,enemy){
 
 
 
-function listenKeyPressed(){
+function listenKeyPressed(key){
   //Esta funcion se ejecuta al pulsar una tecla
-  ////-->> window.addEventListener('keydown',listenKeyPressed,true);
-  keyCode=window.event.keyCode;//coge el codigo de la tecla pulsada
-  switch (keyCode){
-    case 40: //abajo
-    player.y+=step;
-    //alert("holaaaa abajo");
-    break;
-    case 39: //derecha
-    player.x+=step;
-    //alert("holaaaa d");
-    break;
-    case 38: //arriba
-    player.y-=step;
-    //alert("holaaaa arriba");
-    break;
-    case 37: //izquierda
-    player.x-=step;
-    //alert("holaaaa izq");
-    break;
-    default:
-    break;
+  //mirar setup()
+  player.speedX=0;
+  player.speedY=0;
+  if(key==40){//abajo
+    player.speedY = step;
+  }
+  if(key==39){//derecha
+    player.speedX = step;
+  }
+  if(key==38){//arriba
+    player.speedY= -step;
+  }
+  if(key==37){//izquierda
+    player.speedX= -step;
+  }
+  player.movePlayer();
+  if(key==32){//ESPACIO
+    alert("eres un pipa :3");
   }
 }
