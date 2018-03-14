@@ -13,9 +13,13 @@ function Enemy(){
   this.y=Math.random()*h-1;
   this.len=5;
   this.velx=Math.floor(Math.random()*(maxVel-minVel+1)+minVel)*limiter;
- this.vely=Math.floor(Math.random()*(maxVel-minVel+1)+minVel)*limiter;
+  this.vely=Math.floor(Math.random()*(maxVel-minVel+1)+minVel)*limiter;
 
-  /*dibuja un enemigo*/
+  /************************************
+  Autor: Francisco Javier Castellano Farrak
+  Fecha: 10/3/18
+  Definición: función que dibuja al enemigo
+  *************************************/
   this.show=function(){
 
     ctx = cargaContextoCanvas('myCanvas');
@@ -26,7 +30,11 @@ function Enemy(){
 
     }
   }
-/*actualiza la posicion del enemigo*/
+  /************************************
+  Autor: Francisco Javier Castellano Farrak
+  Fecha: 10/3/18
+  Definición: función que actualiza la posición del enemigo
+  *************************************/
   this.update=function(){
 
     this.x+=this.velx;
@@ -34,7 +42,11 @@ function Enemy(){
     this.colision();
   }
 
-  /*deteccion de colisiones de los enemigos*/
+  /************************************
+  Autor: Francisco Javier Castellano Farrak
+  Fecha: 12/3/18
+  Definición: deteccion de colisiones de los enemigos
+  *************************************/
   this.colision=function(){
     if(this.y>=h-this.len/2||this.y<=-this.len/2){//bottom threshold
       this.vely=-this.vely;
@@ -45,4 +57,4 @@ function Enemy(){
   }
 
 
-  }
+}

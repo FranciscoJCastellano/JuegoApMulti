@@ -10,9 +10,13 @@ function Player(){
   this.y=50;
   this.len=20;
   this.score=0;
-  this.level=5;
+  this.level=2;
 
-  /*funcion que dibuja el player*/
+  /************************************
+  Autor: Francisco Javier Castellano Farrak
+  Fecha: 10/3/18
+  Definición: función que dibuja al player
+  *************************************/
   this.show=function(){
 
     ctx = cargaContextoCanvas('myCanvas');
@@ -24,7 +28,12 @@ function Player(){
     }
   }
 
-/*funcion para cambiar posicion del jugador al llegar al final del canvas*/
+  /************************************
+  Autor: Francisco Javier Castellano Farrak
+  Fecha: 10/3/18
+  Definición: función para cambiar posición del jugador al llegar al final del canvas
+  *************************************/
+
   this.colision=function(){
     if(this.y>=h-this.len/2){//bottom threshold
       this.y=0;
