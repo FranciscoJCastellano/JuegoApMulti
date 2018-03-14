@@ -60,7 +60,7 @@ function setup(){
     walls.push(new Wall);
   }
   //generamos los enemigos
-  for(var i=0;i<player.level*factor/2;i++){
+  for(var i=0;i<player.level*factor;i++){
     enemies.push(new Enemy);
   }
   //generamos la comida
@@ -106,7 +106,12 @@ function draw(){
     player.show();
     comer(player,food);
     lucha(player,enemies);
-
+    //si pierde la vida el player se recarga la pagina
+    if(player.life<=0){
+      alert('YOU LOSE');
+      window.location.reload(true);
+      return 0;
+  }
     for(var i=enemies.length-1;i>=0;i--){
       enemies[i].show();
       enemies[i].update();
@@ -115,7 +120,7 @@ function draw(){
       food[i].show();
       food[i].update();
     }
-    //dibuja
+
     //  for(var i=walls.length-1;i>=0;i--){
     //    walls[i].show();
     // }
@@ -144,6 +149,7 @@ function comer(player,comida){
     }else if(player.hasCollided==true&&!coincide(player,comida[i])){
       player.hasCollided=false;
     }
+
   }
 }
 /************************************
@@ -161,20 +167,20 @@ function lucha(player,enemies){
         player.life-=enemies[i].power;
         enemies[i].life-=player.power;
 
-        if(i>-1){
-          if(enemies[i].life<=0){
-            enemies.splice(i,1);
-          }
+      if(i>-1){
+        if(enemies[i].life<=0){
+          console.log(enemies[i].life);
+          enemies.splice(i,1);
         }
-        player.hasCollided=true;
-        console.log(player.life);
-        console.log(enemies[i].life);
-
       }
-    }else if(player.hasCollided==true&&!coincide(player,enemies[i])){
-      player.hasCollided=false;
+      player.hasCollided=true;
+      console.log(player.life);
+
     }
+  }else if(player.hasCollided==true&&!coincide(player,enemies[i])){
+    player.hasCollided=false;
   }
+}
 }
 function coincide(player,enemy){
   var coincide=player.x < enemy.x + enemy.len &&
@@ -182,6 +188,21 @@ function coincide(player,enemy){
   player.y < enemy.y + enemy.len &&
   player.len + player.y > enemy.y;
   return coincide;
+}
+
+/*inacabada: funcion para detectar colisiones con las paredes*/
+function detectarParedes(enemies,walls){
+  for(var i=enemies.length-1;i>=0;i--){
+      for(var j=walls.length-1;j>=0;j--)  {
+      if(enemies[i].x < walls[j].x + walls[j].width &&
+      enemies[i].x + enemies[i].width > walls[j].x &&
+      enemies[i].y < walls[j].y + walls[j].height &&
+      enemies[i].height + enemies[i].y > walls[j].y){
+        enemies[i].velY=-enemies[i].velY;
+        enemies[i].velX=-enemies[i].velX;
+      }
+    }
+  }
 }
 
 

@@ -11,16 +11,16 @@ function Player(){
   this.speedY = 0;
   this.len=20;
   this.score=0;
-  this.level=1;
-  this.life=minLife+factor*this.level;
-  this.power=factor*this.level/2;
+  this.level=2;
+  this.life=Math.floor(minLife+(factor*this.level)/4);
+  this.power=Math.round((factor*this.level/4));
   this.hasCollided=false;
 
-/************************************
-Autor: Alejandro Enrique Trigueros Álvarez
-Fecha: 14/3/18
-Definición: función que mueve el player: actualiza la posición
-*************************************/
+  /************************************
+  Autor: Alejandro Enrique Trigueros Álvarez
+  Fecha: 14/3/18
+  Definición: función que mueve el player: actualiza la posición
+  *************************************/
   this.movePlayer=function(){
     this.x+=this.speedX;
     this.y+=this.speedY;
@@ -31,11 +31,6 @@ Definición: función que mueve el player: actualiza la posición
   Definición: función que dibuja al player
   *************************************/
   this.show=function(){
-    if(player.life<=0){
-      if(confirm('YOU LOSE')){
-          window.location.reload();
-      }
-    }
     ctx = cargaContextoCanvas('myCanvas');
     if(ctx){
       ctx.save();

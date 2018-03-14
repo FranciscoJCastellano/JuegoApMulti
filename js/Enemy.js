@@ -10,9 +10,9 @@ function Enemy(){
   this.through=false;//propiedad para atravesar las paredes
   this.minVel=2;
   this.maxVel=5;
-  this.limiter=0.32;
-  this.life=factor*2;
-  this.power=factor/3;
+  this.limiter=0.4;
+  this.life=Math.floor(factor*2);
+  this.power=Math.floor(factor/3);
   this.velx=Math.floor(Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
   this.vely=Math.floor(Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
 
@@ -22,11 +22,10 @@ function Enemy(){
   Definición: función que dibuja al enemigo
   *************************************/
   this.show=function(){
-
     ctx = cargaContextoCanvas('myCanvas');
     if(ctx){
       ctx.save();
-      ctx.fillStyle = '#00f3f3';
+      ctx.fillStyle = '#4501ff';
       ctx.fillRect(this.x,this.y,this.len,this.len);
       ctx.restore();
     }
@@ -38,7 +37,7 @@ function Enemy(){
   *************************************/
   this.update=function(){
     //si pierdes recarga la pagina
-  
+
     this.x+=this.velx;
     this.y+=this.vely;
     this.colision();
