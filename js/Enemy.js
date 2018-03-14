@@ -3,8 +3,6 @@ Autor: Francisco Javier Castellano Farrak
 Fecha: 10/3/18
 Definición: constructor del objeto tipo para los enemigos
 *************************************/
-var w=800;
-var h=500;
 var minVel=2;
 var maxVel=5;
 var limiter=0.32;
@@ -12,6 +10,7 @@ function Enemy(){
   this.x=Math.random()*w-1;
   this.y=Math.random()*h-1;
   this.len=5;
+  this.through=false;
   this.velx=Math.floor(Math.random()*(maxVel-minVel+1)+minVel)*limiter;
   this.vely=Math.floor(Math.random()*(maxVel-minVel+1)+minVel)*limiter;
 

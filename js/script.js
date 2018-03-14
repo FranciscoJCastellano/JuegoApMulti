@@ -1,9 +1,10 @@
 /*código del juego*/
-var step=15;
+var step=5;
 var enemies=[];
 var walls=[];
 var factor=5;//factor de dificultad para generar enemigos y obstáculos.
-
+var w=800;
+var h=500;
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
   if(elemento && elemento.getContext){
@@ -40,6 +41,7 @@ function setup(){
   player=new Player();
   //enemy=new Enemy();
   enemies.push(new Enemy);
+
   for(var i=0;i<factor*player.level;i++){
     walls.push(new Wall);
   }

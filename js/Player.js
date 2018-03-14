@@ -3,8 +3,7 @@ Autor: Francisco Javier Castellano Farrak
 Fecha: 10/3/18
 Definición: constructor del objeto player
 *************************************/
-var w=800;
-var h=500;
+
 function Player(){
   this.x=50;
   this.y=50;
@@ -12,8 +11,8 @@ function Player(){
   this.speedY = 0;
   this.len=20;
   this.score=0;
-  this.level=2;
-  
+  this.level=4;
+
 /************************************
 Autor: Alejandro Enrique Trigueros Álvarez
 Fecha: 14/3/18
