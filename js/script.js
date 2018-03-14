@@ -38,6 +38,15 @@ function gameOn(){
 }
 /*Guardamos el contexto sin nada y dibujamos al jugadxr en la posicion inicial*/
 function setup(){
+  window.addEventListener('keydown', function(e){
+    e.preventDefault();
+    //listenKeyPressed(e.keyCode);
+    ctx.key=e.keyCode;
+  },true);//Evento:se pulsa una tecla
+
+  window.addEventListener('keyup', function (e) {
+    ctx.key = false;
+  });
   player=new Player();
 
   for(var i=0;i<factor*player.level;i++){
@@ -46,10 +55,6 @@ function setup(){
   for(var i=0;i<player.level*factor/2;i++){
     enemies.push(new Enemy);
   }
-  window.addEventListener('keydown', function(e){
-    e.preventDefault();
-    listenKeyPressed(e.keyCode);
-  },true);//Evento:se pulsa una tecla
 
   ctx = cargaContextoCanvas('myCanvas');
   if(ctx){
@@ -76,6 +81,7 @@ Definición: borramos canvas y redibujamos player, enemigo y obstáculos
 *************************************/
 function draw(){
   ctx = cargaContextoCanvas('myCanvas');
+   listenKeyPressed(ctx);
   if(ctx){
 
     borra_todo();
@@ -113,7 +119,7 @@ function comer(player,enemies){
         console.log(player.score);
       }
     }else if(player.hasCollided==true&&!coincide(player,enemies[i])){
-        player.hasCollided=false;
+      player.hasCollided=false;
     }
   }
 }
@@ -127,9 +133,11 @@ function coincide(player,enemy){
 
 
 
-function listenKeyPressed(key){
+function listenKeyPressed(contx){
   //Esta funcion se ejecuta al pulsar una tecla
   //mirar setup()
+  key=contx.key;
+
   player.speedX=0;
   player.speedY=0;
   if(key==40){//abajo
@@ -148,6 +156,4 @@ function listenKeyPressed(key){
   if(key==32){//ESPACIO
     alert("Eres un pipa :3");
   }
-
-
 }
