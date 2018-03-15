@@ -2,10 +2,15 @@
 var step=5;
 var enemies=[];
 var walls=[];
+var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
+                // (computacionalmente más rápido que usar loops)
 var food=[];
 var factor=5;//factor de dificultad para generar enemigos y obstáculos.
 var w=800;
 var h=500;
+
+var num_dig_y = h.toString().length // para saber cuantos digitos la altura del canvas
+var multp = Math.pow(10, num_dig_y) // servirá para almacenar posiciones
 
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
@@ -55,6 +60,12 @@ function setup(){
     ctx.key = false;
   });
   player=new Player();
+
+  /********************************************
+  Actualización: Sergio Elola García, 14/03/2018
+  Mejora: Ahora si el muro es válido lo almacena, si no es válido genera otro
+  *******************************************/
+
   //generamos las paredes
   for(var i=0;i<factor*player.level;i++){
     works = 0; // Si work = 0 el muro no es válido
@@ -66,6 +77,26 @@ function setup(){
       }
     }
   }
+
+  // guardamos las posiciones de todos los muros (Solo se hace 1 vez!)
+  // Si (432, 123) es muro, se añade 432123
+
+  for (var i in walls){
+    wallx = walls[i].x
+    wally = walls[i].y
+    wallxmax = wallx + walls[i].width
+    wallymax = wally + walls[i].height
+    for (var j = wallx; j <= wallxmax; j++){
+      for (var k = wally; k <= wallymax ; k++){
+        wallspos.push(j*multp+k)
+        }
+      }
+    }
+
+  wallspos.sort() // ordenamos para facilitar la búsqueda
+  console.log(walls.length)
+
+
   //generamos los enemigos
   for(var i=0;i<player.level*factor;i++){
     enemies.push(new Enemy);
@@ -80,19 +111,17 @@ function setup(){
     //console.log("save");
     ctx.save();  // guarda el contexto limpio de efectos
 
-/********************************************
-Actualización: Sergio Elola García, 14/03/2018
-Mejora: Ahora si el muro es válido lo almacena, si no es válido genera otro
-*******************************************/
-    for(var i=walls.length-1;i>=0;i--){
-      works = 0; // Si work = 0 el muro no es válido
-      while (works == 0){ // repetir hasta que salga un muro válido
-        new_wall = new Wall();
-        if (new_wall.valid == 1){
-          walls.push(new_wall);
-          works = 1;
-        }
-      }
+  for(var i=walls.length-1;i>=0;i--){
+      //// Lo dejo comentado porque no tiene sentido generar dos veces los muros
+      // works = 0; // Si work = 0 el muro no es válido
+      // while (works == 0){ // repetir hasta que salga un muro válido
+      //   new_wall = new Wall();
+      //   if (new_wall.valid == 1){
+      //     walls.push(new_wall);
+      //     works = 1;
+      //   }
+      // }
+      walls[i].show();
     }
     //dibuja y actualiza la posición de cada enemigo
     for(var i=enemies.length-1;i>=0;i--){
@@ -124,11 +153,13 @@ function draw(){
     comer(player,food);
     lucha(player,enemies);
     //si pierde la vida el player se recarga la pagina
-    if(player.life<=0){
-      alert('YOU LOSE');
-      window.location.reload(true);
-      return 0;
-  }
+
+    // Lo dejo comentado porque la página se jode cuando se pierde la vida
+  //   if(player.life<=0){
+  //     alert('YOU LOSE');
+  //     window.location.reload(true);
+  //     return 0;
+  // }
     for(var i=enemies.length-1;i>=0;i--){
       enemies[i].show();
       enemies[i].update();

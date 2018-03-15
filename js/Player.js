@@ -21,9 +21,30 @@ function Player(){
   Fecha: 14/3/18
   Definición: función que mueve el player: actualiza la posición
   *************************************/
+  /************************************
+  ACTUALIZACIÓN: Sergio Elola García, 15/03/2018
+  MEJORA: ahora no puede atravesar muros
+  *************************************/
+
   this.movePlayer=function(){
-    this.x+=this.speedX;
-    this.y+=this.speedY;
+    posxNew = this.x + this.speedX
+    posyNew = this.y + this.speedY
+    lenPl = this.len
+    var const_x = 2; // para ajustar
+    var const_y = 2; // para ajustar
+    if (this.speedX > 0){
+      const_x = -const_x;
+    }
+    if (this.speedY > 0){
+      const_x = -const_y
+    }
+    if ((!(wallspos.includes((posxNew+1)*multp+posyNew+1))) && // arriba/izquierda
+    (!(wallspos.includes((posxNew+lenPl-1)*multp+posyNew+1))) && //arriba/derecha
+    (!(wallspos.includes((posxNew+1)*multp+posyNew+lenPl+1))) && // abajo/izquierda
+    (!(wallspos.includes((posxNew+lenPl-1)*multp+posyNew+lenPl-1)))) { //abajo/derecha
+      this.x+=this.speedX;
+      this.y+=this.speedY;
+    }
   }
   /************************************
   Autor: Francisco Javier Castellano Farrak
