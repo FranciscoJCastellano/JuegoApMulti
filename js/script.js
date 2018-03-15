@@ -5,9 +5,11 @@ var walls=[];
 var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
 // (computacionalmente más rápido que usar loops)
 var food=[];
-var factor=5;//factor de dificultad para generar enemigos y obstáculos.
-var w=800;
-var h=500;
+var bullets=[];
+var factor=10;//factor de dificultad para generar enemigos y obstáculos.
+var w=1280;
+var h=720;
+
 
 var num_dig_y = h.toString().length; // para saber cuantos digitos la altura del canvas
 var multp = Math.pow(10, num_dig_y); // servirá para almacenar posiciones
@@ -30,7 +32,7 @@ function borra_todo(){
   if(ctx){
     //console.log("restore");
     ctx.restore();              // restaura el contexto sin efectos
-    ctx.clearRect(0,0,800,500); // borra las figuras
+    ctx.clearRect(0,0,w,h); // borra las figuras
     ctx.save();                 // guarda el contexto limpio de efectos
   }
 }
@@ -60,6 +62,7 @@ function setup(){
     ctx.key = false;
   });
   player=new Player();
+  document.getElementById('score').innerHTML = "Score: " + player.score;
 
   /********************************************
   Autor:Sergio Elola García
@@ -69,7 +72,7 @@ function setup(){
 
   //generamos las paredes
   var works=0;
-  for(var i=0;i<factor*player.level;i++){
+  for(var i=0;i<3*factor*player.level;i++){
     works = 0; // Si work = 0 el muro no es válido
     while (works == 0){ // repetir hasta que salga un muro válido
       new_wall = new Wall();
@@ -100,8 +103,7 @@ function setup(){
   }
 
   wallspos.sort(); // ordenamos para facilitar la búsqueda
-  console.log(walls.length);
-
+  //console.log(walls.length);
 
   //generamos los enemigos
   for(var i=0;i<player.level*factor;i++){
@@ -111,7 +113,6 @@ function setup(){
   for(var i=0;i<player.level*factor*1.5;i++){
     food.push(new Food);
   }
-
   ctx = cargaContextoCanvas('myCanvas');
   if(ctx){
     //console.log("save");
@@ -151,6 +152,9 @@ Definición: borramos canvas y redibujamos player, comida, enemigos y obstáculo
 function draw(){
   ctx = cargaContextoCanvas('myCanvas');
   listenKeyPressed(ctx);
+  document.getElementById('score').innerHTML = "Score: " + player.score;
+  document.getElementById('life').innerHTML = "Life: " + player.life;
+
   if(ctx){
 
     borra_todo();
@@ -160,13 +164,26 @@ function draw(){
     lucha(player,enemies);
 
     if(player.life<=0){
-      alert('YOU LOSE');
+      console.log('YOU LOSE');
       window.location.href=  window.location.href;
       return 0;
     }
     for(var i=enemies.length-1;i>=0;i--){
       enemies[i].show();
       enemies[i].update();
+    }
+    //si no queda comida se rellena
+    if(food.length<=0){
+      for(var i=0;i<player.level*factor*1.5;i++){
+        food.push(new Food);
+        this.score++;
+      }
+    }
+    if(enemies.length<=0){
+      for(var i=0;i<enemies.level*factor*1.5;i++){
+        enemies.push(new Enemy);
+        this.level++;
+      }
     }
     for(var i=food.length-1;i>=0;i--){
       food[i].show();
@@ -176,9 +193,7 @@ function draw(){
     for(var i=walls.length-1;i>=0;i--){
       walls[i].show();
     }
-
   }
-
 }
 /************************************
 Autor: Francisco Javier Castellano Farrak
@@ -191,6 +206,8 @@ function comer(player,comida){
   for(var i=comida.length-1;i>=0;i--){
     if(player.hasCollided==false){
       if (coincide(player,comida[i])){
+          player.score++;
+
         if(i>-1){
           comida.splice(i,1);
         }
@@ -215,25 +232,27 @@ function lucha(player,enemies){
   for(var i=enemies.length-1;i>=0;i--){
     if(player.hasCollided==false){
       if (coincide(player,enemies[i])){
-        //si quedan enemigos aun y ya no tienen vida los elimina
         player.life-=enemies[i].power;
         enemies[i].life-=player.power;
 
         if(i>-1){
           if(enemies[i].life<=0){
-            console.log('Vida enemigo: '+enemies[i].life);
             enemies.splice(i,1);
+            player.score+=2;
           }
         }
         player.hasCollided=true;
-        console.log('Vida jugador: '+player.life);
-
       }
     }else if(player.hasCollided==true&&!coincide(player,enemies[i])){
       player.hasCollided=false;
     }
   }
 }
+/************************************
+Autor: Francisco Javier Castellano Farrak
+Fecha: 13/3/18
+Definición: función para ver si la comida/enememigo coinciden
+*************************************/
 function coincide(player,enemy){
   var coincide=player.x < enemy.x + enemy.len &&
   player.x + player.len > enemy.x &&
@@ -257,8 +276,6 @@ function detectarParedes(enemies,walls){
     }
   }
 
-
-
   function listenKeyPressed(contx){
     //Esta funcion se ejecuta al pulsar una tecla
     //mirar setup()
@@ -280,6 +297,6 @@ function detectarParedes(enemies,walls){
     }
     player.movePlayer();
     if(key==32){//ESPACIO
-      alert("Eres un pipa :3");
+      //alert("Eres un pipa :3");
     }
   }

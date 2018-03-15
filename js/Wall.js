@@ -3,10 +3,10 @@ Autor: Francisco Javier Castellano Farrak
 Fecha: 10/3/18
 Definición: constructor del objeto tipo obstáculo
 *************************************/
-var maxW=120;
-var maxH=200;
-var minW=10;
-var minH=10;
+var maxW=130;
+var maxH=100;
+var minW=5;
+var minH=50;
 
 function Wall(){
   this.x=Math.floor(Math.random()*w-1);

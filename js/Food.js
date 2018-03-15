@@ -17,8 +17,8 @@ function Food(){
 
   /************************************
   Autor: Francisco Javier Castellano Farrak
-  Fecha: 10/3/18
-  Definición: función que dibuja al enemigo
+  Fecha: 14/3/18
+  Definición: función que dibuja la comida
   *************************************/
   this.show=function(){
 
@@ -32,8 +32,8 @@ function Food(){
   }
   /************************************
   Autor: Francisco Javier Castellano Farrak
-  Fecha: 10/3/18
-  Definición: función que actualiza la posición del enemigo
+  Fecha: 14/3/18
+  Definición: función que actualiza la posición de la comida
   *************************************/
   this.update=function(){
 
@@ -44,8 +44,8 @@ function Food(){
 
   /************************************
   Autor: Francisco Javier Castellano Farrak
-  Fecha: 12/3/18
-  Definición: deteccion de colisiones de los enemigos
+  Fecha: 14/3/18
+  Definición: deteccion de colisiones de la comida
   *************************************/
   this.colision=function(){
     if(this.y>=h-this.len/2||this.y<=-this.len/2){//bottom threshold

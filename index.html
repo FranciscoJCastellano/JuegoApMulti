@@ -41,7 +41,7 @@
 
   <section id="juego" class="visiblx">
     <h3>Juego</h3>
-	<div>
+	<section>
 		<video loop
 			id='video'
 			type='video/mp4'
@@ -51,7 +51,7 @@
 			>
 			Tu navegador no es compatible con la reproducción de este vídeo
 		</video>
-		<div id='buttons'>
+		<section id='buttons'>
 			<button onclick="getVideo().play()">Play</button>
 			<button onclick="getVideo().pause()">Pause</button>
 			<button onclick="getVideo().load()">Reload</button>
@@ -61,10 +61,12 @@
 			<button onclick="getVideo().volume+=0.1">Subir volumen</button>
 			<button onclick="getVideo().volume-=0.1">Bajar volumen</button>
 
-		</div>
-		<canvas id="myCanvas" width="800" height="500">
+		</section>
+      <div id="score"></div>
+      <div id="life"></div>
+		<canvas id="myCanvas" width="1280" height="720">
 		</canvas>
-	</div>
+	</section>
 
 
   </section>

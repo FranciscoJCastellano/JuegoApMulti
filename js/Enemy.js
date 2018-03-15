@@ -12,7 +12,7 @@ function Enemy(){
   this.maxVel=5;
   this.limiter=0.4;
   this.life=Math.floor(minLife+factor*2);
-  this.power=Math.floor(factor*0.3);
+  this.power=Math.floor(factor*0.11);
   this.velx=Math.floor(Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
   this.vely=Math.floor(Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
 

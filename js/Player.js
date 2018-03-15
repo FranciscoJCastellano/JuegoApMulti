@@ -13,8 +13,9 @@ function Player(){
   this.score=0;
   this.level=1;
   this.life=Math.floor(minLife+(factor*this.level)*0.7);
-  this.power=Math.round((factor*this.level*0.3));
+  this.power=Math.round((factor*this.level*0.7));
   this.hasCollided=false;
+  this.ammo=this.level*factor;
 
   /************************************
   Autor: Alejandro Enrique Trigueros Álvarez
@@ -22,7 +23,8 @@ function Player(){
   Definición: función que mueve el player: actualiza la posición
   *************************************/
   /************************************
-  ACTUALIZACIÓN: Sergio Elola García, 15/03/2018
+  Autor: Sergio Elola García
+  Fecha: 15/03/2018
   MEJORA: ahora no puede atravesar muros
   *************************************/
 

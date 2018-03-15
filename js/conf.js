@@ -6,6 +6,8 @@ function esconder(){
   document.getElementById("menu").style.display="none";
 }
 
+
+
 function hacerVisible(idEl){
 
   start();

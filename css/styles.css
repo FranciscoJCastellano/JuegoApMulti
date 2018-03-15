@@ -1,9 +1,26 @@
 body {
-    background-color: #11e299;
+  background-color: #11e299;
 }
 
 canvas{
-background-color:#66ff66;
+  background-color:#66ff66;
+}
+#score{
+  position: absolute;
+  top:45%;
+  left: 12%;
+  z-index: 100;
+  border:none;
+  font-size:120%;
+
+}
+#life{
+  position: absolute;
+  top:45%;
+  left: 75%;
+  z-index: 100;
+  border:none;
+  font-size:120%;
 }
 div{
   padding: 9px;
@@ -20,24 +37,24 @@ section section{
 }
 .menuTitle{
   text-align: center;
-    color:#e23411;
-    font-family:Geneva;
-    font-size:1.5em;
+  color:#e23411;
+  font-family:Geneva;
+  font-size:1.5em;
 }
 h1{
   text-align: center;
-    color:#e23411;
-    font-family:Geneva;
-    font-size:3.5em;
-    text-shadow: 3px 2px #000000;
-    font-style:italic;
+  color:#e23411;
+  font-family:Geneva;
+  font-size:3.5em;
+  text-shadow: 3px 2px #000000;
+  font-style:italic;
 }
 h3{
   text-align: center;
-    color:#e33422;
-    font-family:Geneva;
-    font-size:1.5em;
-    text-shadow: 1px 0.5px #000000;
+  color:#e33422;
+  font-family:Geneva;
+  font-size:1.5em;
+  text-shadow: 1px 0.5px #000000;
 }
 section p{
   color:black;
@@ -70,15 +87,15 @@ section p{
   position: relative;
 }
 li a {
-    background-color: #228;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 0.7em;
-    margin: 4px 2px;
+  background-color: #228;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.7em;
+  margin: 4px 2px;
 }
 a{
   text-decoration: none;
@@ -87,7 +104,7 @@ a{
   background-color: #8ee;
   color: #228;
   font-style:italic;
-   text-transform: uppercase;
+  text-transform: uppercase;
 }
 .title{
   font-family:Geneva;
