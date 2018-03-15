@@ -25,7 +25,7 @@ function Wall(){
   this.valid = 1;
   if (walls.length != 0){
 
-    lenMAX = Math.floor(player.len*1.75); // tamaño máximo de espaciado entre 2 bloques
+    var lenMAX = Math.floor(player.len*1.75); // tamaño máximo de espaciado entre 2 bloques
     var i;
     for (i in walls){
       ladoIzq = walls[i]['x'];

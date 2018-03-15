@@ -27,21 +27,13 @@ function Player(){
   *************************************/
 
   this.movePlayer=function(){
-    posxNew = this.x + this.speedX
-    posyNew = this.y + this.speedY
-    lenPl = this.len
-    var const_x = 2; // para ajustar
-    var const_y = 2; // para ajustar
-    if (this.speedX > 0){
-      const_x = -const_x;
-    }
-    if (this.speedY > 0){
-      const_x = -const_y
-    }
+    var posxNew = this.x + this.speedX;
+    var posyNew = this.y + this.speedY;
+    var lenPl = this.len;
     if ((!(wallspos.includes((posxNew+1)*multp+posyNew+1))) && // arriba/izquierda
     (!(wallspos.includes((posxNew+lenPl-1)*multp+posyNew+1))) && //arriba/derecha
-    (!(wallspos.includes((posxNew+1)*multp+posyNew+lenPl+1))) && // abajo/izquierda
-    (!(wallspos.includes((posxNew+lenPl-1)*multp+posyNew+lenPl-1)))) { //abajo/derecha
+    (!(wallspos.includes((posxNew+1)*multp+posyNew+lenPl-1))) && // abajo/izquierda
+    (!(wallspos.includes((posxNew+lenPl-3)*multp+posyNew+lenPl-1)))) { //abajo/derecha
       this.x+=this.speedX;
       this.y+=this.speedY;
     }
