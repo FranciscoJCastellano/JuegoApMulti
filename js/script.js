@@ -3,14 +3,14 @@ var step=5;
 var enemies=[];
 var walls=[];
 var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
-                // (computacionalmente más rápido que usar loops)
+// (computacionalmente más rápido que usar loops)
 var food=[];
 var factor=5;//factor de dificultad para generar enemigos y obstáculos.
 var w=800;
 var h=500;
 
-var num_dig_y = h.toString().length // para saber cuantos digitos la altura del canvas
-var multp = Math.pow(10, num_dig_y) // servirá para almacenar posiciones
+var num_dig_y = h.toString().length; // para saber cuantos digitos la altura del canvas
+var multp = Math.pow(10, num_dig_y); // servirá para almacenar posiciones
 
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
@@ -62,11 +62,13 @@ function setup(){
   player=new Player();
 
   /********************************************
-  Actualización: Sergio Elola García, 14/03/2018
+  Autor:Sergio Elola García
+  Fecha: 14/03/2018
   Mejora: Ahora si el muro es válido lo almacena, si no es válido genera otro
   *******************************************/
 
   //generamos las paredes
+  var works=0;
   for(var i=0;i<factor*player.level;i++){
     works = 0; // Si work = 0 el muro no es válido
     while (works == 0){ // repetir hasta que salga un muro válido
@@ -80,21 +82,25 @@ function setup(){
 
   // guardamos las posiciones de todos los muros (Solo se hace 1 vez!)
   // Si (432, 123) es muro, se añade 432123
+  var wallx=0;
+  var wally=0;
+  var wallxmax=0;
+  var wallymax=0;
 
   for (var i in walls){
-    wallx = walls[i].x
-    wally = walls[i].y
-    wallxmax = wallx + walls[i].width
-    wallymax = wally + walls[i].height
+    wallx = walls[i].x;
+    wally = walls[i].y;
+    wallxmax = wallx + walls[i].width;
+    wallymax = wally + walls[i].height;
     for (var j = wallx; j <= wallxmax; j++){
       for (var k = wally; k <= wallymax ; k++){
-        wallspos.push(j*multp+k)
-        }
+        wallspos.push(j*multp+k);
       }
     }
+  }
 
-  wallspos.sort() // ordenamos para facilitar la búsqueda
-  console.log(walls.length)
+  wallspos.sort(); // ordenamos para facilitar la búsqueda
+  console.log(walls.length);
 
 
   //generamos los enemigos
@@ -102,7 +108,7 @@ function setup(){
     enemies.push(new Enemy);
   }
   //generamos la comida
-  for(var i=0;i<player.level*factor/2;i++){
+  for(var i=0;i<player.level*factor*1.5;i++){
     food.push(new Food);
   }
 
@@ -111,7 +117,7 @@ function setup(){
     //console.log("save");
     ctx.save();  // guarda el contexto limpio de efectos
 
-  for(var i=walls.length-1;i>=0;i--){
+    for(var i=walls.length-1;i>=0;i--){
       //// Lo dejo comentado porque no tiene sentido generar dos veces los muros
       // works = 0; // Si work = 0 el muro no es válido
       // while (works == 0){ // repetir hasta que salga un muro válido
@@ -155,11 +161,11 @@ function draw(){
     //si pierde la vida el player se recarga la pagina
 
     // Lo dejo comentado porque la página se jode cuando se pierde la vida
-  //   if(player.life<=0){
-  //     alert('YOU LOSE');
-  //     window.location.reload(true);
-  //     return 0;
-  // }
+    if(player.life<=0){
+      alert('YOU LOSE');
+      window.location.reload(true);
+      return 0;
+    }
     for(var i=enemies.length-1;i>=0;i--){
       enemies[i].show();
       enemies[i].update();
@@ -169,8 +175,8 @@ function draw(){
       food[i].update();
     }
 
-     for(var i=walls.length-1;i>=0;i--){
-       walls[i].show();
+    for(var i=walls.length-1;i>=0;i--){
+      walls[i].show();
     }
 
   }
@@ -192,7 +198,7 @@ function comer(player,comida){
         }
         player.hasCollided=true;
         player.life++;
-        console.log(player.life);
+        console.log('Vida jugador: '+player.life);
       }
     }else if(player.hasCollided==true&&!coincide(player,comida[i])){
       player.hasCollided=false;
@@ -215,20 +221,20 @@ function lucha(player,enemies){
         player.life-=enemies[i].power;
         enemies[i].life-=player.power;
 
-      if(i>-1){
-        if(enemies[i].life<=0){
-          console.log(enemies[i].life);
-          enemies.splice(i,1);
+        if(i>-1){
+          if(enemies[i].life<=0){
+            console.log('Vida enemigo: '+enemies[i].life);
+            enemies.splice(i,1);
+          }
         }
-      }
-      player.hasCollided=true;
-      console.log(player.life);
+        player.hasCollided=true;
+        console.log('Vida jugador: '+player.life);
 
+      }
+    }else if(player.hasCollided==true&&!coincide(player,enemies[i])){
+      player.hasCollided=false;
     }
-  }else if(player.hasCollided==true&&!coincide(player,enemies[i])){
-    player.hasCollided=false;
   }
-}
 }
 function coincide(player,enemy){
   var coincide=player.x < enemy.x + enemy.len &&
@@ -241,41 +247,41 @@ function coincide(player,enemy){
 /*inacabada: funcion para detectar colisiones con las paredes*/
 function detectarParedes(enemies,walls){
   for(var i=enemies.length-1;i>=0;i--){
-      for(var j=walls.length-1;j>=0;j--)  {
+    for(var j=walls.length-1;j>=0;j--)  {
       if(enemies[i].x < walls[j].x + walls[j].width &&
-      enemies[i].x + enemies[i].width > walls[j].x &&
-      enemies[i].y < walls[j].y + walls[j].height &&
-      enemies[i].height + enemies[i].y > walls[j].y){
-        enemies[i].velY=-enemies[i].velY;
-        enemies[i].velX=-enemies[i].velX;
+        enemies[i].x + enemies[i].width > walls[j].x &&
+        enemies[i].y < walls[j].y + walls[j].height &&
+        enemies[i].height + enemies[i].y > walls[j].y){
+          enemies[i].velY=-enemies[i].velY;
+          enemies[i].velX=-enemies[i].velX;
+        }
       }
     }
   }
-}
 
 
 
-function listenKeyPressed(contx){
-  //Esta funcion se ejecuta al pulsar una tecla
-  //mirar setup()
-  key=contx.key;
+  function listenKeyPressed(contx){
+    //Esta funcion se ejecuta al pulsar una tecla
+    //mirar setup()
+    key=contx.key;
 
-  player.speedX=0;
-  player.speedY=0;
-  if(key==40){//abajo
-    player.speedY = step;
+    player.speedX=0;
+    player.speedY=0;
+    if(key==40){//abajo
+      player.speedY = step;
+    }
+    if(key==39){//derecha
+      player.speedX = step;
+    }
+    if(key==38){//arriba
+      player.speedY= -step;
+    }
+    if(key==37){//izquierda
+      player.speedX= -step;
+    }
+    player.movePlayer();
+    if(key==32){//ESPACIO
+      alert("Eres un pipa :3");
+    }
   }
-  if(key==39){//derecha
-    player.speedX = step;
-  }
-  if(key==38){//arriba
-    player.speedY= -step;
-  }
-  if(key==37){//izquierda
-    player.speedX= -step;
-  }
-  player.movePlayer();
-  if(key==32){//ESPACIO
-    alert("Eres un pipa :3");
-  }
-}

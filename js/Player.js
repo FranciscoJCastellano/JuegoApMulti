@@ -11,9 +11,9 @@ function Player(){
   this.speedY = 0;
   this.len=20;
   this.score=0;
-  this.level=2;
-  this.life=Math.floor(minLife+(factor*this.level)/4);
-  this.power=Math.round((factor*this.level/4));
+  this.level=1;
+  this.life=Math.floor(minLife+(factor*this.level)*0.7);
+  this.power=Math.round((factor*this.level*0.3));
   this.hasCollided=false;
 
   /************************************
@@ -27,16 +27,16 @@ function Player(){
   *************************************/
 
   this.movePlayer=function(){
-    posxNew = this.x + this.speedX
-    posyNew = this.y + this.speedY
-    lenPl = this.len
-    var const_x = 2; // para ajustar
-    var const_y = 2; // para ajustar
+    var posxNew = this.x + this.speedX
+    var posyNew = this.y + this.speedY
+    var lenPl = this.len
+    var constX = 2; // para ajustar
+    var constY = 2; // para ajustar
     if (this.speedX > 0){
-      const_x = -const_x;
+      constX = -constX;
     }
     if (this.speedY > 0){
-      const_x = -const_y
+      constX = -constY
     }
     if ((!(wallspos.includes((posxNew+1)*multp+posyNew+1))) && // arriba/izquierda
     (!(wallspos.includes((posxNew+lenPl-1)*multp+posyNew+1))) && //arriba/derecha
