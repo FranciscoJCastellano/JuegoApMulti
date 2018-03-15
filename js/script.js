@@ -158,12 +158,10 @@ function draw(){
     player.show();
     comer(player,food);
     lucha(player,enemies);
-    //si pierde la vida el player se recarga la pagina
 
-    // Lo dejo comentado porque la página se jode cuando se pierde la vida
     if(player.life<=0){
       alert('YOU LOSE');
-      window.location.reload(true);
+      window.location.href=  window.location.href;
       return 0;
     }
     for(var i=enemies.length-1;i>=0;i--){
