@@ -3,8 +3,7 @@ Autor: Francisco Javier Castellano Farrak
 Fecha: 10/3/18
 Definición: constructor del objeto player
 *************************************/
-var w=800;
-var h=500;
+var minLife=10;
 function Player(){
   this.x=50;
   this.y=50;
@@ -12,16 +11,40 @@ function Player(){
   this.speedY = 0;
   this.len=20;
   this.score=0;
-  this.level=2;
-  
-/************************************
-Autor: Alejandro Enrique Trigueros Álvarez
-Fecha: 14/3/18
-Definición: función que mueve el player: actualiza la posición
-*************************************/
+  this.level=1;
+  this.life=Math.floor(minLife+(factor*this.level)*0.7);
+  this.power=Math.round((factor*this.level*0.3));
+  this.hasCollided=false;
+
+  /************************************
+  Autor: Alejandro Enrique Trigueros Álvarez
+  Fecha: 14/3/18
+  Definición: función que mueve el player: actualiza la posición
+  *************************************/
+  /************************************
+  ACTUALIZACIÓN: Sergio Elola García, 15/03/2018
+  MEJORA: ahora no puede atravesar muros
+  *************************************/
+
   this.movePlayer=function(){
-    this.x+=this.speedX;
-    this.y+=this.speedY;
+    var posxNew = this.x + this.speedX
+    var posyNew = this.y + this.speedY
+    var lenPl = this.len
+    var constX = 2; // para ajustar
+    var constY = 2; // para ajustar
+    if (this.speedX > 0){
+      constX = -constX;
+    }
+    if (this.speedY > 0){
+      constX = -constY
+    }
+    if ((!(wallspos.includes((posxNew+1)*multp+posyNew+1))) && // arriba/izquierda
+    (!(wallspos.includes((posxNew+lenPl-1)*multp+posyNew+1))) && //arriba/derecha
+    (!(wallspos.includes((posxNew+1)*multp+posyNew+lenPl-1))) && // abajo/izquierda
+    (!(wallspos.includes((posxNew+lenPl-2)*multp+posyNew+lenPl-1)))) { //abajo/derecha
+      this.x+=this.speedX;
+      this.y+=this.speedY;
+    }
   }
   /************************************
   Autor: Francisco Javier Castellano Farrak
@@ -31,10 +54,10 @@ Definición: función que mueve el player: actualiza la posición
   this.show=function(){
     ctx = cargaContextoCanvas('myCanvas');
     if(ctx){
-      //alert("player show");
+      ctx.save();
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(this.x,this.y,this.len,this.len);
-
+      ctx.restore();
     }
   }
 

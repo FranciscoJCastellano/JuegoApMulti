@@ -47,5 +47,5 @@ Definición: función que randomiza los valores rgb
 *************************************/
 function randomRgb() {
     var o = Math.round, r = Math.random, s = 255;
-    return 'rgb(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+    return "rgb(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')";
 }
