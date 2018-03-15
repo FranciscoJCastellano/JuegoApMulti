@@ -40,8 +40,8 @@ function Player(){
     }
     if ((!(wallspos.includes((posxNew+1)*multp+posyNew+1))) && // arriba/izquierda
     (!(wallspos.includes((posxNew+lenPl-1)*multp+posyNew+1))) && //arriba/derecha
-    (!(wallspos.includes((posxNew+1)*multp+posyNew+lenPl+1))) && // abajo/izquierda
-    (!(wallspos.includes((posxNew+lenPl-1)*multp+posyNew+lenPl-1)))) { //abajo/derecha
+    (!(wallspos.includes((posxNew+1)*multp+posyNew+lenPl-1))) && // abajo/izquierda
+    (!(wallspos.includes((posxNew+lenPl-2)*multp+posyNew+lenPl-1)))) { //abajo/derecha
       this.x+=this.speedX;
       this.y+=this.speedY;
     }
