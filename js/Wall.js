@@ -30,12 +30,12 @@ function Wall(){
     for (i in walls){
       ladoIzq = walls[i]['x'];
       ladoDch = walls[i]['x'] + walls[i]['width'];
-      ladoSup = walls[i]['y']
-      ladoInf = walls[i]['y']+ walls[i]['height']
+      ladoSup = walls[i]['y'];
+      ladoInf = walls[i]['y']+ walls[i]['height'];
       ladoIzqNuevo = this.x;
-      ladoDchNuevo = this.x + this.width
-      ladoSupNuevo = this.y
-      ladoInfNuevo = this.y + this.height
+      ladoDchNuevo = this.x + this.width;
+      ladoSupNuevo = this.y;
+      ladoInfNuevo = this.y + this.height;
       if (((ladoDchNuevo < ladoIzq) && (ladoDchNuevo > ladoIzq - lenMAX)) ||
       ((ladoDch < ladoIzqNuevo) && (ladoIzqNuevo < ladoDch + lenMAX))) {
 
