@@ -57,7 +57,14 @@ function setup(){
   player=new Player();
   //generamos las paredes
   for(var i=0;i<factor*player.level;i++){
-    walls.push(new Wall);
+    works = 0; // Si work = 0 el muro no es válido
+    while (works == 0){ // repetir hasta que salga un muro válido
+      new_wall = new Wall();
+      if (new_wall.valid == 1){
+        walls.push(new_wall);
+        works = 1;
+      }
+    }
   }
   //generamos los enemigos
   for(var i=0;i<player.level*factor;i++){
@@ -73,9 +80,19 @@ function setup(){
     //console.log("save");
     ctx.save();  // guarda el contexto limpio de efectos
 
-    //dibuja cada obstáculo
+/********************************************
+Actualización: Sergio Elola García, 14/03/2018
+Mejora: Ahora si el muro es válido lo almacena, si no es válido genera otro
+*******************************************/
     for(var i=walls.length-1;i>=0;i--){
-      walls[i].show();
+      works = 0; // Si work = 0 el muro no es válido
+      while (works == 0){ // repetir hasta que salga un muro válido
+        new_wall = new Wall();
+        if (new_wall.valid == 1){
+          walls.push(new_wall);
+          works = 1;
+        }
+      }
     }
     //dibuja y actualiza la posición de cada enemigo
     for(var i=enemies.length-1;i>=0;i--){
@@ -121,9 +138,9 @@ function draw(){
       food[i].update();
     }
 
-    //  for(var i=walls.length-1;i>=0;i--){
-    //    walls[i].show();
-    // }
+     for(var i=walls.length-1;i>=0;i--){
+       walls[i].show();
+    }
 
   }
 
