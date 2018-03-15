@@ -1,5 +1,5 @@
 #video { 
-	position: absolute; 
+	position: fixed; 
 	bottom: 0px; 
 	right: 0px; 
 	min-width: 100%; 
@@ -9,6 +9,7 @@
 	z-index: -1000; 
 	overflow: hidden; 
 }
+/*
 #video_pattern { 
 	background:#fff; 
 	position: fixed; 
@@ -19,3 +20,4 @@
 	height: 100%; 
 	z-index: 1; 
 }
+*/
