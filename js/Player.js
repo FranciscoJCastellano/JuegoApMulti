@@ -51,6 +51,32 @@ function Player(){
       ctx.restore();
     }
   }
+  /************************************
+  Autor: Francisco Javier Castellano Farrak
+  Fecha: 10/3/18
+  Definición: función que cambia el color al player
+  *************************************/
+  this.colourChange=function(food){
+    var sizeFactor=1.3;
+
+    if(!food){
+      ctx = cargaContextoCanvas('myCanvas');
+      if(ctx){
+        ctx.save();
+        ctx.fillStyle = '#ff002f';
+        ctx.fillRect(this.x,this.y,sizeFactor*this.len,sizeFactor*this.len);
+        ctx.restore();
+      }
+    }else if(food){
+      ctx = cargaContextoCanvas('myCanvas');
+      if(ctx){
+        ctx.save();
+        ctx.fillStyle = '#1fefff';
+        ctx.fillRect(this.x,this.y,sizeFactor*this.len,sizeFactor*this.len);
+        ctx.restore();
+      }
+    }
+  }
 
   /************************************
   Autor: Francisco Javier Castellano Farrak

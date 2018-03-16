@@ -6,14 +6,14 @@ var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
 // (computacionalmente más rápido que usar loops)
 var food=[];
 var bullets=[];
-var factor=5;//factor de dificultad para generar enemigos y obstáculos.
+var factor=10;//factor de dificultad para generar enemigos y obstáculos.
 var level=1;//nivel de juego
 var w=1280;
 var h=720;
 var random=0;//para generar random para las velocidades iniciales
 var numDigY = h.toString().length; // para saber cuantos digitos la altura del canvas
 var multp = Math.pow(10, numDigY); // servirá para almacenar posiciones
-var isDay=true;//variable para saber si es de día o de noche
+var isDay=false;//variable para saber si es de día o de noche
 var goal=2;//el numero de veces que se come toda la comida para recargar canvas
 
 function cargaContextoCanvas(idCanvas){
@@ -254,8 +254,9 @@ function comer(player,comida){
   while(i--){
     if(player.hasCollided==false){
       if (coincide(player,comida[i])){
-        player.score++;
+        player.colourChange(true);
 
+        player.score++;
         if(i>-1){
           comida.splice(i,1);
         }
@@ -276,9 +277,11 @@ iDEA: poner
 Ref:https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
 *************************************/
 function lucha(player,enemies){
-  for(var i=enemies.length-1;i>=0;i--){
+  var i=enemies.length;
+  while(i--){
     if(player.hasCollided==false){
       if (coincide(player,enemies[i])){
+        player.colourChange(false);
         player.life-=enemies[i].power;
         enemies[i].life-=player.power;
 
@@ -289,6 +292,7 @@ function lucha(player,enemies){
           }
         }
         player.hasCollided=true;
+
       }
     }else if(player.hasCollided==true&&!coincide(player,enemies[i])){
       player.hasCollided=false;
