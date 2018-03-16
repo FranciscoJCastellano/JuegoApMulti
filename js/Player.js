@@ -11,9 +11,9 @@ function Player(){
   this.speedY = 0;
   this.len=20;
   this.score=0;
-  this.level=1;
-  this.life=Math.floor(minLife+(factor*this.level)*0.7);
-  this.power=Math.round((factor*this.level*0.7));
+  this.level=3;
+  this.life=Math.floor(minLife+(factor*this.level/2)*0.7);
+  this.power=Math.round((factor*this.level*0.3));
   this.hasCollided=false;
   this.ammo=this.level*factor;
 
@@ -34,12 +34,7 @@ function Player(){
     var lenPl = this.len
     var constX = 2; // para ajustar
     var constY = 2; // para ajustar
-    if (this.speedX > 0){
-      constX = -constX;
-    }
-    if (this.speedY > 0){
-      constX = -constY
-    }
+
     if ((!(wallspos.includes((posxNew+1)*multp+posyNew+1))) && // arriba/izquierda
     (!(wallspos.includes((posxNew+lenPl-1)*multp+posyNew+1))) && //arriba/derecha
     (!(wallspos.includes((posxNew+1)*multp+posyNew+lenPl-1))) && // abajo/izquierda

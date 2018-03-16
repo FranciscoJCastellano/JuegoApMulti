@@ -11,9 +11,10 @@ function Food(){
   this.minVel=1;
   this.maxVel=4;
   this.limiter=0.12;
-
-  this.velx=Math.floor(Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
-  this.vely=Math.floor(Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
+  random=Math.floor(Math.random()*(1+1+1)+-1);
+  this.velx=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
+  random=Math.floor(Math.random()*(1+1+1)+-1);
+  this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
 
   /************************************
   Autor: Francisco Javier Castellano Farrak

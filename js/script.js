@@ -9,10 +9,10 @@ var bullets=[];
 var factor=10;//factor de dificultad para generar enemigos y obstáculos.
 var w=1280;
 var h=720;
+var random=0;//para generar random para las velocidades iniciales
 
-
-var num_dig_y = h.toString().length; // para saber cuantos digitos la altura del canvas
-var multp = Math.pow(10, num_dig_y); // servirá para almacenar posiciones
+var numDigY = h.toString().length; // para saber cuantos digitos la altura del canvas
+var multp = Math.pow(10, numDigY); // servirá para almacenar posiciones
 
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
@@ -168,10 +168,7 @@ function draw(){
       window.location.href=  window.location.href;
       return 0;
     }
-    for(var i=enemies.length-1;i>=0;i--){
-      enemies[i].show();
-      enemies[i].update();
-    }
+
     //si no queda comida se rellena
     if(food.length<=0){
       for(var i=0;i<player.level*factor*1.5;i++){
@@ -185,14 +182,19 @@ function draw(){
         this.level++;
       }
     }
+    for(var i=enemies.length-1;i>=0;i--){
+      enemies[i].show();
+      enemies[i].update();
+    }
+    for(var i=walls.length-1;i>=0;i--){
+      walls[i].show();
+    }
     for(var i=food.length-1;i>=0;i--){
       food[i].show();
       food[i].update();
     }
 
-    for(var i=walls.length-1;i>=0;i--){
-      walls[i].show();
-    }
+
   }
 }
 /************************************
