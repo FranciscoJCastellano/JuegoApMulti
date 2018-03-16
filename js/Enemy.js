@@ -10,22 +10,20 @@ function Enemy(){
   this.through=false;//propiedad para atravesar las paredes
   this.minVel=2;
   this.maxVel=5;
-  this.limiter=0.4;
+  this.limiter=0.18*level;
   this.life=Math.floor(minLife+factor*2);
   this.power=Math.floor(factor*0.15);
+  this.velx=0;
+  this.vely=0;
   //generamos num aleatorio para la dirección inicial
-
-  random=Math.floor(Math.random()*(1+1+1)+-1);
-  if(random==0){
-    random=Math.floor(Math.random()*(1+1+1)+-1);
+  if(this.vely==0){
+    random=Math.floor(Math.random()*(3)-1);
+    this.velx=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
   }
-  this.velx=Math.floor(0.25*level*((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
-  random=Math.floor(Math.random()*(1+1+1)+-1);
-  if(random==0){
-    random=Math.floor(Math.random()*(1+1+1)+-1);
+  if(this.vely==0){
+    random=Math.floor(Math.random()*(3)-1);
+    this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
   }
-  this.vely=Math.floor(0.25*level*((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
-
   /************************************
   Autor: Francisco Javier Castellano Farrak
   Fecha: 10/3/18
@@ -48,8 +46,15 @@ function Enemy(){
   Definición: función que actualiza la posición del enemigo
   *************************************/
   this.update=function(){
-    //si pierdes recarga la pagina
+    if(this.vely==0){
+      random=Math.floor(Math.random()*(3)-1);
+      this.velx=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
+    }
+    if(this.vely==0){
+      random=Math.floor(Math.random()*(3)-1);
+      this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
 
+    }
     this.x+=this.velx;
     this.y+=this.vely;
     this.colision();
