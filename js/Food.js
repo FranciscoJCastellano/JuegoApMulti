@@ -47,15 +47,15 @@ function Food(){
   Definición: función que actualiza la posición de la comida
   *************************************/
   this.update=function(){
-    if(this.vely==0){
-      random=Math.floor(Math.random()*(3)-1);
-      this.velx=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
-    }
-    if(this.vely==0){
-      random=Math.floor(Math.random()*(3)-1);
-      this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
-
-    }
+    // if(this.vely==0){
+    //   random=Math.floor(Math.random()*(3)-1);
+    //   this.velx=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
+    // }
+    // if(this.vely==0){
+    //   random=Math.floor(Math.random()*(3)-1);
+    //   this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
+    //
+    // }
     this.x+=this.velx;
     this.y+=this.vely;
     this.colision();

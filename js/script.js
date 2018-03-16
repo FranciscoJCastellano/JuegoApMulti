@@ -6,13 +6,15 @@ var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
 // (computacionalmente más rápido que usar loops)
 var food=[];
 var bullets=[];
-var factor=10;//factor de dificultad para generar enemigos y obstáculos.
-var level=7;//nivel de juego
+var factor=5;//factor de dificultad para generar enemigos y obstáculos.
+var level=1;//nivel de juego
 var w=1280;
 var h=720;
 var random=0;//para generar random para las velocidades iniciales
 var numDigY = h.toString().length; // para saber cuantos digitos la altura del canvas
 var multp = Math.pow(10, numDigY); // servirá para almacenar posiciones
+var isDay=true;//variable para saber si es de día o de noche
+var goal=2;//el numero de veces que se come toda la comida para recargar canvas
 
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
@@ -63,6 +65,8 @@ function setup(){
   });
   player=new Player();
   document.getElementById('score').innerHTML = "Score: " + player.score;
+  document.getElementById('life').innerHTML = "Life: " + player.life;
+  document.getElementById('level').innerHTML = "Level: " + player.life;
 
   /********************************************
   Autor:Sergio Elola García
@@ -107,11 +111,11 @@ function setup(){
   //console.log(walls.length);
 
   //generamos los enemigos
-  for(var i=0;i<level*factor*0.6;i++){
+  for(var i=level*factor*0.6;i>=0;i--){
     enemies.push(new Enemy);
   }
   //generamos la comida
-  for(var i=0;i<level*factor*0.7;i++){
+  for(var i=level*factor*0.7;i>=0;i--){
     food.push(new Food);
   }
   ctx = cargaContextoCanvas('myCanvas');
@@ -131,16 +135,20 @@ function setup(){
       // }
       walls[i].show();
     }
-    //dibuja y actualiza la posición de cada enemigo
-    for(var i=enemies.length-1;i>=0;i--){
-      enemies[i].show();
+
+    //dibuja y actualiza la posición de cada enemigo si es de noche
+    if(!isDay){
+      for(var i=enemies.length-1;i>=0;i--){
+        enemies[i].show();
+      }
     }
-    //dibuja y actualiza la posición de la comida
-    for(var i=food.length-1;i>=0;i--){
-      food[i].show();
+    //dibuja y actualiza la posición de la comida si es de día
+    if(isDay){
+      for(var i=food.length-1;i>=0;i--){
+        food[i].show();
+      }
     }
     player.show();
-
   }
 }
 /************************************
@@ -153,6 +161,7 @@ function draw(){
   listenKeyPressed(ctx);
   document.getElementById('score').innerHTML = "Score: " + player.score;
   document.getElementById('life').innerHTML = "Life: " + player.life;
+  document.getElementById('level').innerHTML = "Level: " + player.level;
 
   if(ctx){
 
@@ -168,14 +177,7 @@ function draw(){
       return 0;
     }
 
-    //si no queda comida se rellena
-    if(food.length<=0){
-      for(var i=0;i<level*factor*1.5;i++){
-        food.push(new Food);
-      }
-      this.score++;
 
-    }
     if(enemies.length<=0){
       for(var i=0;i<enemies.level*factor*1.5;i++){
         enemies.push(new Enemy);
@@ -183,20 +185,39 @@ function draw(){
       this.level++;
 
     }
-    for(var i=enemies.length-1;i>=0;i--){
-      enemies[i].show();
+    if(!isDay){
+      var ie=enemies.length;
+      while(ie--){
+        enemies[ie].show();
+      }
     }
-    for(var i=walls.length-1;i>=0;i--){
-      walls[i].show();
-    }
-    var i=food.length-1;
-    while(i--){
-      food[i].show();
-    }
-    // for(var i=food.length-1;i>=0;i--){
-    //   food[i].show();
+    // for(var i=enemies.length-1;i>=0;i--){
+    //   enemies[i].show();
     // }
-
+    var iw=walls.length;
+    while(iw--){
+      walls[iw].show();
+    }
+    // for(var i=walls.length-1;i>=0;i--){
+    //   walls[i].show();
+    // }
+    //si no queda comida se rellena
+    if(food.length<=0){
+      for(var i=level*factor*1.5;i<=0;i--){
+        food.push(new Food);
+      }
+      this.score++;
+        newDay(player);
+    }
+    if(isDay){
+      var ifood=food.length;
+      while(ifood--){
+        food[ifood].show();
+      }
+      // for(var i=food.length-1;i>=0;i--){
+      //   food[i].show();
+      // }
+    }
 
   }
 }
@@ -229,7 +250,8 @@ aumenta la vida del player y elimina la comida
 Ref:https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
 *************************************/
 function comer(player,comida){
-  for(var i=comida.length-1;i>=0;i--){
+  var i=comida.length;
+  while(i--){
     if(player.hasCollided==false){
       if (coincide(player,comida[i])){
         player.score++;
@@ -298,7 +320,18 @@ function coincideWall(player,wall){
       wall.valid=0;
     }
   }
-
+  /************************************
+  Autor: Francisco Javier Castellano Farrak
+  Fecha: 16/3/18
+  Definición: función para ver si es de día
+  e iniciar nivel nuevo
+  *************************************/
+  function newDay(isDay){
+    if(isDay){
+      level++;
+      setup();
+    }
+  }
   function listenKeyPressed(contx){
     //Esta funcion se ejecuta al pulsar una tecla
     //mirar setup()
