@@ -11,7 +11,7 @@ canvas{
   left: 12%;
   z-index: 100;
   border:none;
-  font-size:120%;
+  font-size:140%;
 
 }
 #life{
@@ -20,7 +20,7 @@ canvas{
   left: 75%;
   z-index: 100;
   border:none;
-  font-size:120%;
+  font-size:140%;
 }
 div{
   padding: 9px;
@@ -45,7 +45,7 @@ h1{
   text-align: center;
   color:#e23411;
   font-family:Geneva;
-  font-size:3.5em;
+  font-size:4em;
   text-shadow: 3px 2px #000000;
   font-style:italic;
 }

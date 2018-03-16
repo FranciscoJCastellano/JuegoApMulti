@@ -1,5 +1,5 @@
 /*código del juego*/
-var step=5;
+var step=7;
 var enemies=[];
 var walls=[];
 var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
@@ -7,10 +7,10 @@ var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
 var food=[];
 var bullets=[];
 var factor=10;//factor de dificultad para generar enemigos y obstáculos.
+var level=3;//nivel de juego
 var w=1280;
 var h=720;
 var random=0;//para generar random para las velocidades iniciales
-
 var numDigY = h.toString().length; // para saber cuantos digitos la altura del canvas
 var multp = Math.pow(10, numDigY); // servirá para almacenar posiciones
 
@@ -42,7 +42,7 @@ window.onload = function(){
   gameOn();
 }
 function gameOn(){
-  setInterval(draw,10);
+  setInterval(draw,30);
   //alert("GAME ON");
 }
 
@@ -72,9 +72,9 @@ function setup(){
 
   //generamos las paredes
   var works=0;
-  for(var i=0;i<3*factor*player.level;i++){
+  for(var i=0;i<2.5*factor*level;i++){
     works = 0; // Si work = 0 el muro no es válido
-    while (works == 0){ // repetir hasta que salga un muro válido
+    while (!works){ // repetir hasta que salga un muro válido
       newWall = new Wall();
       goodStart(player,newWall);
       if (newWall.valid == 1){
@@ -107,11 +107,11 @@ function setup(){
   //console.log(walls.length);
 
   //generamos los enemigos
-  for(var i=0;i<player.level*factor;i++){
+  for(var i=0;i<level*factor*0.6;i++){
     enemies.push(new Enemy);
   }
   //generamos la comida
-  for(var i=0;i<player.level*factor*1.5;i++){
+  for(var i=0;i<level*factor*0.7;i++){
     food.push(new Food);
   }
   ctx = cargaContextoCanvas('myCanvas');
@@ -133,12 +133,10 @@ function setup(){
     }
     //dibuja y actualiza la posición de cada enemigo
     for(var i=enemies.length-1;i>=0;i--){
-      enemies[i].update();
       enemies[i].show();
     }
     //dibuja y actualiza la posición de la comida
     for(var i=food.length-1;i>=0;i--){
-      food[i].update();
       food[i].show();
     }
     player.show();
@@ -159,7 +157,7 @@ function draw(){
   if(ctx){
 
     borra_todo();
-    player.colision();
+    //player.colision();
     player.show();
     comer(player,food);
     lucha(player,enemies);
@@ -172,27 +170,27 @@ function draw(){
 
     //si no queda comida se rellena
     if(food.length<=0){
-      for(var i=0;i<player.level*factor*1.5;i++){
+      for(var i=0;i<level*factor*1.5;i++){
         food.push(new Food);
-        this.score++;
       }
+      this.score++;
+
     }
     if(enemies.length<=0){
       for(var i=0;i<enemies.level*factor*1.5;i++){
         enemies.push(new Enemy);
-        this.level++;
       }
+      this.level++;
+
     }
     for(var i=enemies.length-1;i>=0;i--){
       enemies[i].show();
-      enemies[i].update();
     }
     for(var i=walls.length-1;i>=0;i--){
       walls[i].show();
     }
     for(var i=food.length-1;i>=0;i--){
       food[i].show();
-      food[i].update();
     }
 
 

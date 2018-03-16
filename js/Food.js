@@ -8,13 +8,21 @@ function Food(){
   this.y=Math.random()*h-1;
   this.len=5;
   this.through=false;//propiedad para atravesar las paredes
-  this.minVel=1;
+  this.minVel=2;
   this.maxVel=4;
   this.limiter=0.12;
+  //generamos num aleatorio para la dirección inicial
   random=Math.floor(Math.random()*(1+1+1)+-1);
-  this.velx=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
+  if(random==0){
+    random=Math.floor(Math.random()*(1+1+1)+-1);
+  }
+  this.velx=Math.floor(0.5*level*((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
   random=Math.floor(Math.random()*(1+1+1)+-1);
-  this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
+  random=Math.floor(Math.random()*(1+1+1)+-1);
+  if(random==0){
+    random=Math.floor(Math.random()*(1+1+1)+-1);
+  }
+  this.vely=Math.floor(0.5*level*((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
 
   /************************************
   Autor: Francisco Javier Castellano Farrak
@@ -24,6 +32,8 @@ function Food(){
   this.show=function(){
 
     ctx = cargaContextoCanvas('myCanvas');
+    this.update();
+
     if(ctx){
       ctx.save();
       ctx.fillStyle = '#f002ff';

@@ -5,7 +5,7 @@ Definición: constructor del objeto tipo obstáculo
 *************************************/
 var maxW=130;
 var maxH=100;
-var minW=5;
+var minW=25;
 var minH=50;
 
 function Wall(){

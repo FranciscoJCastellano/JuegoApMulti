@@ -11,7 +11,7 @@ function Player(){
   this.speedY = 0;
   this.len=20;
   this.score=0;
-  this.level=30;
+  this.level=level;
   this.life=Math.floor(minLife+(factor*this.level/2)*0.7);
   this.power=Math.round((factor*this.level*0.3));
   this.hasCollided=false;
@@ -50,6 +50,7 @@ function Player(){
   *************************************/
   this.show=function(){
     ctx = cargaContextoCanvas('myCanvas');
+    this.colision();
     if(ctx){
       ctx.save();
       ctx.fillStyle = '#ffffff';
