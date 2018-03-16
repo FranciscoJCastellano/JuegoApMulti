@@ -29,19 +29,12 @@ function Player(){
   *************************************/
 
   this.movePlayer=function(){
-    var posxNew = this.x + this.speedX
-    var posyNew = this.y + this.speedY
-    var lenPl = this.len
-    var constX = 2; // para ajustar
-    var constY = 2; // para ajustar
-
-    if ((!(wallspos.includes((posxNew+1)*multp+posyNew+1))) && // arriba/izquierda
-    (!(wallspos.includes((posxNew+lenPl-1)*multp+posyNew+1))) && //arriba/derecha
-    (!(wallspos.includes((posxNew+1)*multp+posyNew+lenPl-1))) && // abajo/izquierda
-    (!(wallspos.includes((posxNew+lenPl-2)*multp+posyNew+lenPl-1)))) { //abajo/derecha
-      this.x+=this.speedX;
-      this.y+=this.speedY;
+    /*Ahora usamos una función que devuelve un boolean si se detecta la pared*/
+    if(detectarWall(this)){
+      player.x+=player.speedX;
+      player.y+=player.speedY;
     }
+
   }
   /************************************
   Autor: Francisco Javier Castellano Farrak
@@ -65,6 +58,7 @@ function Player(){
   Definición: función para cambiar posición del jugador al llegar al final del canvas
   *************************************/
   this.colision=function(){
+
     if(this.y>=h-this.len/2){//bottom threshold
       this.y=0;
     }

@@ -10,6 +10,7 @@ function Food(){
   this.through=false;//propiedad para atravesar las paredes
   this.minVel=2;
   this.maxVel=4;
+  this.hasCollided=false;
   this.limiter=0.12;
   //generamos num aleatorio para la dirección inicial
   random=Math.floor(Math.random()*(1+1+1)+-1);
@@ -17,7 +18,6 @@ function Food(){
     random=Math.floor(Math.random()*(1+1+1)+-1);
   }
   this.velx=Math.floor(0.5*level*((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
-  random=Math.floor(Math.random()*(1+1+1)+-1);
   random=Math.floor(Math.random()*(1+1+1)+-1);
   if(random==0){
     random=Math.floor(Math.random()*(1+1+1)+-1);
@@ -47,7 +47,6 @@ function Food(){
   Definición: función que actualiza la posición de la comida
   *************************************/
   this.update=function(){
-
     this.x+=this.velx;
     this.y+=this.vely;
     this.colision();

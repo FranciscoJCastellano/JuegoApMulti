@@ -76,7 +76,7 @@ function setup(){
     works = 0; // Si work = 0 el muro no es válido
     while (!works){ // repetir hasta que salga un muro válido
       newWall = new Wall();
-      goodStart(player,newWall);
+      coincideWall(player,newWall);
       if (newWall.valid == 1){
         walls.push(newWall);
         works = 1;
@@ -168,6 +168,10 @@ function draw(){
       return 0;
     }
 
+
+    colisionWall(food,walls);
+
+
     //si no queda comida se rellena
     if(food.length<=0){
       for(var i=0;i<level*factor*1.5;i++){
@@ -195,6 +199,27 @@ function draw(){
 
 
   }
+}
+/********************************************
+Autor:Sergio Elola García
+Fecha: 14/03/2018
+Def: detecta si el player está en
+  alguna posición de las paredes
+*******************************************/
+function detectarWall(player){
+  var posxNew = player.x + player.speedX;
+  var posyNew = player.y + player.speedY;
+  var lenPl = player.len;
+  var constX = 2; // para ajustar
+  var constY = 2; // para ajustar
+
+  if ((!(wallspos.includes((posxNew+1)*multp+posyNew+1))) && // arriba/izquierda
+  (!(wallspos.includes((posxNew+lenPl-1)*multp+posyNew+1))) && //arriba/derecha
+  (!(wallspos.includes((posxNew+1)*multp+posyNew+lenPl-1))) && // abajo/izquierda
+  (!(wallspos.includes((posxNew+lenPl-2)*multp+posyNew+lenPl-1)))) { //abajo/derecha
+    return true;
+  }else
+  return false;
 }
 /************************************
 Autor: Francisco Javier Castellano Farrak
@@ -261,7 +286,12 @@ function coincide(player,enemy){
   player.len + player.y > enemy.y;
   return coincide;
 }
-function goodStart(player,wall){
+/************************************
+Autor: Francisco Javier Castellano Farrak
+Fecha: 16/3/18
+Definición: función para ver si la comida y wall coinciden
+*************************************/
+function coincideWall(player,wall){
   if(player.x < wall.x + wall.width &&
     player.x + player.len > wall.x &&
     player.y < wall.y + wall.height &&
@@ -269,43 +299,47 @@ function goodStart(player,wall){
       wall.valid=0;
     }
   }
-
-  /*inacabada: funcion para detectar colisiones con las paredes*/
-  function detectarParedes(enemies,walls){
-    for(var i=enemies.length-1;i>=0;i--){
+  function colisionWall(comida,wall){
+    for(var i=comida.length-1;i>=0;i--){
+      if(comida[i].hasCollided==false){
       for(var j=walls.length-1;j>=0;j--)  {
-        if(enemies[i].x < walls[j].x + walls[j].width &&
-          enemies[i].x + enemies[i].width > walls[j].x &&
-          enemies[i].y < walls[j].y + walls[j].height &&
-          enemies[i].height + enemies[i].y > walls[j].y){
-            enemies[i].velY=-enemies[i].velY;
-            enemies[i].velX=-enemies[i].velX;
+        if(comida[i].x < wall[j].x + wall[j].width &&
+          comida[i].x + comida[i].len > wall[j].x){
+            comida[i].hasCollided=true;
+            comida[i].velx=-comida[i].velx;
+          }
+          if(comida[i].y < wall[j].y + wall[j].height &&
+            comida[i].len + comida[i].y > wall[j].y){
+              comida[i].hasCollided=true;
+              comida[i].veyx=-comida[i].vely;
+            }
           }
         }
+        }
       }
-    }
 
-    function listenKeyPressed(contx){
-      //Esta funcion se ejecuta al pulsar una tecla
-      //mirar setup()
-      key=contx.key;
 
-      player.speedX=0;
-      player.speedY=0;
-      if(key==40){//abajo
-        player.speedY = step;
+      function listenKeyPressed(contx){
+        //Esta funcion se ejecuta al pulsar una tecla
+        //mirar setup()
+        key=contx.key;
+
+        player.speedX=0;
+        player.speedY=0;
+        if(key==40){//abajo
+          player.speedY = step;
+        }
+        if(key==39){//derecha
+          player.speedX = step;
+        }
+        if(key==38){//arriba
+          player.speedY= -step;
+        }
+        if(key==37){//izquierda
+          player.speedX= -step;
+        }
+        player.movePlayer();
+        if(key==32){//ESPACIO
+          //alert("Eres un pipa :3");
+        }
       }
-      if(key==39){//derecha
-        player.speedX = step;
-      }
-      if(key==38){//arriba
-        player.speedY= -step;
-      }
-      if(key==37){//izquierda
-        player.speedX= -step;
-      }
-      player.movePlayer();
-      if(key==32){//ESPACIO
-        //alert("Eres un pipa :3");
-      }
-    }
