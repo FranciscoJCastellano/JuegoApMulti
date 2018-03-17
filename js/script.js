@@ -17,6 +17,7 @@ var multp = Math.pow(10, numDigY); // servirá para almacenar posiciones
 var isDay=true;//variable para saber si es de día o de noche
 var goal=2;//el numero de veces que se come toda la comida para recargar canvas
 var velMax=7;
+var tec=[];//array donde se verifica tecla pulsada
 
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
@@ -48,7 +49,7 @@ Definición: se carga el escenario, pero no empieza el juego hasta que se pulsa 
 *************************************/
 window.onload = function(){
   setup();
-  //gameOn(); El Juego empieza cuando se pulsa PLAY(y empieza el vídeo también)
+  //gameOn(); //El Juego empieza cuando se pulsa PLAY(y empieza el vídeo también)
 }
 function gameOn(){
   setInterval(draw,10);
@@ -65,10 +66,13 @@ function setup(){
     e.preventDefault();
     //listenKeyPressed(e.keyCode);
     ctx.key=e.keyCode;
+    ctx.keys=(ctx.keys||[]);
+    tec[e.keyCode]=true;
   },true);//Evento:se pulsa una tecla
 
   window.addEventListener('keyup', function (e) {
     ctx.key = false;
+    tec[e.keyCode]=false;
   });
   player=new Player();
   document.getElementById('score').innerHTML = "Score: " + player.score;
@@ -153,10 +157,14 @@ function setup(){
 }
 
 function gameShow(){
-  listenKeyPressed(ctx);
+
   ctx = cargaContextoCanvas('myCanvas');
 
   if(ctx){
+
+    //listenKeyPressed(ctx);
+    multiKeyPressed(ctx);//mejora de listenKeyPressed()
+
     borra_todo();
     //player.colision();
 
@@ -332,11 +340,15 @@ function coincideWall(player,wall){
       setup();
     }
   }
+
+/********************************************
+Autor:Alejandro Enrique Trigueros Álvarez
+Fecha: 14/03/2018
+Def: actualiza la velocidad del player segun la tecla pulsada
+*******************************************/
   function listenKeyPressed(contx){
     //Esta funcion se ejecuta al pulsar una tecla
-    //mirar setup()
     key=contx.key;
-
     player.speedX=0;
     player.speedY=0;
     if(key==40){//abajo
@@ -356,3 +368,28 @@ function coincideWall(player,wall){
       //alert("Eres un pipa :3");
     }
   }
+
+
+/********************************************
+Autor:Alejandro Enrique Trigueros Álvarez
+Fecha: 17/03/2018
+Def: actualiza la velocidad del player segun la tecla pulsada
+*******************************************/
+function multiKeyPressed(c){
+ player.speedX=0;
+ player.speedY=0;
+ if(c.keys && tec[40]){
+   player.speedY = step;
+ }
+ if(c.keys && tec[39]){
+   player.speedX = step;
+ }
+ if(c.keys && tec[38]){
+   player.speedY = -step;
+ }
+ if(c.keys && tec[37]){
+   player.speedX = -step;
+ }
+ player.movePlayer();
+
+}
