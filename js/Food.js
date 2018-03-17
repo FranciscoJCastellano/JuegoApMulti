@@ -11,17 +11,17 @@ function Food(){
   this.minVel=2;
   this.maxVel=4;
   this.hasCollided=false;
-  this.limiter=0.08*level;
+  this.limiterFactor=2*0.08;
   this.velx=0;
   this.vely=0;
   //generamos num aleatorio para la dirección inicial
   if(this.vely==0){
     random=Math.floor(Math.random()*(3)-1);
-    this.velx=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
+    this.velx=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiterFactor;
   }
   if(this.vely==0){
     random=Math.floor(Math.random()*(3)-1);
-    this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
+    this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiterFactor;
   }
 
   /************************************
@@ -47,15 +47,14 @@ function Food(){
   Definición: función que actualiza la posición de la comida
   *************************************/
   this.update=function(){
-    // if(this.vely==0){
-    //   random=Math.floor(Math.random()*(3)-1);
-    //   this.velx=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
-    // }
-    // if(this.vely==0){
-    //   random=Math.floor(Math.random()*(3)-1);
-    //   this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
-    //
-    // }
+    if(this.velx==0){
+      random=Math.floor(Math.random()*(3)-1);
+      this.velx=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiterFactor;
+    }
+    if(this.vely==0){
+      random=Math.floor(Math.random()*(3)-1);
+      this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiterFactor;
+    }
     this.x+=this.velx;
     this.y+=this.vely;
     this.colision();
