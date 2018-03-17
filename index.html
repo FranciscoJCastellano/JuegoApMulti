@@ -41,7 +41,8 @@
   <section id="juego" class="visiblx">
     <h3>Juego</h3>
 	<section>
-		<video loop
+		<video
+    loop
 			id='video'
 			type='video/mp4'
 			src="multimedia/video_fondo.mp4"
@@ -54,6 +55,9 @@
 			<button onclick="play(video)">Play</button>
 			<button onclick="getVideo().pause()">Pause</button>
 			<button onclick="getVideo().load()">Reload</button>
+      <button onclick="changeTime(video)">Cambiar Comida/Enemigo</button>
+
+
 			<button onclick="isEnded(video)">Is ended?</button>
 			<button onclick="getVideo().muted=true">Silenciar</button>
 			<button onclick="getVideo().muted=false">Volumen</button><br>

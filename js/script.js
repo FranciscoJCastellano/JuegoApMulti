@@ -166,7 +166,6 @@ function gameShow(){
     multiKeyPressed(ctx);//mejora de listenKeyPressed()
 
     borra_todo();
-    //player.colision();
 
     if(!isDay){
       var ie=enemies.length;
