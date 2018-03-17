@@ -1,6 +1,10 @@
-
+/************************************
+Autor: Jaime Moreno Quintanar
+Fecha: 14/03/2018
+Definición: Estilo del vídeo
+*************************************/
 #video {
-	position: absolute;
+	position: fixed;
 	bottom: 0px;
 	right: 0px;
 	min-width: 100%;

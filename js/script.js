@@ -38,10 +38,15 @@ function borra_todo(){
     ctx.save();                 // guarda el contexto limpio de efectos
   }
 }
-
+/************************************
+Modificación
+Autores: Jaime Moreno Quintanar
+Fecha: 17/3/18
+Definición: se carga el escenario, pero no empieza el juego hasta que se pulsa el play del vídeo
+*************************************/
 window.onload = function(){
   setup();
-  gameOn();
+  //gameOn(); El Juego empieza cuando se pulsa PLAY(y empieza el vídeo también)
 }
 function gameOn(){
   setInterval(draw,30);
@@ -302,7 +307,7 @@ function lucha(player,enemies){
 /************************************
 Autor: Francisco Javier Castellano Farrak
 Fecha: 13/3/18
-Definición: función para ver si la comida/enememigo coinciden
+Definición: función para ver si la comida/enemigo coinciden
 *************************************/
 function coincide(player,enemy){
   var coincide=player.x < enemy.x + enemy.len &&

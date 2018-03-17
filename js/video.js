@@ -6,6 +6,7 @@ importante para subir el nivel cuando se sobreviva a la noche con el video y se 
 Referencias: https://www.w3schools.com/tags/ref_av_dom.asp
 *************************************/
 var videoIsEnded = 0; //Si 1 --> vídeo terminado. Si 0 --> video no terminado
+var primerPlay = 0; //Si 0, no se ha pulsado play todavía. Si 1, se ha pulsado play una vez
 
 function alerta (texto) {
 	console.log("Evento Capturado: " + texto);
@@ -25,5 +26,14 @@ function isEnded(video){
 		videoIsEnded = 1;
 	}else {
 		console.log("Not ended");
+	}
+}
+
+/*Función para reproducir el vídeo al pulsar el play y empezar el juego*/
+function play(video){
+	if (primerPlay==0){
+		primerPlay=1;
+		video.play();//El vídeo comienza
+		gameOn();//Función creada en script.js que pone a funcionar el juego
 	}
 }
