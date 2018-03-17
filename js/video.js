@@ -25,6 +25,7 @@ function isEnded(video){
 	if (video.ended == true){
 		console.log("Ended");
 		videoIsEnded = 1;
+
 	}else {
 		console.log("Not ended");
 	}
@@ -51,4 +52,3 @@ function currentTime(){
 
 	}
 }
-
