@@ -1,5 +1,5 @@
 /*código del juego*/
-var step=5;
+var step=4;
 var player;
 var enemies=[];
 var walls=[];
