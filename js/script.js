@@ -1,5 +1,6 @@
 /*código del juego*/
 var step=7;
+var player;
 var enemies=[];
 var walls=[];
 var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
@@ -13,8 +14,9 @@ var h=720;
 var random=0;//para generar random para las velocidades iniciales
 var numDigY = h.toString().length; // para saber cuantos digitos la altura del canvas
 var multp = Math.pow(10, numDigY); // servirá para almacenar posiciones
-var isDay=false;//variable para saber si es de día o de noche
+var isDay=true;//variable para saber si es de día o de noche
 var goal=2;//el numero de veces que se come toda la comida para recargar canvas
+var velMax=7;
 
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
@@ -49,7 +51,7 @@ window.onload = function(){
   //gameOn(); El Juego empieza cuando se pulsa PLAY(y empieza el vídeo también)
 }
 function gameOn(){
-  setInterval(draw,30);
+  setInterval(draw,10);
   //alert("GAME ON");
 }
 
@@ -127,33 +129,80 @@ function setup(){
   if(ctx){
     //console.log("save");
     ctx.save();  // guarda el contexto limpio de efectos
-
-    for(var i=walls.length-1;i>=0;i--){
-      //// Lo dejo comentado porque no tiene sentido generar dos veces los muros
-      // works = 0; // Si work = 0 el muro no es válido
-      // while (works == 0){ // repetir hasta que salga un muro válido
-      //   newWall = new Wall();
-      //   if (newWall.valid == 1){
-      //     walls.push(newWall);
-      //     works = 1;
-      //   }
-      // }
+    var i=walls.length;
+    while(i--){
       walls[i].show();
     }
 
     //dibuja y actualiza la posición de cada enemigo si es de noche
     if(!isDay){
-      for(var i=enemies.length-1;i>=0;i--){
+      var i=enemies.length;
+      while(i--){
         enemies[i].show();
       }
     }
     //dibuja y actualiza la posición de la comida si es de día
     if(isDay){
-      for(var i=food.length-1;i>=0;i--){
+      var i=food.length;
+      while(i--){
         food[i].show();
       }
     }
     player.show();
+  }
+}
+
+function gameShow(){
+  listenKeyPressed(ctx);
+  ctx = cargaContextoCanvas('myCanvas');
+
+  if(ctx){
+    borra_todo();
+    //player.colision();
+
+    if(!isDay){
+      var ie=enemies.length;
+      while(ie--){
+        enemies[ie].show();
+      }
+    }
+    var iw=walls.length;
+    while(iw--){
+      walls[iw].show();
+    }
+    if(isDay){
+      var ifood=food.length;
+      while(ifood--){
+        food[ifood].show();
+      }
+    }
+    player.show();
+  }
+}
+function gameUpdate(){
+  comer(player,food);
+  lucha(player,enemies);
+
+  if(player.life<=0){
+    console.log('YOU LOSE');
+    window.location.href=  window.location.href;
+    return 0;
+  }
+  if(enemies.length<=0){
+    var i=enemies.level*factor*1.5;
+    while(i--){
+      enemies.push(new Enemy);
+    }
+    this.level++;
+  }
+  //si no queda comida se rellena
+  if(food.length<=0){
+    var i=level*factor*1.5;
+    while(i--){
+      food.push(new Food);
+    }
+    this.score++;
+    newDay(player);
   }
 }
 /************************************
@@ -162,69 +211,11 @@ Fecha: 10/3/18
 Definición: borramos canvas y redibujamos player, comida, enemigos y obstáculos
 *************************************/
 function draw(){
-  ctx = cargaContextoCanvas('myCanvas');
-  listenKeyPressed(ctx);
   document.getElementById('score').innerHTML = "Score: " + player.score;
   document.getElementById('life').innerHTML = "Life: " + player.life;
   document.getElementById('level').innerHTML = "Level: " + player.level;
-
-  if(ctx){
-
-    borra_todo();
-    //player.colision();
-    player.show();
-    comer(player,food);
-    lucha(player,enemies);
-
-    if(player.life<=0){
-      console.log('YOU LOSE');
-      window.location.href=  window.location.href;
-      return 0;
-    }
-
-
-    if(enemies.length<=0){
-      for(var i=0;i<enemies.level*factor*1.5;i++){
-        enemies.push(new Enemy);
-      }
-      this.level++;
-
-    }
-    if(!isDay){
-      var ie=enemies.length;
-      while(ie--){
-        enemies[ie].show();
-      }
-    }
-    // for(var i=enemies.length-1;i>=0;i--){
-    //   enemies[i].show();
-    // }
-    var iw=walls.length;
-    while(iw--){
-      walls[iw].show();
-    }
-    // for(var i=walls.length-1;i>=0;i--){
-    //   walls[i].show();
-    // }
-    //si no queda comida se rellena
-    if(food.length<=0){
-      for(var i=level*factor*1.5;i<=0;i--){
-        food.push(new Food);
-      }
-      this.score++;
-        newDay(player);
-    }
-    if(isDay){
-      var ifood=food.length;
-      while(ifood--){
-        food[ifood].show();
-      }
-      // for(var i=food.length-1;i>=0;i--){
-      //   food[i].show();
-      // }
-    }
-
-  }
+  gameUpdate();
+  gameShow();
 }
 /********************************************
 Autor:Sergio Elola García

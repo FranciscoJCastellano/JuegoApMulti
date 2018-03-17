@@ -13,7 +13,7 @@ function Player(){
   this.score=0;
   this.level=level;
   this.life=Math.floor(minLife+(factor*this.level/2)*0.7);
-  this.power=Math.round((factor*this.level*0.3));
+  this.power=Math.round((factor*this.level*0.4));
   this.hasCollided=false;
   this.ammo=this.level*factor;
 

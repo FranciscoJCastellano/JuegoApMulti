@@ -46,14 +46,13 @@ function Enemy(){
   Definición: función que actualiza la posición del enemigo
   *************************************/
   this.update=function(){
-    if(this.vely==0){
+    if(this.velx==0||this.velx>velMax){
       random=Math.floor(Math.random()*(3)-1);
       this.velx=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
     }
-    if(this.vely==0){
+    if(this.vely==0||this.vely>velMax){
       random=Math.floor(Math.random()*(3)-1);
       this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
-
     }
     this.x+=this.velx;
     this.y+=this.vely;
