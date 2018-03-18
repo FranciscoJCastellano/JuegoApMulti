@@ -53,7 +53,7 @@ function Player(){
   }
   /************************************
   Autor: Francisco Javier Castellano Farrak
-  Fecha: 10/3/18
+  Fecha: 16/3/18
   Definición: función que cambia el color al player
   *************************************/
   this.colourChange=function(food){

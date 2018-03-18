@@ -25,8 +25,8 @@ canvas{
 }
 #level{
   position: absolute;
-  top:40%;
-  left: 45%;
+  top:50%;
+  left: 46%;
   z-index: 100;
   border:none;
   font-size:140%;
@@ -62,7 +62,7 @@ h3{
   text-align: center;
   color:#e33422;
   font-family:Geneva;
-  font-size:1.5em;
+  font-size:2.5em;
   text-shadow: 1px 0.5px #000000;
 }
 section p{

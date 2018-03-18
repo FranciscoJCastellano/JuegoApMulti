@@ -25,6 +25,7 @@ function isEnded(video){
 	if (video.ended == true){
 		console.log("Ended");
 		videoIsEnded = 1;
+
 	}else {
 		console.log("Not ended");
 	}
@@ -32,8 +33,16 @@ function isEnded(video){
 
 /*Función para reproducir el vídeo al pulsar el play y empezar el juego*/
 function play(video){
-	if (primerPlay==0){
+	if (!primerPlay){
 		primerPlay=1;
+		video.play();//El vídeo comienza
+		gameOn();//Función creada en script.js que pone a funcionar el juego
+	}
+}
+/*Función para reproducir el vídeo al pulsar el play y empezar el juego*/
+function changeTime(video){
+	if(primerPlay){
+		isDay = !isDay;
 		video.play();//El vídeo comienza
 		gameOn();//Función creada en script.js que pone a funcionar el juego
 	}
@@ -43,12 +52,10 @@ function play(video){
 video.ontimeupdate = function(){currentTime()};
 function currentTime(){
 	if (video.currentTime>=15){//Termina el día y empieza la noche
-		isDay = false;
+		changeTime(video);
 		console.log("Noche");
 	}else{
-		isDay=true;
+		changeTime(video);
 		console.log("Día");
-
 	}
 }
-

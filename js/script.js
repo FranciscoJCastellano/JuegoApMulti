@@ -1,5 +1,5 @@
 /*código del juego*/
-var step=5;
+var step=4;
 var player;
 var enemies=[];
 var walls=[];
@@ -126,7 +126,7 @@ function setup(){
     enemies.push(new Enemy);
   }
   //generamos la comida
-  for(var i=level*factor*0.7;i>=0;i--){
+  for(var i=factor*0.7;i>=0;i--){
     food.push(new Food);
   }
   ctx = cargaContextoCanvas('myCanvas');
@@ -166,7 +166,6 @@ function gameShow(){
     multiKeyPressed(ctx);//mejora de listenKeyPressed()
 
     borra_todo();
-    //player.colision();
 
     if(!isDay){
       var ie=enemies.length;
@@ -205,7 +204,7 @@ function gameUpdate(){
   }
   //si no queda comida se rellena
   if(food.length<=0){
-    var i=level*factor*1.5;
+    var i=factor*1.5;
     while(i--){
       food.push(new Food);
     }
@@ -259,13 +258,12 @@ function comer(player,comida){
     if(player.hasCollided==false){
       if (coincide(player,comida[i])){
         player.colourChange(true);
-
         player.score++;
         if(i>-1){
           comida.splice(i,1);
         }
         player.hasCollided=true;
-        player.life++;
+        player.life+=2;
       }
     }else if(player.hasCollided==true&&!coincide(player,comida[i])){
       player.hasCollided=false;
