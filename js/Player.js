@@ -63,15 +63,15 @@ function Player(){
       ctx = cargaContextoCanvas('myCanvas');
       if(ctx){
         ctx.save();
-        ctx.fillStyle = '#ff002f';
+        ctx.fillStyle = "#ff002f";
         ctx.fillRect(this.x,this.y,sizeFactor*this.len,sizeFactor*this.len);
         ctx.restore();
       }
-    }else if(food){
+    }else{
       ctx = cargaContextoCanvas('myCanvas');
       if(ctx){
         ctx.save();
-        ctx.fillStyle = '#1fefff';
+        ctx.fillStyle = "#1fefff";
         ctx.fillRect(this.x,this.y,sizeFactor*this.len,sizeFactor*this.len);
         ctx.restore();
       }

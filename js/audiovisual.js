@@ -58,10 +58,16 @@ function pause(video, audio){
 
 /*Función para reproducir el vídeo al pulsar el play y empezar el juego*/
 function changeTime(video){
-	if(primerPlay){
-		isDay = !isDay;
-		video.play();//El vídeo comienza
-		gameOn();//Función creada en script.js que pone a funcionar el juego
+	if(isDay){
+		isDay=!isDay;
+		console.log("Noche");
+		audio.currentTime=15;
+		video.currentTime=15;
+	}else if(!isDay){
+		isDay=!isDay;
+		console.log("Día");
+		audio.currentTime=0;
+		video.currentTime=0;
 	}
 }
 
@@ -70,9 +76,11 @@ video.ontimeupdate = function(){currentTime()};
 function currentTime(){
 	if (video.currentTime>=15){//Termina el día y empieza la noche
 		changeTime(video);
+		audio.currentTime=15;
 		console.log("Noche");
 	}else{
 		changeTime(video);
+		audio.currentTime=0;
 		console.log("Día");
 	}
 }

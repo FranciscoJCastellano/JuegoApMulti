@@ -1,5 +1,5 @@
 /*código del juego*/
-var step=4;
+var step=3;
 var player;
 var enemies=[];
 var walls=[];
@@ -14,7 +14,7 @@ var h=720;
 var random=0;//para generar random para las velocidades iniciales
 var numDigY = h.toString().length; // para saber cuantos digitos la altura del canvas
 var multp = Math.pow(10, numDigY); // servirá para almacenar posiciones
-var isDay=false;//variable para saber si es de día o de noche
+var isDay=true;//variable para saber si es de día o de noche
 var goal=2;//el numero de veces que se come toda la comida para recargar canvas
 var velMax=7;
 var tec=[];//array donde se verifica tecla pulsada
@@ -257,8 +257,9 @@ function comer(player,comida){
   while(i--){
     if(player.hasCollided==false){
       if (coincide(player,comida[i])){
-        player.colourChange(true);
         player.score++;
+        player.colourChange(true);
+
         if(i>-1){
           comida.splice(i,1);
         }
