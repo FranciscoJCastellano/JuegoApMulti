@@ -8,7 +8,7 @@
   <script src="js/Enemy.js" type="text/javascript"></script>
   <script src="js/Player.js" type="text/javascript"></script>
   <script src="js/Wall.js" type="text/javascript"></script>
-  <script src="js/video.js" type="text/javascript"></script>
+  <script src="js/audiovisual.js" type="text/javascript"></script>
   <script src="js/Food.js" type="text/javascript"></script>
 
 
@@ -40,6 +40,14 @@
 
   <section id="juego" class="visiblx">
     <h3>Juego</h3>
+	<audio
+		loop
+		id='audio'
+		type='audio/mp3'
+		src="multimedia/musica_fondo.mp3"
+		>
+		Tu navegador no es compatible con la reproducción de este vídeo
+	</audio>
 	<section>
 		<video
     loop
@@ -48,21 +56,23 @@
 			src="multimedia/video_fondo.mp4"
 			onplaying="alerta('PLAY');"
 			onpause="alerta('PAUSE');"
+			onloadstart="this.volume=0.5"
 			>
 			Tu navegador no es compatible con la reproducción de este vídeo
 		</video>
 		<section id='buttons'>
-			<button onclick="play(video)">Play</button>
-			<button onclick="getVideo().pause()">Pause</button>
-			<button onclick="getVideo().load()">Reload</button>
-      <button onclick="changeTime(video)">Cambiar Comida/Enemigo</button>
+			<button onclick="play(video, audio)">Play</button>
+			<button onclick="pause(video, audio)">Pause</button>
+			<button onclick="changeTime(video)">Cambiar Comida/Enemigo</button>
 
 
 			<button onclick="isEnded(video)">Is ended?</button>
-			<button onclick="getVideo().muted=true">Silenciar</button>
-			<button onclick="getVideo().muted=false">Volumen</button><br>
-			<button onclick="getVideo().volume+=0.1">Subir volumen</button>
-			<button onclick="getVideo().volume-=0.1">Bajar volumen</button>
+			<button onclick="getVideo().muted=true">Silenciar efectos vídeo</button>
+			<button onclick="getVideo().muted=false">Volumen efectos vídeo</button><br>
+			<button onclick="getVideo().volume+=0.1">Subir volumen vídeo</button>
+			<button onclick="getVideo().volume-=0.1">Bajar volumen vídeo</button>
+			<button onclick="getAudio().muted=true">Silenciar música</button>
+			<button onclick="getAudio().muted=false">Activar música</button>
 
 		</section>
       <div id="score"></div>
@@ -71,7 +81,7 @@
 		<canvas id="myCanvas" width="1280" height="720">
 		</canvas>
 	</section>
-
+	
 
   </section>
   <section id="descripcion" class="ocultx">

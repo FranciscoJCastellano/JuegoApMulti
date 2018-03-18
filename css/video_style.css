@@ -10,7 +10,7 @@ Definición: Estilo del vídeo
 	min-width: 100%;
 	min-height: 100%;
 	width: auto;
-	height: 50%;
+	height: auto;
 	z-index: -1000;
 	overflow: hidden;
 }

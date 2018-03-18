@@ -12,15 +12,22 @@ var video = document.getElementById("video");
 function alerta (texto) {
 	console.log("Evento Capturado: " + texto);
 }
-
+/*Inicializar audio y video*/
 function init(){
 	document.video = document.getElementById("video");
+	document.audio = document.getElementById("audio");
 }
 document.addEventListener("DOMContentLoaded", init, false);
 
+/*Devuelve el vídeo*/
 function getVideo() {
 	return document.video;
 }
+/*Devuelve el audio*/
+function getAudio(){
+	return document.audio;
+}
+
 function isEnded(video){
 	if (video.ended == true){
 		console.log("Ended");
@@ -31,14 +38,24 @@ function isEnded(video){
 	}
 }
 
-/*Función para reproducir el vídeo al pulsar el play y empezar el juego*/
-function play(video){
+/*Función para reproducir el vídeo y el audio al pulsar el play y empezar el juego*/
+function play(video, audio){
 	if (!primerPlay){
 		primerPlay=1;
 		video.play();//El vídeo comienza
+		audio.play();//El audio comienza
 		gameOn();//Función creada en script.js que pone a funcionar el juego
+	}else{
+		video.play();
+		audio.play();
 	}
 }
+/*Pausa el video y el audio*/
+function pause(video, audio){
+	video.pause();
+	audio.pause();
+}
+
 /*Función para reproducir el vídeo al pulsar el play y empezar el juego*/
 function changeTime(video){
 	if(primerPlay){
@@ -48,7 +65,7 @@ function changeTime(video){
 	}
 }
 
-
+/*Devuelve el tiempo actual del video*/
 video.ontimeupdate = function(){currentTime()};
 function currentTime(){
 	if (video.currentTime>=15){//Termina el día y empieza la noche
