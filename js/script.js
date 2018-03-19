@@ -18,6 +18,7 @@ var isDay=true;//variable para saber si es de día o de noche
 var goal=2;//el numero de veces que se come toda la comida para recargar canvas
 var velMax=7;
 var tec=[];//array donde se verifica tecla pulsada
+var numMax=50;
 
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
@@ -89,7 +90,11 @@ function setup(){
 
   //generamos las paredes
   var works=0;
-  for(var i=0;i<1.38*factor*level;i++){
+  var k=1.38*factor*level;
+  if(k>numMax){
+    k=numMax;
+  }
+  for(var i=0;i<k;i++){
     works = 0; // Si work = 0 el muro no es válido
     while (!works){ // repetir hasta que salga un muro válido
       newWall = new Wall();
@@ -124,7 +129,11 @@ function setup(){
   //console.log(walls.length);
 
   //generamos los enemigos
-  for(var i=level*factor*0.6;i>=0;i--){
+  var i=level*factor*0.6;
+  if(i>numMax){
+    i=numMax;
+  }
+  while(i--){
     enemies.push(new Enemy);
   }
   //generamos la comida
