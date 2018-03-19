@@ -7,7 +7,6 @@ Referencias: https://www.w3schools.com/tags/ref_av_dom.asp
 *************************************/
 var videoIsEnded = 0; //Si 1 --> vídeo terminado. Si 0 --> video no terminado
 var primerPlay = 0; //Si 0, no se ha pulsado play todavía. Si 1, se ha pulsado play una vez
-var video = document.getElementById("video");
 
 function alerta (texto) {
 	console.log("Evento Capturado: " + texto);
@@ -55,8 +54,10 @@ function pause(video, audio){
 	video.pause();
 	audio.pause();
 }
-
-/*Función para reproducir el vídeo al pulsar el play y empezar el juego*/
+/*********
+Fecha: 17/3/18
+Definición: función para cambiar de noche a día
+*************************************/
 function changeTime(video){
 	if(isDay){
 		isDay=!isDay;
@@ -70,17 +71,17 @@ function changeTime(video){
 		video.currentTime=0;
 	}
 }
-
 /*Devuelve el tiempo actual del video*/
-video.ontimeupdate = function(){currentTime()};
-function currentTime(){
-	if (video.currentTime>=15){//Termina el día y empieza la noche
-		changeTime(video);
-		audio.currentTime=15;
-		console.log("Noche");
-	}else{
-		changeTime(video);
-		audio.currentTime=0;
-		console.log("Día");
+// video.ontimeupdate = function(video){instante(video)};
+function instante(video){
+	if(video){
+		//console.log(video.currentTime);
+		if (video.currentTime>=14.9){//Termina el día y empieza la noche
+			isDay=!isDay;
+			console.log("Noche");
+		}else if(video.currentTime<=15){
+			isDay=!isDay;
+			console.log("Día");
+		}
 	}
 }

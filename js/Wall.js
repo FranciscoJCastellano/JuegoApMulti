@@ -3,8 +3,8 @@ Autor: Francisco Javier Castellano Farrak
 Fecha: 10/3/18
 Definición: constructor del objeto tipo obstáculo
 *************************************/
-var maxW=130;
-var maxH=100;
+var maxW=230;
+var maxH=150;
 var minW=25;
 var minH=50;
 

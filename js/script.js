@@ -1,5 +1,5 @@
 /*código del juego*/
-var step=3;
+var step=4;
 var player;
 var enemies=[];
 var walls=[];
@@ -78,6 +78,8 @@ function setup(){
   document.getElementById('score').innerHTML = "Score: " + player.score;
   document.getElementById('life').innerHTML = "Life: " + player.life;
   document.getElementById('level').innerHTML = "Level: " + player.level;
+  document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(document.video.currentTime);
+
 
   /********************************************
   Autor:Sergio Elola García
@@ -87,7 +89,7 @@ function setup(){
 
   //generamos las paredes
   var works=0;
-  for(var i=0;i<0.98*factor*level;i++){
+  for(var i=0;i<1.38*factor*level;i++){
     works = 0; // Si work = 0 el muro no es válido
     while (!works){ // repetir hasta que salga un muro válido
       newWall = new Wall();
@@ -187,6 +189,8 @@ function gameShow(){
   }
 }
 function gameUpdate(){
+  //instante(document.video);
+
   comer(player,food);
   lucha(player,enemies);
 
@@ -221,6 +225,8 @@ function draw(){
   document.getElementById('score').innerHTML = "Score: " + player.score;
   document.getElementById('life').innerHTML = "Life: " + player.life;
   document.getElementById('level').innerHTML = "Level: " + player.level;
+  document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(document.video.currentTime);
+
   gameUpdate();
   gameShow();
 }
@@ -340,11 +346,11 @@ function coincideWall(player,wall){
     }
   }
 
-/********************************************
-Autor:Alejandro Enrique Trigueros Álvarez
-Fecha: 14/03/2018
-Def: actualiza la velocidad del player segun la tecla pulsada
-*******************************************/
+  /********************************************
+  Autor:Alejandro Enrique Trigueros Álvarez
+  Fecha: 14/03/2018
+  Def: actualiza la velocidad del player segun la tecla pulsada
+  *******************************************/
   function listenKeyPressed(contx){
     //Esta funcion se ejecuta al pulsar una tecla
     key=contx.key;
@@ -369,26 +375,26 @@ Def: actualiza la velocidad del player segun la tecla pulsada
   }
 
 
-/********************************************
-Autor:Alejandro Enrique Trigueros Álvarez
-Fecha: 17/03/2018
-Def: actualiza la velocidad del player segun la tecla pulsada
-*******************************************/
-function multiKeyPressed(c){
- player.speedX=0;
- player.speedY=0;
- if(c.keys && tec[40]){
-   player.speedY = step;
- }
- if(c.keys && tec[39]){
-   player.speedX = step;
- }
- if(c.keys && tec[38]){
-   player.speedY = -step;
- }
- if(c.keys && tec[37]){
-   player.speedX = -step;
- }
- player.movePlayer();
+  /********************************************
+  Autor:Alejandro Enrique Trigueros Álvarez
+  Fecha: 17/03/2018
+  Def: actualiza la velocidad del player segun la tecla pulsada
+  *******************************************/
+  function multiKeyPressed(c){
+    player.speedX=0;
+    player.speedY=0;
+    if(c.keys && tec[40]){
+      player.speedY = step;
+    }
+    if(c.keys && tec[39]){
+      player.speedX = step;
+    }
+    if(c.keys && tec[38]){
+      player.speedY = -step;
+    }
+    if(c.keys && tec[37]){
+      player.speedX = -step;
+    }
+    player.movePlayer();
 
-}
+  }
