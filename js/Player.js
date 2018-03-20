@@ -16,6 +16,8 @@ function Player(){
   this.power=Math.round((factor*this.level*0.4));
   this.hasCollided=false;
   this.ammo=this.level*factor;
+  this.color='#fff';
+  this.tic=0;
 
   /************************************
   Autor: Alejandro Enrique Trigueros Álvarez
@@ -46,9 +48,16 @@ function Player(){
     this.colision();
     if(ctx){
       ctx.save();
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = this.color;
       ctx.fillRect(this.x,this.y,this.len,this.len);
       ctx.restore();
+
+      if(this.tic==0){
+        this.color='#fff';
+        this.len=20;
+      }
+      this.tic--;
+
     }
   }
   /************************************
@@ -58,23 +67,26 @@ function Player(){
   *************************************/
   this.colourChange=function(food){
     var sizeFactor=1.3;
-
+    ctx = cargaContextoCanvas('myCanvas');
     if(!food){
-      ctx = cargaContextoCanvas('myCanvas');
-      if(ctx){
-        ctx.save();
-        ctx.fillStyle = "#ff002f";
-        ctx.fillRect(this.x,this.y,sizeFactor*this.len,sizeFactor*this.len);
-        ctx.restore();
-      }
-    }else{
-      ctx = cargaContextoCanvas('myCanvas');
-      if(ctx){
-        ctx.save();
-        ctx.fillStyle = "#1fefff";
-        ctx.fillRect(this.x,this.y,sizeFactor*this.len,sizeFactor*this.len);
-        ctx.restore();
-      }
+      this.len*=sizeFactor;
+      this.color="#ff002f";
+      this.tic=5;
+        // ctx.save();
+        // ctx.fillStyle = "#ff002f";
+        // ctx.fillRect(this.x,this.y,sizeFactor*this.len,sizeFactor*this.len);
+        // ctx.restore();
+    }else if(food){
+      //console.log("food colourChange");
+      this.len*=sizeFactor;
+      this.color="#1fefff";
+      this.tic=5;
+
+
+        // ctx.save();
+        // ctx.fillStyle = "#1fefff";
+        // ctx.fillRect(this.x,this.y,sizeFactor*this.len,sizeFactor*this.len);
+        // ctx.restore();
     }
   }
 
