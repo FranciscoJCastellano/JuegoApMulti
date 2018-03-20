@@ -58,9 +58,13 @@ function Wall(){
   this.show=function(){
     ctx = cargaContextoCanvas('myCanvas');
     if(ctx){
+      ctx.save();
+      ctx.shadowBlur=20;
+      ctx.shadowColor="#777777"
       ctx.fillStyle = randomRgb;
       ctx.fillRect(this.x,this.y,this.width,this.height);
       ctx.fill();
+      ctx.restore();
     }
   }
 }

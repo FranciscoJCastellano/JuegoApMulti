@@ -46,19 +46,23 @@ function Player(){
   this.show=function(){
     ctx = cargaContextoCanvas('myCanvas');
     this.colision();
+    if(isDay){
+      this.color="000000";
+    }else if(!isDay){
+      this.color="ffffff";
+    }
     if(ctx){
       ctx.save();
       ctx.fillStyle = this.color;
       ctx.fillRect(this.x,this.y,this.len,this.len);
       ctx.restore();
-
-      if(this.tic==0){
-        this.color='#ffffff';
-        this.len=20;
-      }
-      this.tic--;
-
     }
+    if(this.tic==0){
+      this.color='#ffffff';
+      this.len=20;
+    }
+    this.tic--;
+
   }
   /************************************
   Autor: Francisco Javier Castellano Farrak

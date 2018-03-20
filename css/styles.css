@@ -3,9 +3,11 @@ body {
 }
 
 canvas{
-  background-color:#66ff66;
+  /*background-color:#66ff66;*/
+  background-image:
   width:90%; /*el tamaño del canvas se adapta al X% del tamaño de la pantalla*/
 }
+
 #score{
   position: absolute;
   top:50%;
