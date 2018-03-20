@@ -21,7 +21,7 @@ var tec=[];//array donde se verifica tecla pulsada
 var numMax=100;
 var gameIsOn=true;//para indicar si el juego está en marcha
 var counter=0;//contador para cambiar nivel si se come toda la comida
-
+var totalScore=0;
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
   if(elemento && elemento.getContext){
@@ -78,14 +78,14 @@ function setup(){
     tec[e.keyCode]=false;
   });
   player=new Player();
-  document.getElementById('score').innerHTML = "Score: " + player.score;
+  document.getElementById('score').innerHTML = "Score: " + totalScore;
   document.getElementById('life').innerHTML = "Life: " + player.life;
   document.getElementById('level').innerHTML = "Level: " + player.level;
   document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(document.video.currentTime);
   document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
   document.getElementById('food').innerHTML = "Food: " + food.length;
 
-
+  player.score+=totalScore;
   /********************************************
   Autor:Sergio Elola García
   Fecha: 14/03/2018
@@ -228,7 +228,7 @@ function gameUpdate(){
     }
     this.score++;
     if(counter==2){
-      newDay(player);
+      newDay(isDay,player);
       counter=0;
     }
   }
@@ -360,9 +360,10 @@ function coincideWall(player,wall){
   Definición: función para ver si es de día
   e iniciar nivel nuevo
   *************************************/
-  function newDay(isDay){
+  function newDay(isDay,player){
     if(isDay){
       level++;
+      totalScore+=player.score;
       counter=0;
       setup();
     }

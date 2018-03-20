@@ -61,7 +61,7 @@ function Wall(){
       ctx.save();
       ctx.shadowBlur=20;
       ctx.shadowColor="#222222"
-      ctx.fillStyle = randomRgb;
+      ctx.fillStyle = "000000";
       ctx.fillRect(this.x,this.y,this.width,this.height);
       ctx.fill();
       ctx.restore();
