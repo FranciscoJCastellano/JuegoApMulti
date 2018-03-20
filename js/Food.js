@@ -9,7 +9,7 @@ function Food(){
   this.len=5;
   this.through=false;//propiedad para atravesar las paredes
   this.minVel=2;
-  this.maxVel=4;
+  this.maxVel=5;
   this.hasCollided=false;
   this.limiterFactor=2*0.08;
   this.velx=0;
@@ -54,6 +54,12 @@ function Food(){
     if(this.vely==0){
       random=Math.floor(Math.random()*(3)-1);
       this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiterFactor;
+    }
+    if(this.velx>velMax){
+      this.velx=velMax;
+    }
+    if(this.vely>velMax){
+      this.vely=velMax;
     }
     this.x+=this.velx;
     this.y+=this.vely;

@@ -16,7 +16,7 @@ var numDigY = h.toString().length; // para saber cuantos digitos la altura del c
 var multp = Math.pow(10, numDigY); // servirá para almacenar posiciones
 var isDay=true;//variable para saber si es de día o de noche
 var goal=2;//el numero de veces que se come toda la comida para recargar canvas
-var velMax=7;
+var velMax=5;
 var tec=[];//array donde se verifica tecla pulsada
 var numMax=50;
 

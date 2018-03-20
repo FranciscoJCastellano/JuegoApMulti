@@ -45,6 +45,8 @@
 		id='audio'
 		type='audio/mp3'
 		src="multimedia/musica_fondo.mp3"
+    onloadstart="this.volume=0.12"
+
 		>
 		Tu navegador no es compatible con la reproducción de este vídeo
 	</audio>
@@ -56,7 +58,7 @@
 			src="multimedia/video_fondo.mp4"
 			onplaying="alerta('PLAY');"
 			onpause="alerta('PAUSE');"
-			onloadstart="this.volume=0.25"
+			onloadstart="this.volume=0.12"
 			>
 			Tu navegador no es compatible con la reproducción de este vídeo
 		</video>

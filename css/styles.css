@@ -8,7 +8,7 @@ canvas{
 }
 #score{
   position: absolute;
-  top:45%;
+  top:50%;
   left: 12%;
   z-index: 100;
   border:none;
@@ -17,7 +17,7 @@ canvas{
 }
 #life{
   position: absolute;
-  top:45%;
+  top:50%;
   left: 75%;
   z-index: 100;
   border:none;
@@ -25,7 +25,7 @@ canvas{
 }
 #level{
   position: absolute;
-  top:50%;
+  top:55%;
   left: 46%;
   z-index: 100;
   border:none;
@@ -33,7 +33,7 @@ canvas{
 }
 #time{
   position: absolute;
-  top:35%;
+  top:40%;
   left: 72%;
   z-index: 100;
   border:none;

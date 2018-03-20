@@ -9,8 +9,11 @@ function Enemy(){
   this.len=10;
   this.through=false;//propiedad para atravesar las paredes
   this.minVel=2;
-  this.maxVel=5;
+  this.maxVel=3;
   this.limiter=0.18*level;
+  if(this.limiter>0.18*5){
+    this.limiter=0.18*5;
+  }
   this.life=Math.floor(minLife+factor*2);
   this.power=Math.floor(factor*0.15);
   this.velx=0;
@@ -46,11 +49,11 @@ function Enemy(){
   Definición: función que actualiza la posición del enemigo
   *************************************/
   this.update=function(){
-    if(this.velx==0||this.velx>velMax){
+    if(this.velx==0){
       random=Math.floor(Math.random()*(3)-1);
       this.velx=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
     }
-    if(this.vely==0||this.vely>velMax){
+    if(this.vely==0){
       random=Math.floor(Math.random()*(3)-1);
       this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
     }
