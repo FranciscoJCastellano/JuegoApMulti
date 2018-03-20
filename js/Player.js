@@ -16,7 +16,7 @@ function Player(){
   this.power=Math.round((factor*this.level*0.4));
   this.hasCollided=false;
   this.ammo=this.level*factor;
-  this.color='#fff';
+  this.color='#ffffff';
   this.tic=0;
 
   /************************************
@@ -48,11 +48,14 @@ function Player(){
     this.colision();
     if(isDay){
       this.color="000000";
+
     }else if(!isDay){
       this.color="ffffff";
     }
     if(ctx){
       ctx.save();
+      ctx.shadowBlur=15;
+      ctx.shadowColor='#ff00ff';
       ctx.fillStyle = this.color;
       ctx.fillRect(this.x,this.y,this.len,this.len);
       ctx.restore();
@@ -74,7 +77,7 @@ function Player(){
     ctx = cargaContextoCanvas('myCanvas');
     if(!food&&!isDay){
       this.len*=sizeFactor*0.78;
-      this.color="#ff002f";
+      //this.color="#ff002f";
       this.tic=5;
         // ctx.save();
         // ctx.fillStyle = "#ff002f";
@@ -83,7 +86,7 @@ function Player(){
     }else if(food&&isDay){
       //console.log("food colourChange");
       this.len*=sizeFactor;
-      this.color="#1fefff";
+    //  this.color="#1fefff";
       this.tic=5;
 
 
