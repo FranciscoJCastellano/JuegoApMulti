@@ -53,7 +53,7 @@ function Player(){
       ctx.restore();
 
       if(this.tic==0){
-        this.color='#fff';
+        this.color='#ffffff';
         this.len=20;
       }
       this.tic--;
@@ -68,7 +68,7 @@ function Player(){
   this.colourChange=function(food){
     var sizeFactor=1.3;
     ctx = cargaContextoCanvas('myCanvas');
-    if(!food){
+    if(!food&&!isDay){
       this.len*=sizeFactor*0.78;
       this.color="#ff002f";
       this.tic=5;
@@ -76,7 +76,7 @@ function Player(){
         // ctx.fillStyle = "#ff002f";
         // ctx.fillRect(this.x,this.y,sizeFactor*this.len,sizeFactor*this.len);
         // ctx.restore();
-    }else if(food){
+    }else if(food&&isDay){
       //console.log("food colourChange");
       this.len*=sizeFactor;
       this.color="#1fefff";

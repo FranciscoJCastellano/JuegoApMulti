@@ -18,7 +18,7 @@ var isDay=true;//variable para saber si es de día o de noche
 var goal=2;//el numero de veces que se come toda la comida para recargar canvas
 var velMax=5;
 var tec=[];//array donde se verifica tecla pulsada
-var numMax=50;
+var numMax=100;
 
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
@@ -80,6 +80,8 @@ function setup(){
   document.getElementById('life').innerHTML = "Life: " + player.life;
   document.getElementById('level').innerHTML = "Level: " + player.level;
   document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(document.video.currentTime);
+  document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
+  document.getElementById('food').innerHTML = "Food: " + food.length;
 
 
   /********************************************
@@ -137,7 +139,8 @@ function setup(){
     enemies.push(new Enemy);
   }
   //generamos la comida
-  for(var i=factor*0.7;i>=0;i--){
+  var i=factor*0.7;
+  while(i--){
     food.push(new Food);
   }
   ctx = cargaContextoCanvas('myCanvas');
@@ -235,6 +238,8 @@ function draw(){
   document.getElementById('life').innerHTML = "Life: " + player.life;
   document.getElementById('level').innerHTML = "Level: " + player.level;
   document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(document.video.currentTime);
+  document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
+  document.getElementById('food').innerHTML = "Food: " + food.length;
 
   gameUpdate();
   gameShow();
@@ -360,28 +365,28 @@ function coincideWall(player,wall){
   Fecha: 14/03/2018
   Def: actualiza la velocidad del player segun la tecla pulsada
   *******************************************/
-  function listenKeyPressed(contx){
-    //Esta funcion se ejecuta al pulsar una tecla
-    key=contx.key;
-    player.speedX=0;
-    player.speedY=0;
-    if(key==40){//abajo
-      player.speedY = step;
-    }
-    if(key==39){//derecha
-      player.speedX = step;
-    }
-    if(key==38){//arriba
-      player.speedY= -step;
-    }
-    if(key==37){//izquierda
-      player.speedX= -step;
-    }
-    player.movePlayer();
-    if(key==32){//ESPACIO
-      //alert("Eres un pipa :3");
-    }
-  }
+  // function listenKeyPressed(contx){
+  //   //Esta funcion se ejecuta al pulsar una tecla
+  //   key=contx.key;
+  //   player.speedX=0;
+  //   player.speedY=0;
+  //   if(key==40){//abajo
+  //     player.speedY = step;
+  //   }
+  //   if(key==39){//derecha
+  //     player.speedX = step;
+  //   }
+  //   if(key==38){//arriba
+  //     player.speedY= -step;
+  //   }
+  //   if(key==37){//izquierda
+  //     player.speedX= -step;
+  //   }
+  //   player.movePlayer();
+  //   if(key==32){//ESPACIO
+  //     //alert("Eres un pipa :3");
+  //   }
+  // }
 
 
   /********************************************
@@ -392,6 +397,7 @@ function coincideWall(player,wall){
   function multiKeyPressed(c){
     player.speedX=0;
     player.speedY=0;
+
     if(c.keys && tec[40]){
       player.speedY = step;
     }

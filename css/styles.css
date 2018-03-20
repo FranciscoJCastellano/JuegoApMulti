@@ -23,6 +23,23 @@ canvas{
   border:none;
   font-size:140%;
 }
+#enemies{
+  position: absolute;
+  top:55%;
+  left: 12%;
+  z-index: 100;
+  border:none;
+  font-size:140%;
+
+}
+#food{
+  position: absolute;
+  top:55%;
+  left: 75%;
+  z-index: 100;
+  border:none;
+  font-size:140%;
+}
 #level{
   position: absolute;
   top:55%;
