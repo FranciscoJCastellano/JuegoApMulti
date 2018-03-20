@@ -28,18 +28,18 @@
     <p><a onmouseover="ver()" onclick="esconder()" href="#">Menú</a></p>
     <div id="menu" >
       <ul>
-        <li> <a onclick="hacerVisible(0)"class="link" href="#juego">Juego</a></li>
-        <li><a onclick="hacerVisible(1)"class="link" href="#descripcion">Descripcion</a></li>
-        <li><a onclick="hacerVisible(2)"class="link" href="#proceso">Proceso Desarrollo</a></li>
-        <li><a onclick="hacerVisible(3)"class="link" href="#autores">Autores</a></li>
-        <li><a onclick="hacerVisible(4)"class="link" href="#referencias">Referencias</a></li>
+        <li> <a onclick="play(video, audio)"onclick="hacerVisible(0)"class="link" href="#juego">Juego</a></li>
+        <li><a onclick="pause(video, audio)" onclick="hacerVisible(1)"class="link" href="#descripcion">Descripcion</a></li>
+        <li><a onclick="pause(video, audio)"onclick="hacerVisible(2)"class="link" href="#proceso">Proceso Desarrollo</a></li>
+        <li><a onclick="pause(video, audio)"onclick="hacerVisible(3)"class="link" href="#autores">Autores</a></li>
+        <li><a onclick="pause(video, audio)"onclick="hacerVisible(4)"class="link" href="#referencias">Referencias</a></li>
       </ul>
     </div>
   </nav>
 
 
-  <section id="juego" class="visiblx">
-    <h3>Juego</h3>
+  <section  class="visiblx">
+    <h3 >Survive The Night</h3>
 	<audio
 		loop
 		id='audio'
@@ -66,8 +66,6 @@
 			<button onclick="play(video, audio)">Play</button>
 			<button onclick="pause(video, audio)">Pause</button>
 			<button onclick="changeTime(video)">Cambiar Comida/Enemigo</button>
-
-
 			<button onclick="isEnded(video)">Is ended?</button>
 			<button onclick="getVideo().muted=true">Silenciar efectos vídeo</button>
 			<button onclick="getVideo().muted=false">Volumen efectos vídeo</button><br>

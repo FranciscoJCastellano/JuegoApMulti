@@ -19,7 +19,7 @@ var goal=2;//el numero de veces que se come toda la comida para recargar canvas
 var velMax=5;
 var tec=[];//array donde se verifica tecla pulsada
 var numMax=100;
-
+var gameIsOn=true;//para indicar si el juego está en marcha
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
   if(elemento && elemento.getContext){
@@ -234,6 +234,7 @@ Fecha: 10/3/18
 Definición: borramos canvas y redibujamos player, comida, enemigos y obstáculos
 *************************************/
 function draw(){
+  if(gameIsOn){
   document.getElementById('score').innerHTML = "Score: " + player.score;
   document.getElementById('life').innerHTML = "Life: " + player.life;
   document.getElementById('level').innerHTML = "Level: " + player.level;
@@ -243,6 +244,7 @@ function draw(){
 
   gameUpdate();
   gameShow();
+}
 }
 /********************************************
 Autor:Sergio Elola García

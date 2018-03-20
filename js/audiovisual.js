@@ -39,6 +39,7 @@ function isEnded(video){
 
 /*Función para reproducir el vídeo y el audio al pulsar el play y empezar el juego*/
 function play(video, audio){
+	gameIsOn=true;
 	if (!primerPlay){
 		primerPlay=1;
 		video.play();//El vídeo comienza
@@ -51,6 +52,7 @@ function play(video, audio){
 }
 /*Pausa el video y el audio*/
 function pause(video, audio){
+	gameIsOn=false;
 	video.pause();
 	audio.pause();
 }

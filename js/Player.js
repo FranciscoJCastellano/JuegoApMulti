@@ -55,7 +55,7 @@ function Player(){
     if(ctx){
       ctx.save();
       ctx.shadowBlur=15;
-      ctx.shadowColor='#ff00ff';
+      ctx.shadowColor='#BEFDFD';
       ctx.fillStyle = this.color;
       ctx.fillRect(this.x,this.y,this.len,this.len);
       ctx.restore();
