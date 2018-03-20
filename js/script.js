@@ -20,6 +20,8 @@ var velMax=5;
 var tec=[];//array donde se verifica tecla pulsada
 var numMax=100;
 var gameIsOn=true;//para indicar si el juego está en marcha
+var counter=0;//contador para cambiar nivel si se come toda la comida
+
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
   if(elemento && elemento.getContext){
@@ -139,7 +141,7 @@ function setup(){
     enemies.push(new Enemy);
   }
   //generamos la comida
-  var i=factor*0.7;
+  var i=factor*0.8;
   while(i--){
     food.push(new Food);
   }
@@ -201,7 +203,6 @@ function gameShow(){
   }
 }
 function gameUpdate(){
-  //instante(document.video);
 
   comer(player,food);
   lucha(player,enemies);
@@ -220,12 +221,16 @@ function gameUpdate(){
   }
   //si no queda comida se rellena
   if(food.length<=0){
-    var i=factor*1.5;
+    counter++;
+    var i=factor*0.8;
     while(i--){
       food.push(new Food);
     }
     this.score++;
-    newDay(player);
+    if(counter==2){
+      newDay(player);
+      counter=0;
+    }
   }
 }
 /************************************
@@ -235,16 +240,16 @@ Definición: borramos canvas y redibujamos player, comida, enemigos y obstáculo
 *************************************/
 function draw(){
   if(gameIsOn){
-  document.getElementById('score').innerHTML = "Score: " + player.score;
-  document.getElementById('life').innerHTML = "Life: " + player.life;
-  document.getElementById('level').innerHTML = "Level: " + player.level;
-  document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(document.video.currentTime);
-  document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
-  document.getElementById('food').innerHTML = "Food: " + food.length;
+    document.getElementById('score').innerHTML = "Score: " + player.score;
+    document.getElementById('life').innerHTML = "Life: " + player.life;
+    document.getElementById('level').innerHTML = "Level: " + player.level;
+    document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(document.video.currentTime);
+    document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
+    document.getElementById('food').innerHTML = "Food: " + food.length;
 
-  gameUpdate();
-  gameShow();
-}
+    gameUpdate();
+    gameShow();
+  }
 }
 /********************************************
 Autor:Sergio Elola García
@@ -358,6 +363,7 @@ function coincideWall(player,wall){
   function newDay(isDay){
     if(isDay){
       level++;
+      counter=0;
       setup();
     }
   }

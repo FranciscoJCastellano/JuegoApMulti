@@ -39,7 +39,7 @@ function isEnded(video){
 
 /*Función para reproducir el vídeo y el audio al pulsar el play y empezar el juego*/
 function play(video, audio){
-	gameIsOn=true;
+	gameIsOn=true;//reanuda el juego
 	if (!primerPlay){
 		primerPlay=1;
 		video.play();//El vídeo comienza
@@ -52,7 +52,7 @@ function play(video, audio){
 }
 /*Pausa el video y el audio*/
 function pause(video, audio){
-	gameIsOn=false;
+	gameIsOn=false;//para el juego
 	video.pause();
 	audio.pause();
 }
@@ -77,13 +77,10 @@ function changeTime(video){
 // video.ontimeupdate = function(video){instante(video)};
 function instante(video){
 	if(video){
+		var dayChange=15;
 		//console.log(video.currentTime);
-		if (video.currentTime>=14.9){//Termina el día y empieza la noche
+		if (video.currentTime==dayChange){//Termina el día y empieza la noche
 			isDay=!isDay;
-			console.log("Noche");
-		}else if(video.currentTime<=15){
-			isDay=!isDay;
-			console.log("Día");
 		}
 	}
 }

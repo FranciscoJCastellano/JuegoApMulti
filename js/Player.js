@@ -15,7 +15,7 @@ function Player(){
   this.life=Math.floor(2*minLife+(factor*this.level*0.3)*0.23);
   this.power=Math.round((factor*this.level*0.4));
   this.hasCollided=false;
-  this.ammo=this.level*factor;
+  this.ammo=this.level*factor;//posible mejora: añadir proyectiles
   this.color='#ffffff';
   this.tic=0;
 
@@ -46,14 +46,15 @@ function Player(){
   this.show=function(){
     ctx = cargaContextoCanvas('myCanvas');
     this.colision();
-    if(isDay){
-      this.color="000000";
 
-    }else if(!isDay){
-      this.color="ffffff";
-    }
     if(ctx){
       ctx.save();
+      if(isDay){
+        this.color="000000";
+
+      }else if(!isDay){
+        this.color="ffffff";
+      }
       ctx.shadowBlur=15;
       ctx.shadowColor='#BEFDFD';
       ctx.fillStyle = this.color;
@@ -61,7 +62,6 @@ function Player(){
       ctx.restore();
     }
     if(this.tic==0){
-      this.color='#ffffff';
       this.len=20;
     }
     this.tic--;
