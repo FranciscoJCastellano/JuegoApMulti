@@ -117,7 +117,9 @@ function setup(){
   var wallxmax=0;
   var wallymax=0;
 
-  for (var i in walls){
+var i=walls.length;
+
+  while (i--){
     wallx = walls[i].x;
     wally = walls[i].y;
     wallxmax = wallx + walls[i].width;
