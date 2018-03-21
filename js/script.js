@@ -87,7 +87,7 @@ function setup(){
   document.getElementById('score').innerHTML = "Score: " + totalScore;
   document.getElementById('life').innerHTML = "Life: " + player.life;
   document.getElementById('level').innerHTML = "Level: " + player.level;
-  document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(document.video.currentTime);
+  document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(videoJuego.currentTime);
   document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
   document.getElementById('food').innerHTML = "Food: " + food.length;
 
@@ -221,8 +221,10 @@ function gameShow(){
   }
 }
 function gameUpdate(){
-  instante(document.video);
-
+  // instante(videoJuego);
+  if(load){
+    document.addEventListener("timeupdate", instante(videoJuego), false);
+  }
   comer(player,food);
   comer(player,orbe);
   lucha(player,enemies);
@@ -265,7 +267,7 @@ function draw(){
     document.getElementById('score').innerHTML = "Score: " + player.score;
     document.getElementById('life').innerHTML = "Life: " + player.life;
     document.getElementById('level').innerHTML = "Level: " + player.level;
-    document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(document.video.currentTime);
+    document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(videoJuego.currentTime);
     document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
     document.getElementById('food').innerHTML = "Food: " + food.length;
 

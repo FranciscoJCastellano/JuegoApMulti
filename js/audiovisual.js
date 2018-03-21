@@ -7,24 +7,27 @@ Referencias: https://www.w3schools.com/tags/ref_av_dom.asp
 *************************************/
 var videoIsEnded = 0; //Si 1 --> vídeo terminado. Si 0 --> video no terminado
 var primerPlay = 0; //Si 0, no se ha pulsado play todavía. Si 1, se ha pulsado play una vez
-
+var videoJuego;//video del juego
+var audioJuego;//audio de juego
+var load=false;//se ha cargado la pagina?
 function alerta (texto) {
-	console.log("Evento Capturado: " + texto);
+	// console.log("Evento Capturado: " + texto);
 }
 /*Inicializar audio y video*/
 function init(){
-	document.video = document.getElementById("video");
-	document.audio = document.getElementById("audio");
+	videoJuego = document.getElementById("video");
+	audioJuego = document.getElementById("audio");
+	load=true;
 }
 document.addEventListener("DOMContentLoaded", init, false);
 
 /*Devuelve el vídeo*/
 function getVideo() {
-	return document.video;
+	return videoJuego;
 }
 /*Devuelve el audio*/
 function getAudio(){
-	return document.audio;
+	return audioJuego;
 }
 
 function isEnded(video){
@@ -73,8 +76,9 @@ function changeTime(video){
 		video.currentTime=0;
 	}
 }
-/*Devuelve el tiempo actual del video*/
-// video.ontimeupdate = function(video){instante(video)};
+if(load){
+	document.addEventListener("timeupdate", instante(videoJuego), false);
+}
 function instante(video){
 	if(video){
 		//console.log(video.currentTime);
