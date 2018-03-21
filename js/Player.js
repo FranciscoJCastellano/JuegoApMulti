@@ -102,21 +102,44 @@ function Player(){
   Fecha: 10/3/18
   Definición: función para cambiar posición del jugador al llegar al final del canvas
   *************************************/
+  /************************************
+  Autor: Sergio Elola
+  Fecha: 21/03/18
+  Definición: ya no se fastidia si hay un muro al otro lado
+  *************************************/
   this.colision=function(){
 
-    if(this.y>=h-this.len/2){//bottom threshold
-      this.y=0;
+    if((this.y+this.len)>=h){//bottom threshold
+      if((!(wallspos.includes(this.x*multp+this.len)))
+      && (!(wallspos.includes((this.x+this.len)*multp+this.len)))) {
+        this.y = 1;
+      }else{
+        this.y = h;
+      }
     }
-    if(this.y<=-this.len/2){//top threshold
-      this.y=h-this.len;
+    if(this.y<=0){//top threshold
+      if((!(wallspos.includes(this.x*multp+h-this.len)))
+      && (!(wallspos.includes((this.x+this.len)*multp+h-this.len)))) {
+        this.y=h-this.len;
+      }else{
+        this.y = 0;
+      }
     }
-    if(this.x>=w-this.len/2){//bottom threshold
-      this.x=0;
+    if((this.x+this.len)>=w){//right threshold
+      if((!(wallspos.includes(this.len*multp+this.y)))
+      && (!(wallspos.includes(this.len*multp+this.y+this.len)))) {
+        this.x=1;
+      }else{
+        this.x = w-this.len;
+      }
     }
-    if(this.x<=-this.len/2){//top threshold
-      this.x=w-this.len;
+    if(this.x<=0){//left threshold
+      if((!(wallspos.includes((w-this.len)*multp+this.y)))
+      && (!(wallspos.includes((w-this.len)*multp+this.y+this.len)))) {
+        this.x=w-this.len;
+      }else{
+        this.x = 0;
+      }
     }
   }
-
-
 }
