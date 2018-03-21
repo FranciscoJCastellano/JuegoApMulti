@@ -1,6 +1,7 @@
 /*código del juego*/
 var step=4;
 var player;
+var orbe=[];
 var enemies=[];
 var walls=[];
 var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
@@ -81,6 +82,7 @@ function setup(){
     ctx.key = false;
     tec[e.keyCode]=false;
   });
+  orbe.push(new Orbe());
   player=new Player();
   document.getElementById('score').innerHTML = "Score: " + totalScore;
   document.getElementById('life').innerHTML = "Life: " + player.life;
@@ -106,11 +108,18 @@ function setup(){
     works = 0; // Si work = 0 el muro no es válido
     while (!works){ // repetir hasta que salga un muro válido
       newWall = new Wall();
+      coincideWall(orbe,newWall);
+      if(newWall.valid == 1){
+        //walls.push(newWall);
+        works = 1;
+      }
+
       coincideWall(player,newWall);
-      if (newWall.valid == 1){
+      if (newWall.valid == 1 && works==1){
         walls.push(newWall);
         works = 1;
       }
+
     }
   }
 
@@ -194,6 +203,9 @@ function gameShow(){
       while(ie--){
         enemies[ie].show();
       }
+      if(orbe.length>0){
+        orbe[0].show();
+      }
     }
     var iw=walls.length;
     while(iw--){
@@ -212,6 +224,7 @@ function gameUpdate(){
   instante(document.video);
 
   comer(player,food);
+  comer(player,orbe);
   lucha(player,enemies);
 
   if(player.life<=0){
