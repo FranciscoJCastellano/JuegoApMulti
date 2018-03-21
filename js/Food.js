@@ -8,7 +8,7 @@ function Food(){
   this.y=Math.random()*h-1;
   this.len=5;
   this.through=false;//propiedad para atravesar las paredes
-  this.minVel=2;
+  this.minVel=3;
   this.maxVel=5;
   this.hasCollided=false;
   this.limiterFactor=2*0.08;

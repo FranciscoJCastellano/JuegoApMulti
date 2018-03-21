@@ -82,6 +82,11 @@ function instante(video){
 			isDay=!isDay;
 		}else if (!isDay&&video.currentTime>=umbral2){//Termina el noche y empieza la noche
 			isDay=!isDay;
+			if(!levelChange){
+				level++;
+				levelChange=false;
+				setup();
+			}
 		}
 	}
 }

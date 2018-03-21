@@ -2,7 +2,7 @@ body {
   background-color: #11e299;
 }
 canvas{
-  background-color:#66ff66;
+  /* background-color:#66ff66; */
   /*background-image:*/
   height:70%;
   width:70%; /*el tamaño del canvas se adapta al X% del tamaño de la pantalla*/

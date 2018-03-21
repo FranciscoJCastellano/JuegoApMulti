@@ -10,9 +10,9 @@ function Enemy(){
   this.through=false;//propiedad para atravesar las paredes
   this.minVel=2;
   this.maxVel=3;
-  this.limiter=0.18*level;
-  if(this.limiter>0.18*5){
-    this.limiter=0.18*5;
+  this.limiter=0.7*level;
+  if(this.limiter> this.maxVe){
+    this.limiter= this.maxVe;
   }
   this.life=Math.floor(minLife+factor*2);
   this.power=Math.floor(factor*0.15);

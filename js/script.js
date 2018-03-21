@@ -18,13 +18,13 @@ var isDay=true;//variable para saber si es de día o de noche
 var goal=2;//el numero de veces que se come toda la comida para recargar canvas
 var velMax=5;
 var tec=[];//array donde se verifica tecla pulsada
-var numMax=100;
+var numMax=50;//num maximo de objetos
 var gameIsOn=true;//para indicar si el juego está en marcha
 var counter=0;//contador para cambiar nivel si se come toda la comida
 var totalScore=0;
 var umbral1=15;//umbral para detectar dia/noche
 var umbral2=30;//umbral para detectar dia/noche
-
+var levelChange=false;
 
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
@@ -98,7 +98,7 @@ function setup(){
 
   //generamos las paredes
   var works=0;
-  var k=1.38*factor*level;
+  var k=1.03*factor*level;
   if(k>numMax){
     k=numMax;
   }
@@ -121,7 +121,7 @@ function setup(){
   var wallxmax=0;
   var wallymax=0;
 
-var i=walls.length;
+  var i=walls.length;
 
   while (i--){
     wallx = walls[i].x;
@@ -209,11 +209,13 @@ function gameShow(){
   }
 }
 function gameUpdate(){
-instante(document.video);
+  instante(document.video);
+
   comer(player,food);
   lucha(player,enemies);
 
   if(player.life<=0){
+    gameIsOn=false;
     console.log('YOU LOSE');
     window.location.href=  window.location.href;
     return 0;
@@ -223,7 +225,6 @@ instante(document.video);
     while(i--){
       enemies.push(new Enemy);
     }
-    this.level++;
   }
   //si no queda comida se rellena
   if(food.length<=0){
@@ -238,6 +239,8 @@ instante(document.video);
       counter=0;
     }
   }
+
+
 }
 /************************************
 Autores: Alejandro Enrique Trigueros Álvarez y Francisco Javier Castellano Farrak
