@@ -60,6 +60,8 @@ window.onload = function(){
   //gameOn(); //El Juego empieza cuando se pulsa PLAY(y empieza el vídeo también)
 }
 function gameOn(){
+  player.score+=totalScore;
+
   setInterval(draw,10);
   //alert("GAME ON");
 }
@@ -91,7 +93,6 @@ function setup(){
   document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
   document.getElementById('food').innerHTML = "Food: " + food.length;
 
-  player.score+=totalScore;
   /********************************************
   Autor:Sergio Elola García
   Fecha: 14/03/2018

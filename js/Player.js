@@ -61,9 +61,9 @@ function Player(){
       ctx.fillRect(this.x,this.y,this.len,this.len);
       ctx.restore();
     }
-    // if(this.tic==0){
-    //   this.len=20;
-    // }
+    if(this.tic==0){
+      this.len=20;
+    }
     this.tic--;
 
   }
