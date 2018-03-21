@@ -84,7 +84,7 @@ function setup(){
   });
   orbe.push(new Orbe());
   player=new Player();
-  document.getElementById('score').innerHTML = "Score: " + totalScore;
+  document.getElementById('score').innerHTML = "Score: " + player.score;
   document.getElementById('life').innerHTML = "Life: " + player.life;
   document.getElementById('level').innerHTML = "Level: " + player.level;
   document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(videoJuego.currentTime);
@@ -308,7 +308,7 @@ function comer(player,comida){
   while(i--){
     if(player.hasCollided==false){
       if (coincide(player,comida[i])){
-        player.score++;
+        player.score+=comida[i].prize;
         player.colourChange(true);
 
         if(i>-1){
@@ -342,7 +342,7 @@ function lucha(player,enemies){
         if(i>-1){
           if(enemies[i].life<=0){
             enemies.splice(i,1);
-            player.score+=2;
+            player.score+=enemies[i].prize;
           }
         }
         player.hasCollided=true;

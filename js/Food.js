@@ -14,6 +14,7 @@ function Food(){
   this.limiterFactor=2*0.08;
   this.velx=0;
   this.vely=0;
+  this.prize=1;
   //generamos num aleatorio para la dirección inicial
   if(this.vely==0){
     random=Math.floor(Math.random()*(3)-1);

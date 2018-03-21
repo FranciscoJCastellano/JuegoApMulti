@@ -60,9 +60,9 @@ function Wall(){
     ctx = cargaContextoCanvas('myCanvas');
     if(ctx){
       ctx.save();
+      ctx.fillStyle = "000000";
       ctx.shadowBlur=20;
       ctx.shadowColor="#666666"
-      ctx.fillStyle = "000000";
       ctx.fillRect(this.x,this.y,this.width,this.height);
       ctx.restore();
     }

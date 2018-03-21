@@ -50,20 +50,20 @@ function Player(){
     if(ctx){
       ctx.save();
       if(isDay){
-        this.color="000000";
-
+        this.color="#000000";
       }else if(!isDay){
-        this.color="ffffff";
+        this.color="#ffffff";
       }
       ctx.shadowBlur=15;
       ctx.shadowColor='#BEFDFD';
       ctx.fillStyle = this.color;
+
       ctx.fillRect(this.x,this.y,this.len,this.len);
       ctx.restore();
     }
-    if(this.tic==0){
-      this.len=20;
-    }
+    // if(this.tic==0){
+    //   this.len=20;
+    // }
     this.tic--;
 
   }

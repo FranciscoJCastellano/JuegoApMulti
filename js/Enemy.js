@@ -11,6 +11,7 @@ function Enemy(){
   this.minVel=2;
   this.maxVel=3;
   this.limiter=0.7*level;
+  this.prize=2;
   if(this.limiter> this.maxVe){
     this.limiter= this.maxVe;
   }

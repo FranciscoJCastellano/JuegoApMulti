@@ -76,9 +76,7 @@ function changeTime(video){
 		video.currentTime=0;
 	}
 }
-if(load){
-	document.addEventListener("timeupdate", instante(videoJuego), false);
-}
+
 function instante(video){
 	if(video){
 		//console.log(video.currentTime);
