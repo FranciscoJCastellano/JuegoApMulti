@@ -60,8 +60,6 @@ window.onload = function(){
   //gameOn(); //El Juego empieza cuando se pulsa PLAY(y empieza el vídeo también)
 }
 function gameOn(){
-  player.score+=totalScore;
-
   setInterval(draw,10);
   //alert("GAME ON");
 }
@@ -86,7 +84,9 @@ function setup(){
   });
   orbe.push(new Orbe());
   player=new Player();
-  document.getElementById('score').innerHTML = "Score: " + player.score;
+  player.score=totalScore;
+
+  document.getElementById('score').innerHTML = "Score: " + totalScore;
   document.getElementById('life').innerHTML = "Life: " + player.life;
   document.getElementById('level').innerHTML = "Level: " + player.level;
   document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(videoJuego.currentTime);
@@ -222,7 +222,7 @@ function gameShow(){
   }
 }
 function gameUpdate(){
-  // instante(videoJuego);
+  totalScore=player.score;
   if(load){
     document.addEventListener("timeupdate", instante(videoJuego), false);
   }
@@ -249,7 +249,7 @@ function gameUpdate(){
     while(i--){
       food.push(new Food);
     }
-    this.score++;
+    player.score++;
     if(counter==2){
       newDay(isDay,player);
       counter=0;
@@ -265,7 +265,7 @@ Definición: borramos canvas y redibujamos player, comida, enemigos y obstáculo
 *************************************/
 function draw(){
   if(gameIsOn){
-    document.getElementById('score').innerHTML = "Score: " + player.score;
+    document.getElementById('score').innerHTML = "Score: " +totalScore;
     document.getElementById('life').innerHTML = "Life: " + player.life;
     document.getElementById('level').innerHTML = "Level: " + player.level;
     document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(videoJuego.currentTime);
