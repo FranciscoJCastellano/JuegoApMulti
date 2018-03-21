@@ -23,8 +23,9 @@ function Wall(){
   if (walls.length != 0){
 
     var lenMAX = Math.floor(player.len*1.75); // tamaño máximo de espaciado entre 2 bloques
-    var i;
-    for (i in walls){
+    var i=walls.length;
+
+      while (i--){
       ladoIzq = walls[i]['x'];
       ladoDch = walls[i]['x'] + walls[i]['width'];
       ladoSup = walls[i]['y'];
@@ -60,7 +61,7 @@ function Wall(){
     if(ctx){
       ctx.save();
       ctx.shadowBlur=20;
-      ctx.shadowColor="#222222"
+      ctx.shadowColor="#666666"
       ctx.fillStyle = "000000";
       ctx.fillRect(this.x,this.y,this.width,this.height);
       ctx.fill();
