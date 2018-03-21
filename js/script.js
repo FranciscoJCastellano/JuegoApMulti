@@ -22,6 +22,10 @@ var numMax=100;
 var gameIsOn=true;//para indicar si el juego está en marcha
 var counter=0;//contador para cambiar nivel si se come toda la comida
 var totalScore=0;
+var umbral1=15;//umbral para detectar dia/noche
+var umbral2=30;//umbral para detectar dia/noche
+
+
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
   if(elemento && elemento.getContext){
@@ -205,7 +209,7 @@ function gameShow(){
   }
 }
 function gameUpdate(){
-
+instante(document.video);
   comer(player,food);
   lucha(player,enemies);
 

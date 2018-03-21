@@ -77,9 +77,10 @@ function changeTime(video){
 // video.ontimeupdate = function(video){instante(video)};
 function instante(video){
 	if(video){
-		var dayChange=15;
 		//console.log(video.currentTime);
-		if (video.currentTime==dayChange){//Termina el día y empieza la noche
+		if (isDay&&video.currentTime>=umbral1){//Termina el día y empieza la noche
+			isDay=!isDay;
+		}else if (!isDay&&video.currentTime>=umbral2){//Termina el noche y empieza la noche
 			isDay=!isDay;
 		}
 	}
