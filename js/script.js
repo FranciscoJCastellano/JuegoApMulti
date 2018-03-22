@@ -65,7 +65,7 @@ function gameOn(){
 }
 
 /************************************
-Autores: Alejandro Enrique Trigueros Álvarez y Francisco Javier Castellano Farrak
+Autores: Alejandro Enrique Trigueros Álvarez, Francisco Javier Castellano Farrak, Sergio Elola García
 Fecha: 14/3/18
 Definición: guardamos el ctx sin nada dibujado y dibujamos los enemigos, player, bloques y comida
 *************************************/

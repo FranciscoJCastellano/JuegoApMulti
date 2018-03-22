@@ -27,7 +27,7 @@ function Player(){
   /************************************
   Autor: Sergio Elola García
   Fecha: 15/03/2018
-  MEJORA: ahora no puede atravesar muros
+  MEJORA: ahora el player no puede atravesar muros
   *************************************/
 
   this.movePlayer=function(){
@@ -101,11 +101,10 @@ function Player(){
   Autor: Francisco Javier Castellano Farrak
   Fecha: 10/3/18
   Definición: función para cambiar posición del jugador al llegar al final del canvas
-  *************************************/
-  /************************************
+
   Autor: Sergio Elola
   Fecha: 21/03/18
-  Definición: ya no se fastidia si hay un muro al otro lado
+  MEJORA: ahora no se queda bloqueado el player si hay un muro al otro lado
   *************************************/
   this.colision=function(){
 
@@ -114,9 +113,9 @@ function Player(){
       && (!(wallspos.includes((this.x+this.len)*multp+this.len)))
       && (!(wallspos.includes(this.x*multp))) // si se crean muros finos
       && (!(wallspos.includes((this.x+this.len)*multp)))) { // si se crean muros finos
-        this.y = 1;
+        this.y = 1; // si se puede mover al otro lado
       }else{
-        this.y = h-this.len;
+        this.y = h-this.len; //si no se puede mover al otro lado
       }
     }
     if(this.y<=0){//top threshold
@@ -124,9 +123,9 @@ function Player(){
       && (!(wallspos.includes((this.x+this.len)*multp+h-this.len)))
       && (!(wallspos.includes(this.x*multp+h))) // si se crean muros finos
       && (!(wallspos.includes((this.x+this.len)*multp+h)))) { // si se crean muros finos
-        this.y=h-this.len;
+        this.y=h-this.len; // si se puede mover al otro lado
       }else{
-        this.y = 0;
+        this.y = 0; //si no se puede mover al otro lado
       }
     }
     if((this.x+this.len)>=w){//right threshold
@@ -134,9 +133,9 @@ function Player(){
       && (!(wallspos.includes(this.len*multp+this.y+this.len)))
       && (!(wallspos.includes(this.y))) // si se crean muros finos
       && (!(wallspos.includes(this.y+this.len)))) { // si se crean muros finos
-        this.x=1;
+        this.x=1; // si se puede mover al otro lado
       }else{
-        this.x = w-this.len;
+        this.x = w-this.len; //si no se puede mover al otro lado
       }
     }
     if(this.x<=0){//left threshold
@@ -144,9 +143,9 @@ function Player(){
       && (!(wallspos.includes((w-this.len)*multp+this.y+this.len)))
       && (!(wallspos.includes(w*multp+this.y))) // si se crean muros finos
       && (!(wallspos.includes(w*multp+this.y+this.len)))) { // si se crean muros finos
-        this.x=w-this.len;
+        this.x=w-this.len; // si se puede mover al otro lado
       }else{
-        this.x = 0;
+        this.x = 0; //si no se puede mover al otro lado
       }
     }
   }

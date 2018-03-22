@@ -1,5 +1,5 @@
 /************************************
-Autor: Francisco Javier Castellano Farrak
+Autor: Sergio Elola García, Francisco Javier Castellano Farrak
 Fecha: 10/3/18
 Definición: constructor del objeto tipo obstáculo
 *************************************/
@@ -16,7 +16,7 @@ function Wall(){
   /********************************************
   Autor: Sergio Elola García
   Fecha: 14/03/2018
-  Definición: en el posicionamiento de los bloques. No se permiten huecos pequeños
+  MEJORA: en el posicionamiento de los bloques. No se permiten huecos pequeños
           entre los bloques para que pueda pasar el player.
   *******************************************/
   this.valid = 1;
