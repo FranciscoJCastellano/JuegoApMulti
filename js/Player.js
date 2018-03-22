@@ -111,7 +111,9 @@ function Player(){
 
     if((this.y+this.len)>=h){//bottom threshold
       if((!(wallspos.includes(this.x*multp+this.len)))
-      && (!(wallspos.includes((this.x+this.len)*multp+this.len)))) {
+      && (!(wallspos.includes((this.x+this.len)*multp+this.len)))
+      && (!(wallspos.includes(this.x*multp))) // si se crean muros finos
+      && (!(wallspos.includes((this.x+this.len)*multp)))) { // si se crean muros finos
         this.y = 1;
       }else{
         this.y = h-this.len;
@@ -119,7 +121,9 @@ function Player(){
     }
     if(this.y<=0){//top threshold
       if((!(wallspos.includes(this.x*multp+h-this.len)))
-      && (!(wallspos.includes((this.x+this.len)*multp+h-this.len)))) {
+      && (!(wallspos.includes((this.x+this.len)*multp+h-this.len)))
+      && (!(wallspos.includes(this.x*multp+h))) // si se crean muros finos
+      && (!(wallspos.includes((this.x+this.len)*multp+h)))) { // si se crean muros finos
         this.y=h-this.len;
       }else{
         this.y = 0;
@@ -127,7 +131,9 @@ function Player(){
     }
     if((this.x+this.len)>=w){//right threshold
       if((!(wallspos.includes(this.len*multp+this.y)))
-      && (!(wallspos.includes(this.len*multp+this.y+this.len)))) {
+      && (!(wallspos.includes(this.len*multp+this.y+this.len)))
+      && (!(wallspos.includes(this.y))) // si se crean muros finos
+      && (!(wallspos.includes(this.y+this.len)))) { // si se crean muros finos
         this.x=1;
       }else{
         this.x = w-this.len;
@@ -135,7 +141,9 @@ function Player(){
     }
     if(this.x<=0){//left threshold
       if((!(wallspos.includes((w-this.len)*multp+this.y)))
-      && (!(wallspos.includes((w-this.len)*multp+this.y+this.len)))) {
+      && (!(wallspos.includes((w-this.len)*multp+this.y+this.len)))
+      && (!(wallspos.includes(w*multp+this.y))) // si se crean muros finos
+      && (!(wallspos.includes(w*multp+this.y+this.len)))) { // si se crean muros finos
         this.x=w-this.len;
       }else{
         this.x = 0;
