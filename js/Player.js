@@ -114,7 +114,7 @@ function Player(){
       && (!(wallspos.includes((this.x+this.len)*multp+this.len)))) {
         this.y = 1;
       }else{
-        this.y = h;
+        this.y = h-this.len;
       }
     }
     if(this.y<=0){//top threshold
