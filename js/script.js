@@ -70,12 +70,6 @@ Fecha: 14/3/18
 Definición: guardamos el ctx sin nada dibujado y dibujamos los enemigos, player, bloques y comida
 *************************************/
 function setup(){
-  // juegoId.addEventListener("DOMContentLoaded", hacerVisible(0), false);
-  // descrId.addEventListener("DOMContentLoaded", hacerVisible(1), false);
-  // procId.addEventListener("DOMContentLoaded", hacerVisible(2), false);
-  // autId.addEventListener("DOMContentLoaded", hacerVisible(3), false);
-  // refId.addEventListener("DOMContentLoaded", hacerVisible(4), false);
-
   window.addEventListener('keydown', function(e){
     e.preventDefault();
     //listenKeyPressed(e.keyCode);
@@ -89,8 +83,9 @@ function setup(){
     tec[e.keyCode]=false;
   });
 
-  orbe.push(new Orbe());
-  player=new Player();
+  createCreatures();
+  crearParedes();
+
   player.score=totalScore;
 
   document.getElementById('score').innerHTML = "Score: " + totalScore;
@@ -100,12 +95,41 @@ function setup(){
   document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
   document.getElementById('food').innerHTML = "Food: " + food.length;
 
-  /********************************************
-  Autor:Sergio Elola García
-  Fecha: 14/03/2018
-  Mejora: Ahora si el muro es válido lo almacena, si no es válido genera otro
-  *******************************************/
 
+  gameShow();
+
+}
+/********************************************
+Autor: Francisco Javier Castellano Farrak
+Fecha: 23/03/2018
+Def: función para crear las criaturas del juego
+*******************************************/
+function createCreatures(){
+  //creamos player
+  player=new Player();
+  //generamos orbe
+  orbe.push(new Orbe());
+
+  //generamos los enemigos
+  var i=level*factor*0.6;
+  if(i>numMax){
+    i=numMax;
+  }
+  while(i--){
+    enemies.push(new Enemy);
+  }
+  //generamos la comida
+  var i=factor*0.8;
+  while(i--){
+    food.push(new Food);
+  }
+}
+/********************************************
+Autor:Sergio Elola García
+Fecha: 14/03/2018
+Mejora: Ahora si el muro es válido lo almacena, si no es válido genera otro
+*******************************************/
+function crearParedes(){
   //generamos las paredes
   var works=0;
   var k=1.03*factor*level;
@@ -154,47 +178,7 @@ function setup(){
 
   wallspos.sort(); // ordenamos para facilitar la búsqueda
   //console.log(walls.length);
-
-  //generamos los enemigos
-  var i=level*factor*0.6;
-  if(i>numMax){
-    i=numMax;
-  }
-  while(i--){
-    enemies.push(new Enemy);
-  }
-  //generamos la comida
-  var i=factor*0.8;
-  while(i--){
-    food.push(new Food);
-  }
-  ctx = cargaContextoCanvas('myCanvas');
-  if(ctx){
-    //console.log("save");
-    ctx.save();  // guarda el contexto limpio de efectos
-    var i=walls.length;
-    while(i--){
-      walls[i].show();
-    }
-
-    //dibuja y actualiza la posición de cada enemigo si es de noche
-    if(!isDay){
-      var i=enemies.length;
-      while(i--){
-        enemies[i].show();
-      }
-    }
-    //dibuja y actualiza la posición de la comida si es de día
-    if(isDay){
-      var i=food.length;
-      while(i--){
-        food[i].show();
-      }
-    }
-    player.show();
-  }
 }
-
 function gameShow(){
 
   ctx = cargaContextoCanvas('myCanvas');
@@ -244,28 +228,12 @@ function gameUpdate(){
     window.location.href=  window.location.href;
     return 0;
   }
-  if(enemies.length<=0){
-    var i=enemies.level*factor*1.5;
-    while(i--){
-      enemies.push(new Enemy);
-    }
-  }
-  //si no queda comida se rellena
-  if(food.length<=0){
-    counter++;
-    var i=factor*0.8;
-    while(i--){
-      food.push(new Food);
-    }
-    player.score++;
-    if(counter==2){
-      newDay(isDay,player);
-      counter=0;
-    }
-  }
-
-
+  repoblate(0);//rellena comida si no queda
+  repoblate(1);//rellena enemigos
+  repoblate(2);//rellena orbe se no queda
 }
+
+
 /************************************
 Autores: Alejandro Enrique Trigueros Álvarez y Francisco Javier Castellano Farrak
 Fecha: 10/3/18
@@ -282,6 +250,44 @@ function draw(){
 
     gameUpdate();
     gameShow();
+  }
+}
+/********************************************
+Autor: Francisco Javier Castellano Farrak
+Fecha: 23/03/2018
+Def: función para repoblar si se acaban enemigos, comida u orbes
+types: 0->Food 1->orbe 2->enemigos
+*******************************************/
+function repoblate(type){
+  switch(type){
+    case 0:
+    if(food.length<=0){
+      counter++;
+      var i=factor*0.8;
+      while(i--){
+        food.push(new Food);
+      }
+      player.score++;
+      if(counter==2){
+        newDay(isDay,player);
+        counter=0;
+      }
+    }
+    break;
+    case 1:
+    if(orbe.length<0){
+      orbe.push(new Enemy);
+    }
+    break;
+    case 2:
+    if(enemies.length<=0){
+      var i=enemies.level*factor*1.5;
+      while(i--){
+        enemies.push(new Enemy);
+      }
+    }
+    break;
+    default:break;
   }
 }
 /********************************************
