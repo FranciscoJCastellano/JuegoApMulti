@@ -1,10 +1,30 @@
 /*funciones paraorganizar pestañas y demás acciones ajenas al juego*/
+var juegoId;
+var descrId;
+var procId;
+var autId;
+var refId;
+var menu;
+var data;
 function ver(){
-  document.getElementById("menu").style.display="block";
+  menu.style.display="block";
+  data.style.display="none";
 }
 function esconder(){
-  document.getElementById("menu").style.display="none";
+  menu.style.display="none";
+  data.style.display="block";
 }
+function initIds(){
+  menu=document.getElementById("menu");
+  data=document.getElementById("dataJuego");
+
+  juegoId=document.getElementById("juego");
+  descrId=document.getElementById("descripcion");
+  procId=document.getElementById("proceso");
+  autId=document.getElementById("autores");
+  refId=document.getElementById("referencias");
+}
+document.addEventListener("DOMContentLoaded", initIds, false);
 
 
 
@@ -17,27 +37,34 @@ function hacerVisible(idEl){
   }
   switch(idEl){
     case 0:
-    document.getElementById("juego").className = "visiblx";
+    juegoId.className = "visiblx";
+    play(videoJuego, audioJuego);
     break;
     case 1:
-    document.getElementById("descripcion").className = "visiblx";
+    descrId.className = "visiblx";
+    pause(videoJuego, audioJuego);
     break;
     case 2:
-    document.getElementById("proceso").className = "visiblx";
+    procId.className = "visiblx";
+    pause(videoJuego, audioJuego);
     break;
     case 3:
-    document.getElementById("autores").className = "visiblx";
+    autId.className = "visiblx";
+    pause(videoJuego, audioJuego);
     break;
     case 4:
-    document.getElementById("referencias").className = "visiblx";
+    refId.className = "visiblx";
+    pause(videoJuego, audioJuego);
     break;
   }
+  esconder();
 }
 
 function start(){
-  document.getElementById("juego").className = "ocultx";
-  document.getElementById("descripcion").className = "ocultx";
-  document.getElementById("proceso").className = "ocultx";
-  document.getElementById("autores").className = "ocultx";
-  document.getElementById("referencias").className = "ocultx";
+  juegoId.className = "ocultx";
+  descrId.className = "ocultx";
+  procId.className = "ocultx";
+  autId.className = "ocultx";
+  refId.className = "ocultx";
+
 }

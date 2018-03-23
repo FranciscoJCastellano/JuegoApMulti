@@ -24,89 +24,90 @@
       <h3 id="lema">Xddd</h3>
     </header>
   </div>
-<div class="menuTitle">
-  <nav id="navegador" >
-    <p><a onmouseover="ver()" onclick="esconder()" href="#">Menú</a></p>
-    <div id="menu" >
-      <ul>
-        <li> <a onclick="play(video, audio)"onclick="hacerVisible(0)"class="link" href="#juego">Juego</a></li>
-        <li><a onclick="pause(video, audio)" onclick="hacerVisible(1)"class="link" href="#descripcion">Descripcion</a></li>
-        <li><a onclick="pause(video, audio)"onclick="hacerVisible(2)"class="link" href="#proceso">Proceso Desarrollo</a></li>
-        <li><a onclick="pause(video, audio)"onclick="hacerVisible(3)"class="link" href="#autores">Autores</a></li>
-        <li><a onclick="pause(video, audio)"onclick="hacerVisible(4)"class="link" href="#referencias">Referencias</a></li>
-      </ul>
-    </div>
-  </nav>
+  <div class="menuTitle">
+    <nav id="navegador" >
+      <p><a onmouseover="ver()" onclick="esconder()" href="#">Menú</a></p>
+      <div id="menu" >
+        <ul>
+          <li> <a onclick="hacerVisible(0)"class="link" href="#juego">Juego</a></li>
+          <li><a onclick="hacerVisible(1)"class="link" href="#descripcion">Descripcion</a></li>
+          <li><a onclick="hacerVisible(2)"class="link" href="#proceso">Proceso Desarrollo</a></li>
+          <li><a onclick="hacerVisible(3)"class="link" href="#autores">Autores</a></li>
+          <li><a onclick="hacerVisible(4)"class="link" href="#referencias">Referencias</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- onclick="hacerVisible(0)"
+    onclick="hacerVisible(1)" -->
+    <section id="juego" onclick="hacerVisible(0)"class="visiblx">
+      <h3>Survive The Night</h3>
+      <audio
+      loop
+      id='audio'
+      type='audio/mp3'
+      src="multimedia/musica_fondo.mp3"
+      onloadstart="this.volume=0.12"
 
+      >
+      Tu navegador no es compatible con la reproducción de este vídeo
+    </audio>
+    <section>
+      <video
+      loop
+      id='video'
+      type='video/mp4'
+      src="multimedia/video_fondo.mp4"
+      onplaying="alerta('PLAY');"
+      onpause="alerta('PAUSE');"
+      onloadstart="this.volume=0.12"
+      >
+      Tu navegador no es compatible con la reproducción de este vídeo
+    </video>
+    <section id='buttons'>
+      <button onclick="play(video, audio)">Play</button>
+      <button onclick="pause(video, audio)">Pause</button>
+      <button onclick="changeTime(video)">Cambiar Comida/Enemigo</button>
+      <button onclick="isEnded(video)">Is ended?</button>
+      <button onclick="getVideo().muted=true">Silenciar efectos vídeo</button>
+      <button onclick="getVideo().muted=false">Volumen efectos vídeo</button><br>
+      <button onclick="getVideo().volume+=0.1">Subir volumen vídeo</button>
+      <button onclick="getVideo().volume-=0.1">Bajar volumen vídeo</button>
+      <button onclick="getAudio().muted=true">Silenciar música</button>
+      <button onclick="getAudio().muted=false">Activar música</button>
 
-  <section  class="visiblx">
-    <h3 >Survive The Night</h3>
-	<audio
-		loop
-		id='audio'
-		type='audio/mp3'
-		src="multimedia/musica_fondo.mp3"
-    onloadstart="this.volume=0.12"
-
-		>
-		Tu navegador no es compatible con la reproducción de este vídeo
-	</audio>
-	<section>
-		<video
-    loop
-			id='video'
-			type='video/mp4'
-			src="multimedia/video_fondo.mp4"
-			onplaying="alerta('PLAY');"
-			onpause="alerta('PAUSE');"
-			onloadstart="this.volume=0.12"
-			>
-			Tu navegador no es compatible con la reproducción de este vídeo
-		</video>
-		<section id='buttons'>
-			<button onclick="play(video, audio)">Play</button>
-			<button onclick="pause(video, audio)">Pause</button>
-			<button onclick="changeTime(video)">Cambiar Comida/Enemigo</button>
-			<button onclick="isEnded(video)">Is ended?</button>
-			<button onclick="getVideo().muted=true">Silenciar efectos vídeo</button>
-			<button onclick="getVideo().muted=false">Volumen efectos vídeo</button><br>
-			<button onclick="getVideo().volume+=0.1">Subir volumen vídeo</button>
-			<button onclick="getVideo().volume-=0.1">Bajar volumen vídeo</button>
-			<button onclick="getAudio().muted=true">Silenciar música</button>
-			<button onclick="getAudio().muted=false">Activar música</button>
-
-		</section>
+    </section>
+    <section id="dataJuego">
       <section id="score"></section>
       <section id="life"></section>
       <section id="enemies"></section>
       <section id="food"></section>
       <section id="level"></section>
       <section id="time"></section>
+    </section>
 
-		<canvas id="myCanvas" width="1280" height="720">
-		</canvas>
-	</section>
-
-
-  </section>
-  <section id="descripcion" class="ocultx">
-    <h3>Descripcion</h3>
-    <p>afSEGFASDGASDGASDGS</p>
-  </section>
-  <section id="proceso" class="ocultx">
-    <h3>Proceso Desarrollo</h3>
-    <p>afSEGFASDGA63456SDGASDGS</p>
-  </section>
-  <section id="autores" class="ocultx">
-    <h3>Autores</h3>
-    <p>afSEGFASDGASD34545GASDGS</p>
+    <canvas id="myCanvas" width="1280" height="720">
+    </canvas>
   </section>
 
 
-  <section id="referencias" class="ocultx">
-    <h3>Referencias</h3>
-    <p>afSEGFASDGASDwerywer5646GASDGS</p>
+</section>
+<section id="descripcion" class="ocultx">
+  <h3>Descripcion</h3>
+  <p>afSEGFASDGASDGASDGS</p>
+</section>
+<section id="proceso" class="ocultx">
+  <h3>Proceso Desarrollo</h3>
+  <p>afSEGFASDGA63456SDGASDGS</p>
+</section>
+<section id="autores"class="ocultx">
+  <h3>Autores</h3>
+  <p>afSEGFASDGASD34545GASDGS</p>
+</section>
+<section id="referencias"class="ocultx">
+  <h3>Referencias</h3>
+  <p>afSEGFASDGASDwerywer5646GASDGS</p>
 
-  </section>
+</section>
+
 </body>
 </html>

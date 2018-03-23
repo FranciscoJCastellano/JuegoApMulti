@@ -70,6 +70,12 @@ Fecha: 14/3/18
 Definición: guardamos el ctx sin nada dibujado y dibujamos los enemigos, player, bloques y comida
 *************************************/
 function setup(){
+  // juegoId.addEventListener("DOMContentLoaded", hacerVisible(0), false);
+  // descrId.addEventListener("DOMContentLoaded", hacerVisible(1), false);
+  // procId.addEventListener("DOMContentLoaded", hacerVisible(2), false);
+  // autId.addEventListener("DOMContentLoaded", hacerVisible(3), false);
+  // refId.addEventListener("DOMContentLoaded", hacerVisible(4), false);
+
   window.addEventListener('keydown', function(e){
     e.preventDefault();
     //listenKeyPressed(e.keyCode);
@@ -82,6 +88,7 @@ function setup(){
     ctx.key = false;
     tec[e.keyCode]=false;
   });
+
   orbe.push(new Orbe());
   player=new Player();
   player.score=totalScore;
@@ -226,6 +233,7 @@ function gameUpdate(){
   if(load){
     document.addEventListener("timeupdate", instante(videoJuego), false);
   }
+
   comer(player,food);
   comer(player,orbe);
   lucha(player,enemies);
