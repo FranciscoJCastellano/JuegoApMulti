@@ -9,7 +9,7 @@ var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
 var food=[];
 var bullets=[];
 var factor=10;//factor de dificultad para generar enemigos y obstáculos.
-var level=41;//nivel de juego
+var level=1;//nivel de juego
 var w=1280;
 var h=720;
 var random=0;//para generar random para las velocidades iniciales
@@ -19,7 +19,7 @@ var isDay=true;//variable para saber si es de día o de noche
 var goal=2;//el numero de veces que se come toda la comida para recargar canvas
 var velMax=5;
 var tec=[];//array donde se verifica tecla pulsada
-var numMax=50;//num maximo de objetos
+var numMax=40;//num maximo de objetos
 var gameIsOn=true;//para indicar si el juego está en marcha
 var counter=0;//contador para cambiar nivel si se come toda la comida
 var totalScore=0;
@@ -90,6 +90,7 @@ function setup(){
   isLoading=false;
   loading();
 
+  console.log("Enemigos: "+enemies.length);
   player.score=totalScore;
 
   document.getElementById('score').innerHTML = "Score: " + totalScore;
@@ -114,13 +115,21 @@ function createCreatures(){
   //generamos orbe
   orbe.push(new Orbe());
 
+  var j=enemies.length;
+  while(j--){
+    enemies.splice(j,1);
+  }
   //generamos los enemigos
   var i=level*factor*0.6;
-  if(i>numMax){
-    i=numMax;
+  if(i>numMax*0.4){
+    i=numMax*0.4;
   }
   while(i--){
     enemies.push(new Enemy);
+  }
+  var j=food.length;
+  while(j--){
+    food.splice(j,1);
   }
   //generamos la comida
   var i=factor*0.8;
@@ -265,7 +274,7 @@ types: 0->Food 1->orbe 2->enemigos
 *******************************************/
 function repoblate(type){
   switch(type){
-    case 0:
+    case 0://comida
     if(food.length<=0){
       counter++;
       var i=factor*0.8;
@@ -279,14 +288,14 @@ function repoblate(type){
       }
     }
     break;
-    case 1:
+    case 1://orbe
     if(orbe.length<0){
       orbe.push(new Enemy);
     }
     break;
-    case 2:
+    case 2://enemigos
     if(enemies.length<=0){
-      var i=enemies.level*factor*1.5;
+      var i=level*factor*0.7;
       while(i--){
         enemies.push(new Enemy);
       }
