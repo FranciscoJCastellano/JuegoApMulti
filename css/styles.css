@@ -10,11 +10,13 @@ canvas{
 
 
 #wheel {
-  border: 16px solid #f3f3f3;
+  position:relative;
+  border: 16px solid #535353;
   border-radius: 50%;
   border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
+  width: 400px;
+  height: 400px;
+  left:30%;
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
 }
@@ -50,7 +52,7 @@ canvas{
 }
 #food{
   position: absolute;
-  top:55%;
+  top:60%;
   left: 75%;
   z-index: 100;
   border:none;

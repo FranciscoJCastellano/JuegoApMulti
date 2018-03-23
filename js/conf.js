@@ -34,11 +34,9 @@ function loading(){
   if(!isLoading){
     loadWheel.className = "ocultx";
     pags.className = "visiblx";
-
   }else if(isLoading){
     pags.className = "ocultx";
     loadWheel.className = "visiblx";
-
   }
 }
 

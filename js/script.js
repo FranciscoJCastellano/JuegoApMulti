@@ -9,7 +9,7 @@ var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
 var food=[];
 var bullets=[];
 var factor=10;//factor de dificultad para generar enemigos y obstáculos.
-var level=21;//nivel de juego
+var level=41;//nivel de juego
 var w=1280;
 var h=720;
 var random=0;//para generar random para las velocidades iniciales
@@ -83,8 +83,12 @@ function setup(){
     tec[e.keyCode]=false;
   });
 
+  isLoading=true;
+  loading();
   createCreatures();
   crearParedes();
+  isLoading=false;
+  loading();
 
   player.score=totalScore;
 
@@ -130,7 +134,6 @@ Fecha: 14/03/2018
 Mejora: Ahora si el muro es válido lo almacena, si no es válido genera otro
 *******************************************/
 function crearParedes(){
-  isLoading=true;
   //generamos las paredes
   var works=0;
   var k=1.03*factor*level;
