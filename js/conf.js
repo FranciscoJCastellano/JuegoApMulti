@@ -6,6 +6,7 @@ var autId;
 var refId;
 var menu;
 var data;
+var loadWheel;
 function ver(){
   menu.style.display="block";
   data.style.display="none";
@@ -17,16 +18,29 @@ function esconder(){
 function initIds(){
   menu=document.getElementById("menu");
   data=document.getElementById("dataJuego");
-
+  pags=document.getElementById("pags");
   juegoId=document.getElementById("juego");
   descrId=document.getElementById("descripcion");
   procId=document.getElementById("proceso");
   autId=document.getElementById("autores");
   refId=document.getElementById("referencias");
+
+  loadWheel=document.getElementById("wheel");
+
 }
 document.addEventListener("DOMContentLoaded", initIds, false);
 
+function loading(){
+  if(!isLoading){
+    loadWheel.className = "ocultx";
+    pags.className = "visiblx";
 
+  }else if(isLoading){
+    pags.className = "ocultx";
+    loadWheel.className = "visiblx";
+
+  }
+}
 
 function hacerVisible(idEl){
 

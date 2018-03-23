@@ -9,7 +9,7 @@ var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
 var food=[];
 var bullets=[];
 var factor=10;//factor de dificultad para generar enemigos y obstáculos.
-var level=1;//nivel de juego
+var level=21;//nivel de juego
 var w=1280;
 var h=720;
 var random=0;//para generar random para las velocidades iniciales
@@ -26,7 +26,7 @@ var totalScore=0;
 var umbral1=15;//umbral para detectar dia/noche
 var umbral2=30;//umbral para detectar dia/noche
 var levelChange=false;
-
+var isLoading=false;
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
   if(elemento && elemento.getContext){
@@ -130,6 +130,7 @@ Fecha: 14/03/2018
 Mejora: Ahora si el muro es válido lo almacena, si no es válido genera otro
 *******************************************/
 function crearParedes(){
+  isLoading=true;
   //generamos las paredes
   var works=0;
   var k=1.03*factor*level;
@@ -154,7 +155,6 @@ function crearParedes(){
 
     }
   }
-
   // guardamos las posiciones de todos los muros (Solo se hace 1 vez!)
   // Si (432, 123) es muro, se añade 432123
   var wallx=0;
@@ -178,6 +178,8 @@ function crearParedes(){
 
   wallspos.sort(); // ordenamos para facilitar la búsqueda
   //console.log(walls.length);
+  isLoading=false;
+
 }
 function gameShow(){
 
