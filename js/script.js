@@ -100,7 +100,6 @@ function setup(){
   document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
   document.getElementById('food').innerHTML = "Food: " + food.length;
 
-
   gameShow();
 
 }
@@ -155,7 +154,6 @@ function crearParedes(){
       newWall = new Wall();
       coincideWall(orbe,newWall);
       if(newWall.valid == 1){
-        //walls.push(newWall);
         works = 1;
       }
 
@@ -243,8 +241,8 @@ function gameUpdate(){
     return 0;
   }
   repoblate(0);//rellena comida si no queda
-  repoblate(1);//rellena enemigos
-  repoblate(2);//rellena orbe se no queda
+  //repoblate(1);//rellena orbe// no hace falta, el orbe se genera en cada nivel
+  repoblate(2);//rellena enemigo
 }
 
 
@@ -289,8 +287,11 @@ function repoblate(type){
     }
     break;
     case 1://orbe
+    if(orbe.lenth>0){
+      orbe=[];
+    }
     if(orbe.length<0){
-      orbe.push(new Enemy);
+      orbe.push(new Orbe);
     }
     break;
     case 2://enemigos
