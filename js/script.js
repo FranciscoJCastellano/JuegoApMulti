@@ -90,7 +90,7 @@ function setup(){
   isLoading=false;
   loading();
 
-  console.log("Enemigos: "+enemies.length);
+  // console.log("Enemigos: "+enemies.length);
   player.score=totalScore;
 
   document.getElementById('score').innerHTML = "Score: " + totalScore;
@@ -114,10 +114,6 @@ function createCreatures(){
   //generamos orbe
   orbe.push(new Orbe());
 
-  var j=enemies.length;
-  while(j--){
-    enemies.splice(j,1);
-  }
   //generamos los enemigos
   var i=level*factor*0.6;
   if(i>numMax*0.4){
@@ -126,10 +122,7 @@ function createCreatures(){
   while(i--){
     enemies.push(new Enemy);
   }
-  var j=food.length;
-  while(j--){
-    food.splice(j,1);
-  }
+
   //generamos la comida
   var i=factor*0.8;
   while(i--){
