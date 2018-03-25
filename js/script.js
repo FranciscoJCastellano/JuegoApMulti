@@ -27,6 +27,7 @@ var umbral1=15;//umbral para detectar dia/noche
 var umbral2=30;//umbral para detectar dia/noche
 var levelChange=false;
 var isLoading=false;
+var show=true;
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
   if(elemento && elemento.getContext){
@@ -60,10 +61,30 @@ window.onload = function(){
   //gameOn(); //El Juego empieza cuando se pulsa PLAY(y empieza el vídeo también)
 }
 function gameOn(){
-  setInterval(draw,10);
+  if(gameIsOn){
+    document.getElementById('score').innerHTML = "Score: " +totalScore;
+    document.getElementById('life').innerHTML = "Life: " + player.life;
+    document.getElementById('level').innerHTML = "Level: " + player.level;
+    document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(videoJuego.currentTime);
+    document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
+    document.getElementById('food').innerHTML = "Food: " + food.length;
+    setInterval(draw,10);
+
+
+  }
+
   //alert("GAME ON");
 }
+/************************************
+Autores: Alejandro Enrique Trigueros Álvarez y Francisco Javier Castellano Farrak
+Fecha: 10/3/18
+Definición: borramos canvas y redibujamos player, comida, enemigos y obstáculos
+*************************************/
+function draw(){
+  gameUpdate();
+  gameShow();
 
+}
 /************************************
 Autores: Alejandro Enrique Trigueros Álvarez, Francisco Javier Castellano Farrak, Sergio Elola García
 Fecha: 14/3/18
@@ -105,108 +126,7 @@ function setup(){
   gameShow();
 
 }
-/********************************************
-Autor: Francisco Javier Castellano Farrak
-Fecha: 23/03/2018
-Def: función para crear las criaturas del juego
-*******************************************/
-function createCreatures(){
-  //creamos player
-  player=new Player();
-  //generamos orbe
-  orbe.push(new Orbe());
 
-  //generamos los enemigos
-  var i=level*factor*0.6;
-  if(i>numMax*0.4){
-    i=numMax*0.4;
-  }
-  while(i--){
-    enemies.push(new Enemy);
-  }
-
-  //generamos la comida
-  var i=factor*0.8;
-  while(i--){
-    food.push(new Food);
-  }
-}
-/********************************************
-Autor:Sergio Elola García
-Fecha: 14/03/2018
-Mejora: Ahora si el muro es válido lo almacena, si no es válido genera otro
-*******************************************/
-function crearParedes(){
-  //generamos las paredes
-  var works=0;
-  var k=1.03*factor*level;
-  if(k>numMax){
-    k=numMax;
-  }
-  for(var i=0;i<k;i++){
-    works = 0; // Si work = 0 el muro no es válido
-    while (!works){ // repetir hasta que salga un muro válido
-      newWall = new Wall();
-      coincideWall(orbe,newWall);
-      if(newWall.valid == 1){
-        works = 1;
-      }
-
-      coincideWall(player,newWall);
-      if (newWall.valid == 1 && works==1){
-        walls.push(newWall);
-        works = 1;
-      }
-
-    }
-  }
-  // guardamos las posiciones de todos los muros (Solo se hace 1 vez!)
-  // Si (432, 123) es muro, se añade 432123
-  var wallx=0;
-  var wally=0;
-  var wallxmax=0;
-  var wallymax=0;
-
-  var i=walls.length;
-
-  while (i--){
-    wallx = walls[i].x;
-    wally = walls[i].y;
-    wallxmax = wallx + walls[i].width;
-    wallymax = wally + walls[i].height;
-    for (var j = wallx; j <= wallxmax; j++){
-      for (var k = wally; k <= wallymax ; k++){
-        wallspos.push(j*multp+k);
-      }
-    }
-  }
-
-  wallspos.sort(); // ordenamos para facilitar la búsqueda
-  //console.log(walls.length);
-
-}
-/*************************
-Fecha: 25/3/18
-Definición: función para vaciar arrays antes de cambiar de nivel
-*************************************/
-function clearArrays(){
-	var j=enemies.length;
-	while(j--){
-		enemies.splice(j,1);
-	}
-	var j=walls.length;
-	while(j--){
-		walls.splice(j,1);
-	}
-	var j=food.length;
-	while(j--){
-		food.splice(j,1);
-	}
-	var j=wallspos.length;
-	while(j--){
-		wallspos.splice(j,1);
-	}
-}
 function gameShow(){
 
   ctx = cargaContextoCanvas('myCanvas');
@@ -261,23 +181,107 @@ function gameUpdate(){
   repoblate(2);//rellena enemigo
 }
 
+/********************************************
+Autor: Francisco Javier Castellano Farrak
+Fecha: 23/03/2018
+Def: función para crear las criaturas del juego
+*******************************************/
+function createCreatures(){
+  //creamos player
+  player=new Player();
+  //generamos orbe
+  orbe.push(new Orbe());
 
-/************************************
-Autores: Alejandro Enrique Trigueros Álvarez y Francisco Javier Castellano Farrak
-Fecha: 10/3/18
-Definición: borramos canvas y redibujamos player, comida, enemigos y obstáculos
+  //generamos los enemigos
+  var i=level*factor*0.6;
+  if(i>numMax*0.4){
+    i=numMax*0.4;
+  }
+  while(i--){
+    enemies.push(new Enemy);
+  }
+
+  //generamos la comida
+  var i=factor*0.8;
+  while(i--){
+    food.push(new Food);
+  }
+}
+/********************************************
+Autor:Sergio Elola García
+Fecha: 14/03/2018
+Mejora: Ahora si el muro es válido lo almacena, si no es válido genera otro
+*******************************************/
+function crearParedes(){
+  //generamos las paredes
+  var works=0;
+  var k=1.03*factor*level;
+  if(k>numMax){
+    k=numMax;
+  }
+  // for(var i=0;i<k;i++){
+  for(var i=0;i<k;i++){
+    works = 0; // Si work = 0 el muro no es válido
+    while (!works){ // repetir hasta que salga un muro válido
+      newWall = new Wall();
+      coincideWall(orbe,newWall);
+      if(newWall.valid == 1){
+        works = 1;
+      }
+
+      coincideWall(player,newWall);
+      if (newWall.valid == 1 && works==1){
+        walls.push(newWall);
+        works = 1;
+      }
+
+    }
+  }
+  // guardamos las posiciones de todos los muros (Solo se hace 1 vez!)
+  // Si (432, 123) es muro, se añade 432123
+  var wallx=0;
+  var wally=0;
+  var wallxmax=0;
+  var wallymax=0;
+
+  var i=walls.length;
+
+  while (i--){
+    wallx = walls[i].x;
+    wally = walls[i].y;
+    wallxmax = wallx + walls[i].width;
+    wallymax = wally + walls[i].height;
+    for (var j = wallx; j <= wallxmax; j++){
+      for (var k = wally; k <= wallymax ; k++){
+        wallspos.push(j*multp+k);
+      }
+    }
+  }
+
+  wallspos.sort(); // ordenamos para facilitar la búsqueda
+  //console.log(walls.length);
+
+}
+/*************************
+Fecha: 25/3/18
+Definición: función para vaciar arrays antes de cambiar de nivel
 *************************************/
-function draw(){
-  if(gameIsOn){
-    document.getElementById('score').innerHTML = "Score: " +totalScore;
-    document.getElementById('life').innerHTML = "Life: " + player.life;
-    document.getElementById('level').innerHTML = "Level: " + player.level;
-    document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(videoJuego.currentTime);
-    document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
-    document.getElementById('food').innerHTML = "Food: " + food.length;
-
-    gameUpdate();
-    gameShow();
+function clearArrays(){
+  var j=enemies.length;
+  while(j--){
+    enemies.splice(j,1);
+  }
+  var j=walls.length;
+  while(j--){
+    walls.splice(j,1);
+  }
+  var j=food.length;
+  while(j--){
+    food.splice(j,1);
+  }
+  var j=wallspos.length;
+  while(j--){
+    wallspos.splice(j,1);
   }
 }
 /********************************************
