@@ -100,7 +100,7 @@ function setup(){
   document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
   document.getElementById('food').innerHTML = "Food: " + food.length;
   document.getElementById('walls').innerHTML = "Walls: " + walls.length;
-  document.getElementById('wallspos').innerHTML = "Walls: " + wallspos.length;
+  document.getElementById('wallspos').innerHTML = "Wallspos: " + wallspos.length;
 
   gameShow();
 
