@@ -91,12 +91,16 @@ function instante(video){
 				while(j--){
 					enemies.splice(j,1);
 				}
+				var j=walls.length;
+				while(j--){
+					walls.splice(j,1);
+				}
 				var j=food.length;
 				while(j--){
 					food.splice(j,1);
 				}
-				setup();
 			}
+			setup();
 		}
 	}
 }

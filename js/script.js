@@ -99,6 +99,8 @@ function setup(){
   document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(videoJuego.currentTime);
   document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
   document.getElementById('food').innerHTML = "Food: " + food.length;
+  document.getElementById('walls').innerHTML = "Walls: " + walls.length;
+  document.getElementById('wallspos').innerHTML = "Walls: " + wallspos.length;
 
   gameShow();
 
@@ -181,7 +183,6 @@ function crearParedes(){
 
   wallspos.sort(); // ordenamos para facilitar la búsqueda
   //console.log(walls.length);
-  isLoading=false;
 
 }
 function gameShow(){
