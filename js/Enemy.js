@@ -16,7 +16,7 @@ function Enemy(){
     this.limiter= this.maxVe;
   }
   this.life=Math.floor(minLife+factor*2);
-  this.power=Math.floor(factor*0.15);
+  this.power=Math.floor(factor*0.5);
   this.velx=0;
   this.vely=0;
   //generamos num aleatorio para la dirección inicial
@@ -57,6 +57,12 @@ function Enemy(){
     if(this.vely==0){
       random=Math.floor(Math.random()*(3)-1);
       this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
+    }
+    if(this.velx>1.23*velMax){
+      this.velx=1.23*velMax;
+    }
+    if(this.vely>1.23*velMax){
+      this.vely=1.23*velMax;
     }
     this.x+=this.velx;
     this.y+=this.vely;

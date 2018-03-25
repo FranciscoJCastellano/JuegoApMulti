@@ -87,18 +87,7 @@ function instante(video){
 			if(!levelChange){
 				level++;
 				levelChange=false;
-				var j=enemies.length;
-				while(j--){
-					enemies.splice(j,1);
-				}
-				var j=walls.length;
-				while(j--){
-					walls.splice(j,1);
-				}
-				var j=food.length;
-				while(j--){
-					food.splice(j,1);
-				}
+				clearArrays();
 			}
 			setup();
 		}

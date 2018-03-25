@@ -19,7 +19,7 @@ var isDay=true;//variable para saber si es de día o de noche
 var goal=2;//el numero de veces que se come toda la comida para recargar canvas
 var velMax=5;
 var tec=[];//array donde se verifica tecla pulsada
-var numMax=40;//num maximo de objetos
+var numMax=50;//num maximo de objetos
 var gameIsOn=true;//para indicar si el juego está en marcha
 var counter=0;//contador para cambiar nivel si se come toda la comida
 var totalScore=0;
@@ -184,6 +184,28 @@ function crearParedes(){
   wallspos.sort(); // ordenamos para facilitar la búsqueda
   //console.log(walls.length);
 
+}
+/*************************
+Fecha: 25/3/18
+Definición: función para vaciar arrays antes de cambiar de nivel
+*************************************/
+function clearArrays(){
+	var j=enemies.length;
+	while(j--){
+		enemies.splice(j,1);
+	}
+	var j=walls.length;
+	while(j--){
+		walls.splice(j,1);
+	}
+	var j=food.length;
+	while(j--){
+		food.splice(j,1);
+	}
+	var j=wallspos.length;
+	while(j--){
+		wallspos.splice(j,1);
+	}
 }
 function gameShow(){
 
