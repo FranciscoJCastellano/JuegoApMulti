@@ -98,6 +98,7 @@ Desde aquí trabajo con título y subtítulo
 h1{
 	text-align: center;
 	color: white;
+  margin:0;
 	font: 150px existence;
 	font-family: 'Amatic SC';
 	text-shadow: 0px 0px 10px #ff005b,
@@ -111,6 +112,7 @@ h1{
 }
 h3{
 	text-align: center;
+  margin:0;
 	color: #11e299;
 	font: 38px existence;
 	font-family: 'VT323', monospace;

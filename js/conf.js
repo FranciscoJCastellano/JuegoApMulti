@@ -27,6 +27,7 @@ function initIds(){
   refId=document.getElementById("referencias");
   loadWheel=document.getElementById("wheel");
   pags.className = "ocultx";
+  ver();
 }
 document.addEventListener("DOMContentLoaded", initIds, false);
 
@@ -69,7 +70,7 @@ function hacerVisible(idEl){
     pause(videoJuego, audioJuego);
     break;
   }
-  esconder();
+  // esconder();
 }
 
 function start(){
