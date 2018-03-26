@@ -7,9 +7,9 @@ var walls=[];
 var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
 // (computacionalmente más rápido que usar loops)
 var food=[];
-var bullets=[];
+// var bullets=[];
 var factor=10;//factor de dificultad para generar enemigos y obstáculos.
-var level=30;//nivel de juego
+var level=1;//nivel de juego
 var w=1280;
 var h=720;
 var random=0;//para generar random para las velocidades iniciales
@@ -19,7 +19,7 @@ var isDay=true;//variable para saber si es de día o de noche
 var goal=2;//el numero de veces que se come toda la comida para recargar canvas
 var velMax=5;
 var tec=[];//array donde se verifica tecla pulsada
-var numMax=50;//num maximo de objetos
+var numMax=70;//num maximo de objetos
 var gameIsOn=true;//para indicar si el juego está en marcha
 var counter=0;//contador para cambiar nivel si se come toda la comida
 var totalScore=0;
@@ -62,12 +62,7 @@ window.onload = function(){
 }
 function gameOn(){
   if(gameIsOn){
-    document.getElementById('score').innerHTML = "Score: " +totalScore;
-    document.getElementById('life').innerHTML = "Life: " + player.life;
-    document.getElementById('level').innerHTML = "Level: " + player.level;
-    document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(videoJuego.currentTime);
-    document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
-    document.getElementById('food').innerHTML = "Food: " + food.length;
+
     setInterval(draw,10);
 
 
@@ -81,6 +76,12 @@ Fecha: 10/3/18
 Definición: borramos canvas y redibujamos player, comida, enemigos y obstáculos
 *************************************/
 function draw(){
+  document.getElementById('score').innerHTML = "Score: " +totalScore;
+  document.getElementById('life').innerHTML = "Life: " + player.life;
+  document.getElementById('level').innerHTML = "Level: " + player.level;
+  document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(videoJuego.currentTime);
+  document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
+  document.getElementById('food').innerHTML = "Food: " + food.length;
   gameUpdate();
   gameShow();
 
@@ -103,7 +104,8 @@ function setup(){
     ctx.key = false;
     tec[e.keyCode]=false;
   });
-
+  pags.className = "ocultx";
+  loadWheel.className = "visiblx";
   isLoading=true;
   loading();
   createCreatures();
@@ -120,8 +122,6 @@ function setup(){
   document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(videoJuego.currentTime);
   document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
   document.getElementById('food').innerHTML = "Food: " + food.length;
-  document.getElementById('walls').innerHTML = "Walls: " + walls.length;
-  document.getElementById('wallspos').innerHTML = "Wallspos: " + wallspos.length;
 
   gameShow();
 
@@ -173,7 +173,7 @@ function gameUpdate(){
   if(player.life<=0){
     gameIsOn=false;
     console.log('YOU LOSE');
-    window.location.href=  window.location.href;
+    window.location.href= "index.html";
     return 0;
   }
   repoblate(0);//rellena comida si no queda
@@ -202,7 +202,7 @@ function createCreatures(){
   }
 
   //generamos la comida
-  var i=factor*0.8;
+  var i=factor*1.8;
   while(i--){
     food.push(new Food);
   }
@@ -256,14 +256,14 @@ function crearParedes(){
     wallxmax = wallx + walls[i].width;
     wallymax = wally + walls[i].height;
     for (var j = wallx; j <= wallxmax; j++){
-      for (var k = wally; k <= wally+lenPla+desv; k++){  // borde superior
+      for (var k = wally,thresholdSup=wally+lenPla+desv; k <=thresholdSup ; k++){  // borde superior
         wallspos.push(j*multp+k);
       }
       for (var k = wallymax-lenPla-desv; k <= wallymax ; k++){   // borde inferior
         wallspos.push(j*multp+k);
       }
     }
-    for (var k = wally+lenPla+desv; k <= wallymax-lenPla-desv; k++){
+    for (var k = wally+lenPla+desv,thresholdLeft=wallymax-lenPla-desv; k <= thresholdLeft; k++){
       for (var j = wallx; j <= wallx+lenPla+desv; j++){   //borde izquierdo
         wallspos.push(j*multp+k);
       }

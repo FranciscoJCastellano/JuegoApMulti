@@ -7,6 +7,7 @@ var refId;
 var menu;
 var data;
 var loadWheel;
+
 function ver(){
   menu.style.display="block";
   data.style.display="none";
@@ -24,9 +25,8 @@ function initIds(){
   procId=document.getElementById("proceso");
   autId=document.getElementById("autores");
   refId=document.getElementById("referencias");
-
   loadWheel=document.getElementById("wheel");
-
+  pags.className = "ocultx";
 }
 document.addEventListener("DOMContentLoaded", initIds, false);
 
