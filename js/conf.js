@@ -10,7 +10,7 @@ var loadWheel;
 
 function ver(){
   menu.style.display="block";
-  data.style.display="none";
+  // data.style.display="none";
 }
 function esconder(){
   menu.style.display="none";

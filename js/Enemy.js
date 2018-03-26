@@ -9,8 +9,8 @@ function Enemy(){
   this.len=10;
   this.through=false;//propiedad para atravesar las paredes
   this.minVel=2;
-  this.maxVel=3;
-  this.limiter=0.7*level;
+  this.maxVel=2.5;
+  this.limiter=0.67*level;
   this.prize=2;
   if(this.limiter> this.maxVe){
     this.limiter= this.maxVe;
@@ -19,11 +19,15 @@ function Enemy(){
   this.power=Math.floor(factor*0.27);
   this.velx=0;
   this.vely=0;
+  random=Math.floor(Math.random()*(3)-1);
+
   //generamos num aleatorio para la dirección inicial
   if(this.vely==0){
     random=Math.floor(Math.random()*(3)-1);
     this.velx=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
   }
+  random=Math.floor(Math.random()*(3)-1);
+
   if(this.vely==0){
     random=Math.floor(Math.random()*(3)-1);
     this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
@@ -58,11 +62,11 @@ function Enemy(){
       random=Math.floor(Math.random()*(3)-1);
       this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
     }
-    if(this.velx>1.13*velMax){
-      this.velx=1.13*velMax;
+    if(this.velx>1.03*velMax){
+      this.velx=1.03*velMax;
     }
-    if(this.vely>1.13*velMax){
-      this.vely=1.13*velMax;
+    if(this.vely>1.03*velMax){
+      this.vely=1.03*velMax;
     }
     this.x+=this.velx;
     this.y+=this.vely;
