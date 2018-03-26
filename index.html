@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Juego</title>
+  <title>Survive the night</title>
   <meta charset="utf-8" >
   <meta name="author" content="Sergio Elola García-Jaime Moreno Quintanar-Francisco Javier Castellano Farrak-Alejandro Enrique Trigueros Álvarez">
   <script src="js/conf.js" type="text/javascript"></script>
@@ -15,17 +15,21 @@
 
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="stylesheet" type="text/css" href="css/video_style.css">
+  <!-- Google Web ICons-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
 </head>
 <body>
   <div>
     <header>
-      <h1 >Juego</h1>
-      <h3 id="lema">Xddd</h3>
+
+		 <h1><span class="logo">S</span>URV<span class="logo">I</span>VE T<span class="logo">H</span>E NI<span class="logo">G</span>HT</h1>
+		 <h3>¿Eres capaz de superar los peligros de la noche?</h3>
     </header>
   </div>
-  <div class="menuTitle">
-    <nav id="navegador" >
+ <div class="menuTitle">
+	<nav id="navegador" >
       <p><a onmouseover="ver()" onclick="esconder()" href="#">Menú</a></p>
       <div id="menu" >
         <ul>
@@ -37,10 +41,12 @@
         </ul>
       </div>
     </nav>
+
     <div id="wheel"></div>
+	
     <section id="pags">
       <section id="juego" onclick="hacerVisible(0)"class="visiblx">
-        <h3>Survive The Night</h3>
+        <h1>Juego</h1>
         <audio
         loop
         id='audio'
@@ -64,16 +70,12 @@
         Tu navegador no es compatible con la reproducción de este vídeo
       </video>
       <section id='buttons'>
-        <button onclick="play(video, audio)">Play</button>
-        <button onclick="pause(video, audio)">Pause</button>
-        <button onclick="changeTime(video)">Cambiar Comida/Enemigo</button>
-        <button onclick="isEnded(video)">Is ended?</button>
-        <button onclick="getVideo().muted=true">Silenciar efectos vídeo</button>
-        <button onclick="getVideo().muted=false">Volumen efectos vídeo</button><br>
-        <button onclick="getVideo().volume+=0.1">Subir volumen vídeo</button>
-        <button onclick="getVideo().volume-=0.1">Bajar volumen vídeo</button>
-        <button onclick="getAudio().muted=true">Silenciar música</button>
-        <button onclick="getAudio().muted=false">Activar música</button>
+
+        <button class="button" onclick="play(video, audio)">Play</button>
+        <button class="button" onclick="pause(video, audio)">Pause</button>
+        <button class="button" onclick="silenciar(video, audio)">Silenciar</button>
+        <button class="button" onclick="sonido(video,audio)">Activar sonido</button>
+        <button class="button" onclick="changeTime(video)">Cambiar Comida/Enemigo</button>
 
       </section>
       <section id="dataJuego">
@@ -94,19 +96,19 @@
 
   </section>
   <section id="descripcion" class="ocultx">
-    <h3>Descripcion</h3>
+    <h1>Descripción</h1>
     <p>afSEGFASDGASDGASDGS</p>
   </section>
   <section id="proceso" class="ocultx">
-    <h3>Proceso Desarrollo</h3>
+    <h1>Proceso Desarrollo</h1>
     <p>afSEGFASDGA63456SDGASDGS</p>
   </section>
   <section id="autores"class="ocultx">
-    <h3>Autores</h3>
+    <h1>Autores</h1>
     <p>afSEGFASDGASD34545GASDGS</p>
   </section>
   <section id="referencias"class="ocultx">
-    <h3>Referencias</h3>
+    <h1>Referencias</h1>
     <p>afSEGFASDGASDwerywer5646GASDGS</p>
 
   </section>

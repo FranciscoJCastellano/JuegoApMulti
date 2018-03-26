@@ -59,6 +59,15 @@ function pause(video, audio){
 	video.pause();
 	audio.pause();
 }
+
+function silenciar(video, audio){
+	video.muted=true;
+	audio.muted=true;
+}
+function sonido(video,audio){
+	video.muted=false;
+	audio.muted=false;
+}
 /*********
 Fecha: 17/3/18
 Definición: función para cambiar de noche a día
@@ -93,3 +102,4 @@ function instante(video){
 		}
 	}
 }
+
