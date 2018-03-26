@@ -9,7 +9,7 @@ var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
 var food=[];
 var bullets=[];
 var factor=10;//factor de dificultad para generar enemigos y obstáculos.
-var level=1;//nivel de juego
+var level=30;//nivel de juego
 var w=1280;
 var h=720;
 var random=0;//para generar random para las velocidades iniciales
@@ -239,24 +239,45 @@ function crearParedes(){
   }
   // guardamos las posiciones de todos los muros (Solo se hace 1 vez!)
   // Si (432, 123) es muro, se añade 432123
+  // Se guardan solo las posiciones de los bordes, con un ancho de la longitud
+  // del Player
+
   var wallx=0;
   var wally=0;
   var wallxmax=0;
   var wallymax=0;
 
   var i=walls.length;
-
+  var lenPla = player.len;
+  var desv = 3; // desviación, utilizada para asegurar que no haya errores
   while (i--){
     wallx = walls[i].x;
     wally = walls[i].y;
     wallxmax = wallx + walls[i].width;
     wallymax = wally + walls[i].height;
     for (var j = wallx; j <= wallxmax; j++){
-      for (var k = wally; k <= wallymax ; k++){
+      for (var k = wally; k <= wally+lenPla+desv; k++){  // borde superior
+        wallspos.push(j*multp+k);
+      }
+      for (var k = wallymax-lenPla-desv; k <= wallymax ; k++){   // borde inferior
+        wallspos.push(j*multp+k);
+      }
+    }
+    for (var k = wally+lenPla+desv; k <= wallymax-lenPla-desv; k++){
+      for (var j = wallx; j <= wallx+lenPla+desv; j++){   //borde izquierdo
+        wallspos.push(j*multp+k);
+      }
+      for (var j = wallxmax-lenPla-desv; j <= wallxmax ; j++){  //borde derecho
         wallspos.push(j*multp+k);
       }
     }
   }
+
+  // Para eliminar posiciones repetidas en el array (porque se solapan los muros),
+  // se crea un objeto Set (en el cual no se permiten elementos repetidos) y luego
+  // se transforma a Array
+  var unique_array = Array.from(new Set(wallspos));
+  wallspos = unique_array;
 
   wallspos.sort(); // ordenamos para facilitar la búsqueda
   //console.log(walls.length);
