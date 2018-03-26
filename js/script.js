@@ -9,7 +9,7 @@ var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
 var food=[];
 // var bullets=[];
 var factor=10;//factor de dificultad para generar enemigos y obstáculos.
-var level=1;//nivel de juego
+var level=10;//nivel de juego
 var w=1280;
 var h=720;
 var random=0;//para generar random para las velocidades iniciales
@@ -112,6 +112,7 @@ function setup(){
   crearParedes();
   isLoading=false;
   loading();
+  orbe[0].coincideConWall();
 
   // console.log("Enemigos: "+enemies.length);
   player.score=totalScore;
@@ -233,7 +234,7 @@ function crearParedes(){
       if (newWall.valid == 1 && works==1){
         walls.push(newWall);
         works = 1;
-      }
+      }else woks=0;
 
     }
   }
