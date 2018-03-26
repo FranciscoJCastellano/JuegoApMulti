@@ -88,8 +88,9 @@ function instante(video){
 				level++;
 				levelChange=false;
 				clearArrays();
+				setup();
+
 			}
-			setup();
 		}
 	}
 }

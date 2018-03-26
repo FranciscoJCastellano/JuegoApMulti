@@ -104,7 +104,8 @@ function setup(){
     ctx.key = false;
     tec[e.keyCode]=false;
   });
-
+  pags.className = "ocultx";
+  loadWheel.className = "visiblx";
   isLoading=true;
   loading();
   createCreatures();
@@ -201,7 +202,7 @@ function createCreatures(){
   }
 
   //generamos la comida
-  var i=factor*0.8;
+  var i=factor*1.8;
   while(i--){
     food.push(new Food);
   }
