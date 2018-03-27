@@ -79,8 +79,6 @@ function draw(){
   document.getElementById('life').innerHTML = "Life: " + player.life;
   document.getElementById('level').innerHTML = "Level: " + player.level;
   document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(videoJuego.currentTime);
-  document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
-  document.getElementById('food').innerHTML = "Food: " + food.length;
 
   if(gameIsOn){
     gameUpdate();
@@ -118,12 +116,12 @@ function setup(){
   // console.log("Enemigos: "+enemies.length);
   player.score=totalScore;
 
-  document.getElementById('score').innerHTML = "Score: " + totalScore;
-  document.getElementById('life').innerHTML = "Life: " + player.life;
-  document.getElementById('level').innerHTML = "Level: " + player.level;
-  document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(videoJuego.currentTime);
-  document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
-  document.getElementById('food').innerHTML = "Food: " + food.length;
+  document.getElementById('score').innerHTML = "Puntuación: " + totalScore;
+  document.getElementById('life').innerHTML = "Vida: " + player.life;
+  document.getElementById('level').innerHTML = "Nivel: " + player.level;
+  document.getElementById('time').innerHTML = "Tiempo: " + Math.floor(videoJuego.currentTime);
+  //document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
+  //document.getElementById('food').innerHTML = "Food: " + food.length;
 
   gameShow();
 

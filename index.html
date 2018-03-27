@@ -24,7 +24,7 @@
   <section>
     <header>
 		 <h1><span class="logo">S</span>URV<span class="logo">I</span>VE T<span class="logo">H</span>E NI<span class="logo">G</span>HT</h1>
-		 <h3>¿Eres capaz de superar los peligros de la noche?</h3>
+		 <h3 id="subtitulo">¿Eres capaz de superar los peligros de la noche?</h3>
     </header>
   </section>
  <section class="menuTitle">
@@ -32,16 +32,20 @@
       <!-- <p><a onmouseover="ver()" onclick="esconder()" href="#">Menú</a></p> -->
       <section id="menu">
         <ul>
-          <li> <a onclick="hacerVisible(0)"class="link" href="#juego">Juego</a></li>
-          <li><a onclick="hacerVisible(1)"class="link" href="#descripcion">Descripcion</a></li>
-          <li><a onclick="hacerVisible(2)"class="link" href="#proceso">Proceso Desarrollo</a></li>
-          <li><a onclick="hacerVisible(3)"class="link" href="#autores">Autores</a></li>
-          <li><a onclick="hacerVisible(4)"class="link" href="#referencias">Referencias</a></li>
+          <li> <a onclick="hacerVisible(0)"class="button" href="#juego">Juego</a></li>
+          <li><a onclick="hacerVisible(1)"class="button" href="#descripcion">Descripción</a></li>
+          <li><a onclick="hacerVisible(2)"class="button" href="#proceso">Proceso Desarrollo</a></li>
+          <li><a onclick="hacerVisible(3)"class="button" href="#autores">Autores</a></li>
+          <li><a onclick="hacerVisible(4)"class="button" href="#referencias">Referencias</a></li>
         </ul>
       </section>
     </nav>
 
+
+<!--Sección Juego-->
+
     <section id="wheel"></section>
+
 
     <section id="pags">
       <section id="juego" class="visiblx">
@@ -55,7 +59,7 @@
         >
         Tu navegador no es compatible con la reproducción de este vídeo
       </audio>
-      <section>
+
         <video
         loop
         id='video'
@@ -69,45 +73,123 @@
       </video>
       <section id='buttons'>
 
-        <button class="button" onclick="play(video, audio)">Play</button>
-        <button class="button" onclick="pause(video, audio)">Pause</button>
+        <button class="button" onclick="play(video, audio)">Jugar</button>
+        <button class="button" onclick="pause(video, audio)">Pausa</button>
         <button class="button" onclick="silenciar(video, audio)">Silenciar</button>
         <button class="button" onclick="sonido(video,audio)">Activar sonido</button>
-        <button class="button" onclick="changeTime(video)">Cambiar Comida/Enemigo</button>
+      <!--  <button class="button" onclick="changeTime(video)">Cambiar Comida/Enemigo</button> -->
 
       </section>
+
       <section id="dataJuego">
-        <section id="score"></section>
-        <section id="life"></section>
-        <section id="enemies"></section>
-        <section id="food"></section>
-        <section id="level"></section>
-        <section id="time"></section>
-        <section id="walls"></section>
-        <section id="wallspos"></section>
+        <section class="datos" id="score"></section>
+        <section class="datos" id="life"></section>
+		<section class="datos" id="level"></section>
+        <section class="datos" id="time"></section>
+        <!--
+		<section class="datos" id="enemies"></section>
+        <section class="datos" id="food"></section>
+        <section class="datos" id="walls"></section>
+        <section class="datos" id="wallspos"></section>
+		-->
       </section>
 
       <canvas id="myCanvas" width="1280" height="720">
       </canvas>
-    </section>
+
+
+
+<!--Fin Sección Juego-->
+
+<!--Sección Descripción-->
+
   </section>
   <section id="descripcion" class="ocultx">
     <h1>Descripción</h1>
-    <p>afSEGFASDGASDGASDGS</p>
+    <p class="texto1"><span class="texto2">"Survive the night"</span> es un juego arcade en el que podemos diferenciar dos
+	fases principales: Día y noche. Intenta comer todo lo posible durante el día para poder
+	sobrevivir a los ataques de los malvados seres de la noche.</p>
+	<br>
+	<p class="texto1"><span class="texto2">Día: ¡Come todo lo que puedas!</span> Tienes 15 
+	segundos para alimentarte con todos los bloques morados que puedas. Este alimento 
+	aumentará tu puntuación así como tu cantidad de vida.</p>
+	<br>
+	<p class="texto1"><span class="texto2">Noche: ¡Esquiva a los malos!</span> Ahora te enfrentas
+	a 15 segundos de tensión en los que tendrás que evitar los bloques azules haciendo
+	gala de todos tus skills. Todas las noches aparecerá un orbe que subirá tu puntuación: 
+	¡Intenta cogerlo sin ser golpeado!</p>
+	<br>
+	<p class="texto1"><span class="texto2">Más información.</span> "Survive the night" comienza
+	en el nivel 1 y después de cada noche el nivel se incrementa, aumentando la velocidad de
+	los enemigos y el número de obstáculos que encuentras en el camino.</p>
+	<br>
+	<p class="texto1"><span class="texto2">¿Cómo se juega?</span> Simplemente tendrás que utilizar las
+	flechas de dirección del teclado para ir arriba/abajo/derecha/izquierda (incluso te 
+	puedes mover en diagonal). ¡Así de fácil!</p>
+  
   </section>
+  
+  
+<!--Fin Sección Descripción-->
+
+<!--Sección Proceso Desarrollo-->
   <section id="proceso" class="ocultx">
     <h1>Proceso Desarrollo</h1>
-    <p>afSEGFASDGA63456SDGASDGS</p>
+	<p class="texto1"><span class="texto2">Idea. </span>Encontrar una idea relativamente original
+	y que cumpliese los requisitos necesarios para este primer proyecto de Aplicaciones Multimedia,
+	no fue una tarea fácil. Nos pareció una buena idea desarrollar un juego arcade y reinventarlo
+	de alguna manera insertando material audiovisual con el que el juego pudiese interactuar.</p>
+    <br>
+	<p class="texto1"><span class="texto2">Interacción multimedia. </span>"Survive the night"
+	tiene dos fases, el día y la noche. Un vídeo de 30 segundos (15 para el día y 15 para la noche),
+	usado como fondo de la aplicación, diferencia cada fase. Un escuchador se encarga de leer y detectar
+	cuando el vídeo se encuentra justamente por la mitad, y en ese momento se pasará del día a la noche,
+	desaparecerán los bloques de alimento y aparecerán los enemigos que tendrás que evitar. Lo mismo
+	sucede cuando termina el vídeo, pero en este caso se pasa de la noche al día.</p>
+    <br>
+	<p class="texto1"><span class="texto2">Dificultades encontradas. </span>adasdas</p>
+    <br>
+	<p class="texto1"><span class="texto2">Dificultades encontradas. </span>adasdas</p>
+    <br>
+	<p class="texto1"><span class="texto2">Dificultades encontradas. </span>adasdas</p>
   </section>
+<!--Fin Sección Proceso Desarrollo-->
+
+<!--Sección Autores-->
   <section id="autores"class="ocultx">
     <h1>Autores</h1>
-    <p>afSEGFASDGASD34545GASDGS</p>
+    <p class="texto1"><span class="texto2">Jaime Moreno Quintanar (100329996):</span> Encargado de la parte audiovisual de "Survive
+	the night", tanto del aspecto externo del juego como de integrar los elementos audiovisuales
+	(audio y vídeo) para que participen directamente del desarrollo del juego.</p>
+	<br>
+	<p class="texto1"><span class="texto2">Jaime Moreno Quintanar (100329996):</span> Encargado de la parte audiovisual de "Survive
+	the night", tanto del aspecto externo del juego como de integrar los elementos audiovisuales
+	(audio y vídeo) para que participen directamente del desarrollo del juego.</p>
+	<br>
+	<p class="texto1"><span class="texto2">Jaime Moreno Quintanar (100329996):</span> Encargado de la parte audiovisual de "Survive
+	the night", tanto del aspecto externo del juego como de integrar los elementos audiovisuales
+	(audio y vídeo) para que participen directamente del desarrollo del juego.</p>
+	<br>
+	<p class="texto1"><span class="texto2">Jaime Moreno Quintanar (100329996):</span> Encargado de la parte audiovisual de "Survive
+	the night", tanto del aspecto externo del juego como de integrar los elementos audiovisuales
+	(audio y vídeo) para que participen directamente del desarrollo del juego.</p>
+	
+	<br>
+	<p class="texto2">Cabe mencionar que la banda sonora de "Survive the night" ha sido creada por
+	Berto Quintanar (bertoquintanar@gmail.com) especialmente para este proyecto.</p>
   </section>
+  
+<!--Fin Sección Autores-->
+
+<!--Sección Referencias-->
+
   <section id="referencias"class="ocultx">
     <h1>Referencias</h1>
-    <p>afSEGFASDGASDwerywer5646GASDGS</p>
+	<p class="texto1"><span class="texto2">w3schools.com</span> <a href="https://www.w3schools.com/">w3schools.com</a></p>
 
   </section>
+<!--Fin Sección Referencias-->
+
 </section>
 
 </body>

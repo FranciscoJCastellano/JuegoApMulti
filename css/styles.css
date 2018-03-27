@@ -32,6 +32,7 @@ canvas{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+/*
 #score{
   position: absolute;
   top:50%;
@@ -82,7 +83,7 @@ canvas{
   border:none;
   font-size:140%;
 }
-
+*/
 
 .menuTitle{
   text-align: center;
@@ -90,7 +91,7 @@ canvas{
   font-family:Geneva;
   font-size:1.5em;
 }
-/*Efecto neon: https://www.youtube.com/watch?v=bShgVFIye1g
+/**Efecto neon: https://www.youtube.com/watch?v=bShgVFIye1g
 Efecto parpadeo: https://stackoverflow.com/questions/37436202/make-an-image-animate-dim-and-bright-with-css
 Desde aquí trabajo con título y subtítulo
 */
@@ -98,7 +99,7 @@ Desde aquí trabajo con título y subtítulo
 h1{
 	text-align: center;
 	color: white;
-  margin:0;
+	margin:0;
 	font: 150px existence;
 	font-family: 'Amatic SC';
 	text-shadow: 0px 0px 10px #ff005b,
@@ -112,12 +113,28 @@ h1{
 }
 h3{
 	text-align: center;
-  margin:0;
+	margin:0;
 	color: #11e299;
 	font: 38px existence;
 	font-family: 'VT323', monospace;
-
-
+}
+.texto1{
+	text-align: justify;
+	margin:0;
+	color: #11e299;
+	font: 20px existence;
+	font-family: 'VT323', monospace;
+}
+.texto2{
+	text-align: justify;
+	margin:0;
+	color: #ff005b;
+	font-weight: bold;
+	font: 25px existence;
+	font-family: 'VT323', monospace;
+}
+#subtitulo{
+	margin-bottom:100px;
 }
 .logo:hover{
   animation: logo-animation linear 0.1s;
@@ -213,6 +230,7 @@ h3{
 }
 /*Hasta aquí título y subtítulo*/
 
+
 section p{
   color:black;
   font-size:0.5em;
@@ -258,12 +276,7 @@ li a {
 a{
   text-decoration: none;
 }
-.link:hover{
-  background-color: #8ee;
-  color: #228;
-  font-style:italic;
-  text-transform: uppercase;
-}
+
 .title{
   font-family:Geneva;
   font-size:1.5em;
@@ -287,4 +300,17 @@ a{
     color: #ff005b;
 	font-size: 43px;
 
+}
+.datos{
+	background-color:transparent;
+    border: none;
+    color: #ff005b;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 35px;
+	font-family: 'VT323', monospace;
+    margin: 4px 2px;
+    cursor: pointer;
 }

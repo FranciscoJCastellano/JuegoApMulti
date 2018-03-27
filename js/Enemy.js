@@ -16,7 +16,7 @@ function Enemy(){
     this.limiter= this.maxVe;
   }
   this.life=Math.floor(minLife+factor*2);
-  this.power=Math.floor(factor*0.27);
+  this.power=Math.floor(factor*0.37);
   this.velx=0;
   this.vely=0;
   random=Math.floor(Math.random()*(3)-1);
