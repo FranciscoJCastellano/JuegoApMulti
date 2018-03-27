@@ -9,7 +9,7 @@ var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
 var food=[];
 // var bullets=[];
 var factor=10;//factor de dificultad para generar enemigos y obstáculos.
-var level=10;//nivel de juego
+var level=1;//nivel de juego
 var w=1280;
 var h=720;
 var random=0;//para generar random para las velocidades iniciales
@@ -28,6 +28,7 @@ var umbral2=30;//umbral para detectar dia/noche
 var levelChange=false;
 var isLoading=false;
 var show=true;
+var fps=60;
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
   if(elemento && elemento.getContext){
@@ -62,10 +63,8 @@ window.onload = function(){
 }
 function gameOn(){
   if(gameIsOn){
-
-    setInterval(draw,10);
-
-
+    var interval=1000/fps;
+    setInterval(draw,interval);
   }
 
   //alert("GAME ON");
@@ -139,6 +138,7 @@ function gameShow(){
     borra_todo();
 
     if(!isDay){
+      clearArrays(2);//si es de noche, ya no hace falta la comida
       var ie=enemies.length;
       while(ie--){
         enemies[ie].show();
@@ -294,23 +294,30 @@ function crearParedes(){
 /*************************
 Fecha: 25/3/18
 Definición: función para vaciar arrays antes de cambiar de nivel
+type: 1->enemigos 2->walls y wallspos 3->comida
 *************************************/
-function clearArrays(){
-  var j=enemies.length;
-  while(j--){
-    enemies.splice(j,1);
-  }
-  var j=walls.length;
-  while(j--){
-    walls.splice(j,1);
-  }
-  var j=food.length;
-  while(j--){
-    food.splice(j,1);
-  }
-  var j=wallspos.length;
-  while(j--){
-    wallspos.splice(j,1);
+function clearArrays(type){
+  switch (type) {
+    case 0:
+    var j=enemies.length;
+    while(j--){
+      enemies.splice(j,1);
+    }break;
+    case 1:
+    var j=walls.length;
+    while(j--){
+      walls.splice(j,1);
+    }
+    var j=wallspos.length;
+    while(j--){
+      wallspos.splice(j,1);
+    }break;
+    case 2:
+    var j=food.length;
+    while(j--){
+      food.splice(j,1);
+    }break;
+    default: break;
   }
 }
 /********************************************
