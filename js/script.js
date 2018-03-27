@@ -81,9 +81,11 @@ function draw(){
   document.getElementById('time').innerHTML = "Time Elapsed: " + Math.floor(videoJuego.currentTime);
   document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
   document.getElementById('food').innerHTML = "Food: " + food.length;
-  gameUpdate();
-  gameShow();
 
+  if(gameIsOn){
+    gameUpdate();
+    gameShow();
+  }
 }
 /************************************
 Autores: Alejandro Enrique Trigueros Álvarez, Francisco Javier Castellano Farrak, Sergio Elola García

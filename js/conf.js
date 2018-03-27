@@ -54,7 +54,6 @@ function hacerVisible(idEl){
   switch(idEl){
     case 0:
     juegoId.className = "visiblx";
-    play(videoJuego, audioJuego);
     break;
     case 1:
     descrId.className = "visiblx";

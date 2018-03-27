@@ -50,9 +50,9 @@ function Player(){
     if(ctx){
       ctx.save();
       if(isDay){
-        this.color="#000000";
+        this.color='#000000';
       }else if(!isDay){
-        this.color="#ffffff";
+        this.color='#ffffff';
       }
       ctx.shadowBlur=15;
       ctx.shadowColor='#BEFDFD';

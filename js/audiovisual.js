@@ -59,7 +59,6 @@ function pause(video, audio){
 	video.pause();
 	audio.pause();
 }
-
 function silenciar(video, audio){
 	video.muted=true;
 	audio.muted=true;
