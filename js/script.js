@@ -329,7 +329,7 @@ types: 0->Food 1->orbe 2->enemigos
 function repoblate(type){
   switch(type){
     case 0://comida
-    if(food.length<=0){
+    if(food.length<=0&&isDay){
       counter++;
       var i=factor*0.8;
       while(i--){
