@@ -112,7 +112,6 @@ function setup(){
   crearParedes();
   isLoading=false;
   loading();
-  orbe[0].coincideConWall();
 
   // console.log("Enemigos: "+enemies.length);
   player.score=totalScore;
@@ -190,8 +189,16 @@ Def: función para crear las criaturas del juego
 function createCreatures(){
   //creamos player
   player=new Player();
+
   //generamos orbe
-  orbe.push(new Orbe());
+  var i=true;
+  while (i) {
+    newOrbe = new Orbe();
+    i=newOrbe.coincideConWall();
+    if (i==false) {
+      orbe.push(newOrbe);
+    }
+  }
 
   //generamos los enemigos
   var i=level*factor*0.6;

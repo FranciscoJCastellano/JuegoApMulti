@@ -28,14 +28,16 @@ function Orbe(){
     }
   }
   this.coincideConWall=function(){
-    var coincide=true;
     var i=0;
     for(i ; i <= walls.length-1;i++){
       if (this.a < walls[i].x+walls[i].width
       && this.b < walls[i].y+walls[i].height
       && this.a > walls[i].x && this.b > walls[i].y) {
-        console.log('coincide');
+        console.log('coincide Orbe con wall!');
+        return true;
+        break;
       }
     }
+    return false;
   }
 }
