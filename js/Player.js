@@ -46,27 +46,28 @@ function Player(){
   this.show=function(){
     ctx = cargaContextoCanvas('myCanvas');
     this.colision();
-
     if(ctx){
-      ctx.save();
-      if(isDay){
-        this.color='#000000';
-      }else if(!isDay){
-        this.color='#ffffff';
-      }
       ctx.shadowBlur=15;
       ctx.shadowColor='#BEFDFD';
       ctx.fillStyle = this.color;
-
       ctx.fillRect(this.x,this.y,this.len,this.len);
       ctx.restore();
     }
-    if(this.tic==0){
-      this.len=20;
+    if(this.tic<=0){
+      this.resetColor();
     }
     this.tic--;
-
   }
+  this.resetColor=function() {
+    if(isDay){
+      this.len=20;
+      this.color="#000000";
+    }else if(!isDay){
+      this.color="#ffffff";
+      this.len=20;
+    }
+  }
+
   /************************************
   Autor: Francisco Javier Castellano Farrak
   Fecha: 16/3/18
@@ -76,24 +77,20 @@ function Player(){
     var sizeFactor=1.3;
     ctx = cargaContextoCanvas('myCanvas');
     if(!food&&!isDay){
-      this.len*=sizeFactor*0.78;
-      //this.color="#ff002f";
-      this.tic=5;
-        // ctx.save();
-        // ctx.fillStyle = "#ff002f";
-        // ctx.fillRect(this.x,this.y,sizeFactor*this.len,sizeFactor*this.len);
-        // ctx.restore();
+      console.log("Enemy colourChange");
+      this.color="#ff0000";
+      this.len*=sizeFactor*0.75;
+      this.tic=8;
     }else if(food&&isDay){
-      //console.log("food colourChange");
+      console.log("Food colourChange");
+      this.color='#00ffaa';
       this.len*=sizeFactor;
-    //  this.color="#1fefff";
-      this.tic=5;
-
-
-        // ctx.save();
-        // ctx.fillStyle = "#1fefff";
-        // ctx.fillRect(this.x,this.y,sizeFactor*this.len,sizeFactor*this.len);
-        // ctx.restore();
+      this.tic=10;
+    }else if (food&& !isDay) {
+      console.log("Orbe colourChange");
+      this.color='#00ffaa';
+      this.len*=sizeFactor;
+      this.tic=10;
     }
   }
 
