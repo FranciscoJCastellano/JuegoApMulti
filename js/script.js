@@ -280,20 +280,29 @@ function crearParedes(){
     wally = walls[i].y;
     wallxmax = wallx + walls[i].width;
     wallymax = wally + walls[i].height;
-    for (var j = wallx; j <= wallxmax; j++){
-      for (var k = wally,thresholdSup=wally+lenPla+desv; k <=thresholdSup ; k++){  // borde superior
-        wallspos.push(j*multp+k);
+
+    if (((wallxmax-lenPla)> w) || ((wallymax-lenPla)> h)){
+      for (var j = wallx; j <= wallxmax; j++){
+        for (var k = wally; k <= wallymax ; k++){
+          wallspos.push(j*multp+k);
+        }
       }
-      for (var k = wallymax-lenPla-desv; k <= wallymax ; k++){   // borde inferior
-        wallspos.push(j*multp+k);
+    } else {
+      for (var j = wallx; j <= wallxmax; j++){
+        for (var k = wally,thresholdSup=wally+lenPla+desv; k <=thresholdSup ; k++){  // borde superior
+          wallspos.push(j*multp+k);
+        }
+        for (var k = wallymax-lenPla-desv; k <= wallymax ; k++){   // borde inferior
+          wallspos.push(j*multp+k);
+        }
       }
-    }
-    for (var k = wally+lenPla+desv,thresholdLeft=wallymax-lenPla-desv; k <= thresholdLeft; k++){
-      for (var j = wallx; j <= wallx+lenPla+desv; j++){   //borde izquierdo
-        wallspos.push(j*multp+k);
-      }
-      for (var j = wallxmax-lenPla-desv; j <= wallxmax ; j++){  //borde derecho
-        wallspos.push(j*multp+k);
+      for (var k = wally+lenPla+desv,thresholdLeft=wallymax-lenPla-desv; k <= thresholdLeft; k++){
+        for (var j = wallx; j <= wallx+lenPla+desv; j++){   //borde izquierdo
+          wallspos.push(j*multp+k);
+        }
+        for (var j = wallxmax-lenPla-desv; j <= wallxmax ; j++){  //borde derecho
+          wallspos.push(j*multp+k);
+        }
       }
     }
   }
@@ -360,7 +369,7 @@ function repoblate(type){
     }
     break;
     case 1://orbe
-    if(orbe.lenth>0){
+    if(orbe.length>0){
       orbe=[];
     }
     if(orbe.length<0){
@@ -394,7 +403,7 @@ function detectarWall(player){
   if ((!(wallspos.includes((posxNew+1)*multp+posyNew+1))) && // arriba/izquierda
   (!(wallspos.includes((posxNew+lenPl-1)*multp+posyNew+1))) && //arriba/derecha
   (!(wallspos.includes((posxNew+1)*multp+posyNew+lenPl-1))) && // abajo/izquierda
-  (!(wallspos.includes((posxNew+lenPl-2)*multp+posyNew+lenPl-1)))) { //abajo/derecha
+  (!(wallspos.includes((posxNew+lenPl-1)*multp+posyNew+lenPl-1)))) { //abajo/derecha
     return true;
   }else
   return false;
