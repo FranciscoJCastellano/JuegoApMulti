@@ -111,6 +111,7 @@ function setup(){
   loading();
   createCreatures();
   crearParedes();
+  createOrbe();
   isLoading=false;
   loading();
 
@@ -145,9 +146,7 @@ function gameShow(){
       while(ie--){
         enemies[ie].show();
       }
-      if(orbe.length>0){
-        orbe[0].show();
-      }
+
     }
     var iw=walls.length;
     while(iw--){
@@ -157,6 +156,11 @@ function gameShow(){
       var ifood=food.length;
       while(ifood--){
         food[ifood].show();
+      }
+    }
+    if (!isDay) {
+      if(orbe.length>0){
+        orbe[0].show();
       }
     }
     player.show();
@@ -192,16 +196,6 @@ function createCreatures(){
   //creamos player
   player=new Player();
 
-  //generamos orbe
-  var i=true;
-  while (i) {
-    newOrbe = new Orbe();
-    i=newOrbe.coincideConWall();
-    if (i==false) {
-      orbe.push(newOrbe);
-    }
-  }
-
   //generamos los enemigos
   var i=level*factor*0.6;
   if(i>numMax*0.4){
@@ -217,6 +211,26 @@ function createCreatures(){
     food.push(new Food);
   }
 }
+/********************************************
+Autor:Alejandro Trigueros
+Fecha: 27/03/2018
+Def: genera el orbe fuera de walls
+*******************************************/
+function createOrbe(){
+  //generamos orbe
+  var i=true;
+  while (i) {
+    newOrbe = new Orbe();
+    var coincide=newOrbe.coincideConWall();
+    //console.log(coincide);
+    if (!coincide.includes(1)) {
+      orbe.push(newOrbe);
+      i=0;
+    }
+  }
+}
+
+
 /********************************************
 Autor:Sergio Elola García
 Fecha: 14/03/2018
