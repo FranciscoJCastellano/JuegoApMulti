@@ -28,6 +28,7 @@ var umbral2=30;//umbral para detectar dia/noche
 var levelChange=false;
 var isLoading=false;
 var show=true;
+var fps=60;
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
   if(elemento && elemento.getContext){
@@ -62,10 +63,8 @@ window.onload = function(){
 }
 function gameOn(){
   if(gameIsOn){
-
-    setInterval(draw,10);
-
-
+    var interval=1000/fps;
+    setInterval(draw,interval);
   }
 
   //alert("GAME ON");
@@ -110,6 +109,7 @@ function setup(){
   loading();
   createCreatures();
   crearParedes();
+  createOrbe();
   isLoading=false;
   loading();
 
@@ -139,13 +139,12 @@ function gameShow(){
     borra_todo();
 
     if(!isDay){
+      clearArrays(2);//si es de noche, ya no hace falta la comida
       var ie=enemies.length;
       while(ie--){
         enemies[ie].show();
       }
-      if(orbe.length>0){
-        orbe[0].show();
-      }
+
     }
     var iw=walls.length;
     while(iw--){
@@ -155,6 +154,11 @@ function gameShow(){
       var ifood=food.length;
       while(ifood--){
         food[ifood].show();
+      }
+    }
+    if (!isDay) {
+      if(orbe.length>0){
+        orbe[0].show();
       }
     }
     player.show();
@@ -189,8 +193,6 @@ Def: función para crear las criaturas del juego
 function createCreatures(){
   //creamos player
   player=new Player();
-  //generamos orbe
-  orbe.push(new Orbe());
 
   //generamos los enemigos
   var i=level*factor*0.6;
@@ -207,6 +209,26 @@ function createCreatures(){
     food.push(new Food);
   }
 }
+/********************************************
+Autor:Alejandro Trigueros
+Fecha: 27/03/2018
+Def: genera el orbe fuera de walls
+*******************************************/
+function createOrbe(){
+  //generamos orbe
+  var i=true;
+  while (i) {
+    newOrbe = new Orbe();
+    var coincide=newOrbe.coincideConWall();
+    //console.log(coincide);
+    if (!coincide.includes(1)) {
+      orbe.push(newOrbe);
+      i=0;
+    }
+  }
+}
+
+
 /********************************************
 Autor:Sergio Elola García
 Fecha: 14/03/2018
@@ -233,7 +255,7 @@ function crearParedes(){
       if (newWall.valid == 1 && works==1){
         walls.push(newWall);
         works = 1;
-      }
+      }else woks=0;
 
     }
   }
@@ -286,23 +308,30 @@ function crearParedes(){
 /*************************
 Fecha: 25/3/18
 Definición: función para vaciar arrays antes de cambiar de nivel
+type: 1->enemigos 2->walls y wallspos 3->comida
 *************************************/
-function clearArrays(){
-  var j=enemies.length;
-  while(j--){
-    enemies.splice(j,1);
-  }
-  var j=walls.length;
-  while(j--){
-    walls.splice(j,1);
-  }
-  var j=food.length;
-  while(j--){
-    food.splice(j,1);
-  }
-  var j=wallspos.length;
-  while(j--){
-    wallspos.splice(j,1);
+function clearArrays(type){
+  switch (type) {
+    case 0:
+    var j=enemies.length;
+    while(j--){
+      enemies.splice(j,1);
+    }break;
+    case 1:
+    var j=walls.length;
+    while(j--){
+      walls.splice(j,1);
+    }
+    var j=wallspos.length;
+    while(j--){
+      wallspos.splice(j,1);
+    }break;
+    case 2:
+    var j=food.length;
+    while(j--){
+      food.splice(j,1);
+    }break;
+    default: break;
   }
 }
 /********************************************
@@ -314,7 +343,7 @@ types: 0->Food 1->orbe 2->enemigos
 function repoblate(type){
   switch(type){
     case 0://comida
-    if(food.length<=0){
+    if(food.length<=0&&isDay){
       counter++;
       var i=factor*0.8;
       while(i--){

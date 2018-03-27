@@ -96,11 +96,11 @@ function instante(video){
 			if(!levelChange){
 				level++;
 				levelChange=false;
-				clearArrays();
+				clearArrays(0);//enemigos
+				clearArrays(1);//walls y wallspos
 				setup();
 
 			}
 		}
 	}
 }
-

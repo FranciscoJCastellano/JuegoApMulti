@@ -16,6 +16,9 @@ function esconder(){
   menu.style.display="none";
   data.style.display="block";
 }
+/*********************
+Función para inicializar los elementos necesarios DOM
+**********************/
 function initIds(){
   menu=document.getElementById("menu");
   data=document.getElementById("dataJuego");

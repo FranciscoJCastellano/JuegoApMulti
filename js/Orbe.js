@@ -4,8 +4,8 @@ Fecha: 21/3/18
 Definición: constructor del objeto Orbe
 *************************************/
 function Orbe(){
-  this.x=50;
-  this.y=50;
+  this.x=0;
+  this.y=0;
   this.r=10;
   this.a=Math.random()*w-1+this.r;
   this.b=Math.random()*h-1+this.r;
@@ -26,5 +26,17 @@ function Orbe(){
       ctx.closePath();
       ctx.restore();
     }
+  }
+  this.coincideConWall=function(){
+    var i=0;
+    var coincide=[0,0];
+    for(i ; i <= walls.length-1;i++){
+      if (this.a < walls[i].x+walls[i].width
+      && this.b < walls[i].y+walls[i].height
+      && this.a > walls[i].x && this.b > walls[i].y) {
+        coincide.push(1);
+      } else{coincide.push(0);}
+    }
+    return coincide;//si el orbe coincide con un wall el vector coincide contiene unos
   }
 }
