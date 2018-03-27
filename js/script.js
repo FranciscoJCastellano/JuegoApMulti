@@ -169,10 +169,13 @@ function gameUpdate(){
   if(load){
     document.addEventListener("timeupdate", instante(videoJuego), false);
   }
+  if(isDay){
+    comer(player,food);
+  }else if(!isDay){
+    comer(player,orbe);
+    lucha(player,enemies);
+  }
 
-  comer(player,food);
-  comer(player,orbe);
-  lucha(player,enemies);
 
   if(player.life<=0){
     gameIsOn=false;
