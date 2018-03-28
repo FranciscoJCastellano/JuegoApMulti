@@ -77,17 +77,14 @@ function Player(){
     var sizeFactor=1.3;
     ctx = cargaContextoCanvas('myCanvas');
     if(!food&&!isDay){
-      console.log("Enemy colourChange");
       this.color="#ff0000";
       this.len*=sizeFactor*0.75;
       this.tic=4;
     }else if(food&&isDay){
-      console.log("Food colourChange");
       this.color='#00ffaa';
       this.len*=sizeFactor;
       this.tic=6;
     }else if (food&& !isDay) {
-      console.log("Orbe colourChange");
       this.color='#00ffaa';
       this.len*=sizeFactor;
       this.tic=6;
