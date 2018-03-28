@@ -62,11 +62,11 @@ function Enemy(){
       random=Math.floor(Math.random()*(3)-1);
       this.vely=Math.floor(((-1)^random)*Math.random()*(this.maxVel-this.minVel+1)+this.minVel)*this.limiter;
     }
-    if(this.velx>1.03*velMax){
-      this.velx=1.03*velMax;
+    if(this.velx>1.23*velMax){
+      this.velx=1.23*velMax;
     }
-    if(this.vely>1.03*velMax){
-      this.vely=1.03*velMax;
+    if(this.vely>1.23*velMax){
+      this.vely=1.23*velMax;
     }
     this.x+=this.velx;
     this.y+=this.vely;
