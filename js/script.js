@@ -226,7 +226,7 @@ function createOrbe(){
     //console.log(coincide);
     if (!coincide.includes(1)) {
       orbe.push(newOrbe);
-      i=0;
+      i=false;
     }
   }
 }
@@ -453,8 +453,8 @@ function lucha(player,enemies){
 
         if(i>-1){
           if(enemies[i].life<=0){
-            enemies.splice(i,1);
             player.score+=enemies[i].prize;
+            enemies.splice(i,1);  
           }
         }
         player.hasCollided=true;
