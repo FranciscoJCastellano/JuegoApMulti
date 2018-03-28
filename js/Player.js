@@ -29,15 +29,14 @@ function Player(){
   Fecha: 15/03/2018
   MEJORA: ahora el player no puede atravesar muros
   *************************************/
-
   this.movePlayer=function(){
     /*Ahora usamos una función que devuelve un boolean si se detecta la pared*/
     if(detectarWall(this)){
       player.x+=player.speedX;
       player.y+=player.speedY;
     }
-
   }
+
   /************************************
   Autor: Francisco Javier Castellano Farrak
   Fecha: 10/3/18
@@ -73,17 +72,26 @@ function Player(){
   Fecha: 16/3/18
   Definición: función que cambia el color al player
   *************************************/
+  /************************************
+  Autor: Alejandro Enrique Trigueros Álvarez
+  Fecha: 27/3/18
+  Definición: función que cambia el color al player
+  *************************************/
   this.colourChange=function(food){
     var sizeFactor=1.3;
     ctx = cargaContextoCanvas('myCanvas');
+    //dependiendo de si es comida o enemigo el Player cmbia de colourChange
+    //food==false-> es enemigo y es de noche
     if(!food&&!isDay){
       this.color="#ff0000";
       this.len*=sizeFactor*0.75;
       this.tic=4;
+    //food==true->es comida de dia
     }else if(food&&isDay){
       this.color='#00ffaa';
       this.len*=sizeFactor;
       this.tic=6;
+    //food==true->ORBE de noche
     }else if (food&& !isDay) {
       this.color='#00ffaa';
       this.len*=sizeFactor;
@@ -101,7 +109,6 @@ function Player(){
   MEJORA: ahora no se queda bloqueado el player si hay un muro al otro lado
   *************************************/
   this.colision=function(){
-
     if((this.y+this.len)>=h){//bottom threshold
       if((!(wallspos.includes(this.x*multp+this.len)))
       && (!(wallspos.includes((this.x+this.len)*multp+this.len)))
