@@ -522,16 +522,20 @@ function coincideWall(player,wall){
   *******************************************/
   function restart(){
     primerPlay=0;
+    isDay=true;
     gameIsOn=false;
-    player.speedX=0;
-    player.speedY=0;
+    level=1;
+    player=undefined;
     clearArrays(0);//enemigos
     clearArrays(1);//walls y wallspos
     clearArrays(2);//comida
     clearArrays(3);//orbe
-    pause(videoJuego);
     setup();
+    pause(videoJuego);
+
     videoJuego.currentTime=0;
+    gameIsOn=true;
+
     play(videoJuego);
 
   }

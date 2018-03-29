@@ -14,11 +14,10 @@ function Data(score){
 
   this.set=function(){
     this.user=prompt('Enter your name:');
-    if(this.user===""){
+    if(this.user===""||this.user===null){
       this.user="No One";
     }
   }
-
 }
 
 var scores=[];
