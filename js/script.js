@@ -429,7 +429,7 @@ function comer(player,comida){
         //actualizamos la puntuación total
         totalScore=player.score;
         localStorage.setItem('latestScore',JSON.stringify(totalScore));
-        player.colourChange(true);
+        player.colourChange(1);
 
         if(i>-1){
           comida.splice(i,1);
@@ -454,7 +454,7 @@ function lucha(player,enemies){
   while(i--){
     if(player.hasCollided==false){
       if (coincide(player,enemies[i])){
-        player.colourChange(false);
+        player.colourChange(0);
         player.life-=enemies[i].power;
         enemies[i].life-=player.power;
 

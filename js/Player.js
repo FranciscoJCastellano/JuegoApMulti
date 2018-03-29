@@ -81,21 +81,20 @@ function Player(){
     var sizeFactor=1.3;
     ctx = cargaContextoCanvas('myCanvas');
     //dependiendo de si es comida o enemigo el Player cmbia de colourChange
-    //food==false-> es enemigo y es de noche
-    if(!food&&!isDay){
-      this.color="#ff0000";
-      this.len*=sizeFactor*0.75;
+    //food==1-> es enemigo y es de noche
+    switch(food){
+      //enemigo
+      case 0:this.color="#ff0000";
+      this.len*=sizeFactor*0.5;
       this.tic=4;
-    //food==true->es comida de dia
-    }else if(food&&isDay){
+      break;
+      //comida y orbe
+      case 1:
       this.color='#00ffaa';
       this.len*=sizeFactor;
       this.tic=6;
-    //food==true->ORBE de noche
-    }else if (food&& !isDay) {
-      this.color='#00ffaa';
-      this.len*=sizeFactor;
-      this.tic=6;
+      break;
+      default:break;
     }
   }
 
