@@ -7,11 +7,12 @@ function Enemy(){
   this.x=Math.random()*w-1;
   this.y=Math.random()*h-1;
   this.len=10;
-  this.through=false;//propiedad para atravesar las paredes
   this.minVel=2;
   this.maxVel=2.5;
   this.limiter=0.67*level;
   this.prize=2;
+  this.color='#4501ff';
+
   if(this.limiter> this.maxVe){
     this.limiter= this.maxVe;
   }
@@ -43,7 +44,7 @@ function Enemy(){
 
     if(ctx){
       ctx.save();
-      ctx.fillStyle = '#4501ff';
+      ctx.fillStyle = this.color;
       ctx.fillRect(this.x,this.y,this.len,this.len);
       ctx.restore();
     }

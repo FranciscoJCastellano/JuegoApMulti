@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function(){
   //Intentamos sacar la puntuación de local storage
   //Si no hay nada, se añade el array creado al principio
   var JSONnewscores=localStorage.getItem('scores');
-  if(JSONnewscores===null){
+  if(JSONnewscores===null||!localStorage.getItem('scores')){
     JSONnewscores= setNewScores(scores);
   }
   //guardamos las nuevas puntuaciones recibidas de localStorage
@@ -145,7 +145,12 @@ document.addEventListener("DOMContentLoaded", function(){
 
   //añadimos las nuevas Puntuaciones
   //y se meten en la tabla
-  addNewScore(totalScore,newscores);
+  if(newscores!==null){
+    addNewScore(totalScore,newscores);
+  }else{
+    iniciar();
+    newscores=scores;
+  }
   var i=newscores.length;
   while(i--){
     añadirATabla(newscores[i]);

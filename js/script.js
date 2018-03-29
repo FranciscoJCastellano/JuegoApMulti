@@ -7,7 +7,6 @@ var walls=[];
 var wallspos=[]; // aquí se almacenarán todas las posiciones de muros
 // (computacionalmente más rápido que usar loops)
 var food=[];
-// var bullets=[];
 var factor=10;//factor de dificultad para generar enemigos y obstáculos.
 var level=1;//nivel de juego
 var w=1280;
@@ -91,18 +90,18 @@ Fecha: 14/3/18
 Definición: guardamos el ctx sin nada dibujado y dibujamos los enemigos, player, bloques y comida
 *************************************/
 function setup(){
-  window.addEventListener('keydown', function(e){
+  addEvent(window, 'keydown', function(e){
     e.preventDefault();
-    //listenKeyPressed(e.keyCode);
     ctx.key=e.keyCode;
     ctx.keys=(ctx.keys||[]);
     tec[e.keyCode]=true;
-  },true);//Evento:se pulsa una tecla
+  });//Evento:se pulsa una tecla
 
-  window.addEventListener('keyup', function (e) {
-    ctx.key = false;
-    tec[e.keyCode]=false;
-  });
+  addEvent(window, 'keyup', function (e) {
+      ctx.key = false;
+      tec[e.keyCode]=false;
+    });
+
   pags.className = "ocultx";
   loadWheel.className = "visiblx";
   isLoading=true;
@@ -114,8 +113,6 @@ function setup(){
   loading();
   localStorage.setItem('latestScore',JSON.stringify(0));//empieza una partida nueva
 
-
-  // console.log("Enemigos: "+enemies.length);
   player.score=totalScore;
 
   document.getElementById('score').innerHTML = "Puntuación: " + totalScore;
@@ -525,7 +522,8 @@ function coincideWall(player,wall){
     isDay=true;
     gameIsOn=false;
     level=1;
-    player=undefined;
+    player.x=50;
+    player.y=50;
     clearArrays(0);//enemigos
     clearArrays(1);//walls y wallspos
     clearArrays(2);//comida
@@ -534,7 +532,6 @@ function coincideWall(player,wall){
     pause(videoJuego);
 
     videoJuego.currentTime=0;
-    gameIsOn=true;
 
     play(videoJuego);
 

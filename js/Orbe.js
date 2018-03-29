@@ -18,9 +18,9 @@ function Orbe(){
     if(ctx){
       ctx.save();
       ctx.beginPath();
-      ctx.fillStyle = "#ee9900";
+      ctx.fillStyle = '#ee9900';
       ctx.shadowBlur=10;
-      ctx.shadowColor="ffffff";
+      ctx.shadowColor='#ffffff';
       ctx.arc(this.a,this.b,this.r,0,2*Math.PI);//context.arc(x,y,r,sAngle,eAngle,counterclockwise);
       ctx.fill();
       ctx.closePath();

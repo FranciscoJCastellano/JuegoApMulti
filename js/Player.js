@@ -15,7 +15,6 @@ function Player(){
   this.life=Math.floor(2*minLife+(this.level*0.3)*0.23);
   this.power=Math.round((factor*this.level*0.4));
   this.hasCollided=false;
-  this.ammo=this.level*factor;//posible mejora: añadir proyectiles
   this.color='#ffffff';
   this.tic=0;
 
