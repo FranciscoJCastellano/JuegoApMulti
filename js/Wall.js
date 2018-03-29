@@ -13,6 +13,7 @@ function Wall(){
   this.y=Math.floor(Math.random()*h-1);
   this.width=Math.floor(Math.random()*(maxW-minW+1)+minW);
   this.height=Math.floor(Math.random()*(maxH-minH+1)+minH);
+  
   /********************************************
   Autor: Sergio Elola García
   Fecha: 14/03/2018

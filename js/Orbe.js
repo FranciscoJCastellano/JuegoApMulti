@@ -13,6 +13,7 @@ function Orbe(){
   this.y=this.b-this.r-1;
   this.len=2*this.r;
   this.prize=5;
+
   this.show=function(){
     ctx = cargaContextoCanvas('myCanvas');
     if(ctx){
@@ -27,15 +28,29 @@ function Orbe(){
       ctx.restore();
     }
   }
+
+  /************************************
+  Autor: Sergio Elola
+  Fecha: 29/3/18
+  Definición: devolver TRUE si el orbe coincide con algún muro
+  *************************************/
   this.coincideConWall=function(){
     var i=0;
     for(i ; i <= walls.length-1;i++){
-      if (this.a < walls[i].x+walls[i].width
-      && this.b < walls[i].y+walls[i].height
-      && this.a > walls[i].x && this.b > walls[i].y) {
+
+      wallx = walls[i].x;
+      wallxmax = wallx + walls[i].width;
+      wally = walls[i].y;
+      wallymax = wally + walls[i].height
+
+      if ( (((this.x-this.r-this.len) >= wallx) && (this.x <= wallxmax)) ||
+      (((this.y-this.r-this.len)>= wally) && (this.y <= wallymax)) ) {
+      //if (this.a < walls[i].x+walls[i].width
+      //&& this.b < walls[i].y+walls[i].height
+      //&& this.a > walls[i].x && this.b > walls[i].y) {
         return true
       }
     }
-    return false;//si el orbe coincide con un wall el vector coincide contiene unos
+    return false;
   }
 }
