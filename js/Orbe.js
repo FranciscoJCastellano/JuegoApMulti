@@ -36,21 +36,14 @@ function Orbe(){
   *************************************/
   this.coincideConWall=function(){
     var i=0;
-    for(i ; i <= walls.length-1;i++){
-
-      wallx = walls[i].x;
-      wallxmax = wallx + walls[i].width;
-      wally = walls[i].y;
-      wallymax = wally + walls[i].height
-
-      if ( (((this.x-this.r-this.len) >= wallx) && (this.x <= wallxmax)) ||
-      (((this.y-this.r-this.len)>= wally) && (this.y <= wallymax)) ) {
-      //if (this.a < walls[i].x+walls[i].width
-      //&& this.b < walls[i].y+walls[i].height
-      //&& this.a > walls[i].x && this.b > walls[i].y) {
-        return true
+        var coincide=[0,0];
+        for(i ; i <= walls.length-1;i++){
+          if (this.a-this.r < walls[i].x+walls[i].width
+          && this.b-this.r < walls[i].y+walls[i].height
+          && this.a+this.r > walls[i].x && this.b+this.r > walls[i].y) {
+            coincide.push(1);
+          } else{coincide.push(0);}
+        }
+        return coincide;//si el orbe coincide con un wall el vector coincide contiene unos
       }
-    }
-    return false;
-  }
 }

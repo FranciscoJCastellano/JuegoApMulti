@@ -1,4 +1,4 @@
-/*código del juego*/
+﻿/*código del juego*/
 var step=4;
 var player;
 var orbe=[];
@@ -222,14 +222,14 @@ function createOrbe(){
   var i=true;
   while (i) {
     newOrbe = new Orbe();
+    var coincide=newOrbe.coincideConWall();
     //console.log(coincide);
-    if (!newOrbe.coincideConWall()) {
+    if (!coincide.includes(1)) {
       orbe.push(newOrbe);
       i=false;
     }
   }
 }
-
 
 /********************************************
 Autor:Sergio Elola García
@@ -341,6 +341,11 @@ function clearArrays(type){
     var j=food.length;
     while(j--){
       food.splice(j,1);
+    }break;
+    case 3:
+    var j=orbe.length;
+    while(j--){
+      orbe.splice(j,1);
     }break;
     default: break;
   }

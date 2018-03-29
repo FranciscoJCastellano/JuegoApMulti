@@ -97,6 +97,7 @@ function instante(video){
 				levelChange=false;
 				clearArrays(0);//enemigos
 				clearArrays(1);//walls y wallspos
+				clearArrays(3);//orbe
 				setup();
 
 			}
