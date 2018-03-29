@@ -13,7 +13,6 @@ function Orbe(){
   this.y=this.b-this.r-1;
   this.len=2*this.r;
   this.prize=5;
-
   this.show=function(){
     ctx = cargaContextoCanvas('myCanvas');
     if(ctx){
@@ -28,12 +27,6 @@ function Orbe(){
       ctx.restore();
     }
   }
-
-  /************************************
-  Autor: Sergio Elola
-  Fecha: 29/3/18
-  Definición: devolver TRUE si el orbe coincide con algún muro
-  *************************************/
   this.coincideConWall=function(){
     var i=0;
         var coincide=[0,0];
