@@ -86,7 +86,7 @@ function changeTime(video){
 }
 
 function instante(video){
-	if(video){
+	if(gameIsOn&&video){
 		//console.log(video.currentTime);
 		if (isDay&&video.currentTime>=umbral1){//Termina el día y empieza la noche
 			isDay=!isDay;

@@ -30,6 +30,7 @@ function initIds(){
   autId=document.getElementById("autores");
   refId=document.getElementById("referencias");
   loadWheel=document.getElementById("wheel");
+
   pags.className = "ocultx";
   ver();
 }

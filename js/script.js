@@ -520,28 +520,21 @@ function coincideWall(player,wall){
   Fecha: 14/03/2018
   Def: actualiza la velocidad del player segun la tecla pulsada
   *******************************************/
-  // function listenKeyPressed(contx){
-  //   //Esta funcion se ejecuta al pulsar una tecla
-  //   key=contx.key;
-  //   player.speedX=0;
-  //   player.speedY=0;
-  //   if(key==40){//abajo
-  //     player.speedY = step;
-  //   }
-  //   if(key==39){//derecha
-  //     player.speedX = step;
-  //   }
-  //   if(key==38){//arriba
-  //     player.speedY= -step;
-  //   }
-  //   if(key==37){//izquierda
-  //     player.speedX= -step;
-  //   }
-  //   player.movePlayer();
-  //   if(key==32){//ESPACIO
-  //     //alert("Eres un pipa :3");
-  //   }
-  // }
+  function restart(){
+    primerPlay=0;
+    gameIsOn=false;
+    player.speedX=0;
+    player.speedY=0;
+    clearArrays(0);//enemigos
+    clearArrays(1);//walls y wallspos
+    clearArrays(2);//comida
+    clearArrays(3);//orbe
+    pause(videoJuego);
+    setup();
+    videoJuego.currentTime=0;
+    play(videoJuego);
+
+  }
 
 
   /********************************************
