@@ -112,6 +112,8 @@ function setup(){
   createOrbe();
   isLoading=false;
   loading();
+  localStorage.setItem('latestScore',JSON.stringify(0));//empieza una partida nueva
+
 
   // console.log("Enemigos: "+enemies.length);
   player.score=totalScore;
@@ -165,7 +167,6 @@ function gameShow(){
   }
 }
 function gameUpdate(){
-  totalScore=player.score;
   if(load){
     document.addEventListener("timeupdate", instante(videoJuego), false);
   }
@@ -180,7 +181,7 @@ function gameUpdate(){
   if(player.life<=0){
     gameIsOn=false;
     console.log('YOU LOSE');
-    window.location.href= "index.html";
+    window.location.href= "./gameOver.html";
     return 0;
   }
   repoblate(0);//rellena comida si no queda
@@ -425,6 +426,9 @@ function comer(player,comida){
     if(player.hasCollided==false){
       if (coincide(player,comida[i])){
         player.score+=comida[i].prize;
+        //actualizamos la puntuación total
+        totalScore=player.score;
+        localStorage.setItem('latestScore',JSON.stringify(totalScore));
         player.colourChange(true);
 
         if(i>-1){
@@ -443,7 +447,6 @@ function comer(player,comida){
 Autor: Francisco Javier Castellano Farrak
 Fecha: 13/3/18
 Definición: función para ver si el player y los enemigos están en la misma posición
-iDEA: poner
 Ref:https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
 *************************************/
 function lucha(player,enemies){
@@ -459,6 +462,9 @@ function lucha(player,enemies){
           if(enemies[i].life<=0){
             player.score+=enemies[i].prize;
             enemies.splice(i,1);
+            //actualizamos la puntuación total
+            totalScore=player.score;
+            localStorage.setItem('latestScore',JSON.stringify(totalScore));
           }
         }
         player.hasCollided=true;

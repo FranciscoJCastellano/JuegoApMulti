@@ -11,6 +11,12 @@ canvas{
   height:70%;
   width:70%; /*el tamaño del canvas se adapta al X% del tamaño de la pantalla*/
 }
+.fondo{
+  background-color: #000000;
+}
+.NoFondo{
+  background-color: transparent;
+}
 #wheel {
     position: absolute;
     left: 50%;
@@ -32,58 +38,7 @@ canvas{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-/*
-#score{
-  position: absolute;
-  top:50%;
-  left: 12%;
-  z-index: 1000;
-  border:none;
-  font-size:140%;
 
-}
-#life{
-  position: absolute;
-  top:50%;
-  left: 75%;
-  z-index: 1000;
-  border:none;
-  font-size:140%;
-}
-#enemies{
-  position: absolute;
-  top:55%;
-  left: 12%;
-  z-index: 100;
-  border:none;
-  font-size:140%;
-
-}
-#food{
-  position: absolute;
-  top:60%;
-  left: 75%;
-  z-index: 100;
-  border:none;
-  font-size:140%;
-}
-#level{
-  position: absolute;
-  top:50%;
-  left: 46%;
-  z-index: 100;
-  border:none;
-  font-size:140%;
-}
-#time{
-  position: absolute;
-  top:40%;
-  left: 72%;
-  z-index: 100;
-  border:none;
-  font-size:140%;
-}
-*/
 
 .menuTitle{
   text-align: center;
@@ -262,19 +217,11 @@ section p{
   position: relative;
 }
 
-li a {
-  background-color: #228;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 0.7em;
-  margin: 4px 2px;
-}
+
 a{
   text-decoration: none;
+  color: #11e299;
+
 }
 
 .title{
@@ -313,4 +260,42 @@ a{
 	font-family: 'VT323', monospace;
     margin: 4px 2px;
     cursor: pointer;
+}
+/* Estilos para las puntuaciones */
+
+#gameOver{
+  background-color:#000000;
+}
+#gameOverTitle{
+  display:block;
+  position:relative;
+  margin: 0 0 0.35em 0.1em;
+  width: auto;
+  font-size:7em;
+
+}
+#tabla{
+  margin:0 auto;
+  margin: 0 0 0 40%;
+  width:28%;
+  color: #ff005b;
+  font-weight: bold;
+  font: 4em existence;
+  font-family: 'VT323', monospace;
+}
+#botonVolver{
+  position:relative;
+  margin: 0 0 0 25%;
+  width:50%;
+  font-size:4em;
+
+}
+#scores,#fail{
+  font-size:4em;
+  text-align:center;
+}
+#fail{
+  font-size:4em;
+  text-align:center;
+  margin-top:1em;
 }
