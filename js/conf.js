@@ -60,22 +60,22 @@ function hacerVisible(idEl){
     case 1:
     descrId.className = "visiblx";
     bodyEl.className="fondo";
-    pause(videoJuego, audioJuego);
+    pause(videoJuego);
     break;
     case 2:
     procId.className = "visiblx";
     bodyEl.className="fondo";
-    pause(videoJuego, audioJuego);
+    pause(videoJuego);
     break;
     case 3:
     autId.className = "visiblx";
     bodyEl.className="fondo";
-    pause(videoJuego, audioJuego);
+    pause(videoJuego);
     break;
     case 4:
     refId.className = "visiblx";
     bodyEl.className="fondo";
-    pause(videoJuego, audioJuego);
+    pause(videoJuego);
     break;
   }
   // esconder();

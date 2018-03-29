@@ -12,7 +12,7 @@ canvas{
   width:70%; /*el tamaño del canvas se adapta al X% del tamaño de la pantalla*/
 }
 .fondo{
-  background-color: #000000;
+  background-color: white;
 }
 .NoFondo{
   background-color: transparent;

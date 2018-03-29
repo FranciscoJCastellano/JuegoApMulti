@@ -8,7 +8,7 @@ Referencias: https://www.w3schools.com/tags/ref_av_dom.asp
 var videoIsEnded = 0; //Si 1 --> vídeo terminado. Si 0 --> video no terminado
 var primerPlay = 0; //Si 0, no se ha pulsado play todavía. Si 1, se ha pulsado play una vez
 var videoJuego;//video del juego
-var audioJuego;//audio de juego
+//var audioJuego;//audio de juego
 var load=false;//se ha cargado la pagina?
 function alerta (texto) {
 	// console.log("Evento Capturado: " + texto);
@@ -16,7 +16,7 @@ function alerta (texto) {
 /*Inicializar audio y video*/
 function init(){
 	videoJuego = document.getElementById("video");
-	audioJuego = document.getElementById("audio");
+	//audioJuego = document.getElementById("audio");
 	load=true;
 }
 document.addEventListener("DOMContentLoaded", init, false);
@@ -41,31 +41,31 @@ function isEnded(video){
 }
 
 /*Función para reproducir el vídeo y el audio al pulsar el play y empezar el juego*/
-function play(video, audio){
+function play(video){
 	gameIsOn=true;//reanuda el juego
 	if (!primerPlay){
 		primerPlay=1;
 		video.play();//El vídeo comienza
-		audio.play();//El audio comienza
+		//audio.play();//El audio comienza
 		gameOn();//Función creada en script.js que pone a funcionar el juego
 	}else{
 		video.play();
-		audio.play();
+		//audio.play();
 	}
 }
 /*Pausa el video y el audio*/
-function pause(video, audio){
+function pause(video){
 	gameIsOn=false;//para el juego
 	video.pause();
-	audio.pause();
+	//audio.pause();
 }
-function silenciar(video, audio){
+function silenciar(video){
 	video.muted=true;
-	audio.muted=true;
+	//audio.muted=true;
 }
-function sonido(video,audio){
+function sonido(video){
 	video.muted=false;
-	audio.muted=false;
+	//audio.muted=false;
 }
 /*********
 Fecha: 17/3/18
@@ -75,12 +75,12 @@ function changeTime(video){
 	if(isDay){
 		isDay=!isDay;
 		console.log("Noche");
-		audio.currentTime=15;
+		//audio.currentTime=15;
 		video.currentTime=15;
 	}else if(!isDay){
 		isDay=!isDay;
 		console.log("Día");
-		audio.currentTime=0;
+		//audio.currentTime=0;
 		video.currentTime=0;
 	}
 }
