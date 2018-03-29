@@ -222,9 +222,8 @@ function createOrbe(){
   var i=true;
   while (i) {
     newOrbe = new Orbe();
-    var coincide=newOrbe.coincideConWall();
     //console.log(coincide);
-    if (!coincide.includes(1)) {
+    if (!newOrbe.coincideConWall()) {
       orbe.push(newOrbe);
       i=false;
     }
@@ -454,7 +453,7 @@ function lucha(player,enemies){
         if(i>-1){
           if(enemies[i].life<=0){
             player.score+=enemies[i].prize;
-            enemies.splice(i,1);  
+            enemies.splice(i,1);
           }
         }
         player.hasCollided=true;

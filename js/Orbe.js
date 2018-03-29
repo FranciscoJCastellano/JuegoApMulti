@@ -29,14 +29,13 @@ function Orbe(){
   }
   this.coincideConWall=function(){
     var i=0;
-    var coincide=[0,0];
     for(i ; i <= walls.length-1;i++){
       if (this.a < walls[i].x+walls[i].width
       && this.b < walls[i].y+walls[i].height
       && this.a > walls[i].x && this.b > walls[i].y) {
-        coincide.push(1);
-      } else{coincide.push(0);}
+        return true
+      }
     }
-    return coincide;//si el orbe coincide con un wall el vector coincide contiene unos
+    return false;//si el orbe coincide con un wall el vector coincide contiene unos
   }
 }
