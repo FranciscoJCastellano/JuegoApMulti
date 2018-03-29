@@ -25,6 +25,7 @@ var scores=[];
 var tabla;
 var JSONscores;
 var p;
+var restored=0;
 /***************
 Se inicia un array vacío de datos
 ********************/
@@ -83,14 +84,44 @@ function añadirATabla(data){
   var  newscore = newfila.insertCell(-1);
   newuser.innerHTML=data.user;
   newscore.innerHTML=data.score;
-
 }
-
+/***********************
+Coge el elemento tabla y elimina las filas
+***************************/
+function eliminarFilas(){
+  tabla=document.getElementById("tabla").getElementsByTagName('tbody')[0];
+  var j=5;
+  while(j--){
+    tabla.deleteRow(j);
+  }
+}
 /***********************
 Función para volver a la página original del juego
 ***************************/
 function playAgain(){
   window.location.href= "./index.html";
+}
+/***********************
+Función para volver a la página original del juego
+***************************/
+function restoreScore(){
+  if(!restored){
+    restored=1;
+    eliminarFilas();
+    localStorage.removeItem('scores');
+    scores.length=0;
+    iniciar();
+    let JSONrestoredScores=setNewScores(scores);//añadimos la version restaurada de scores
+    let restoredScores=JSON.parse(JSONrestoredScores);
+
+    var i=restoredScores.length;
+    while(i--){
+      añadirATabla(restoredScores[i]);
+    }
+  }else{
+    return;
+  }
+
 }
 
 
@@ -99,18 +130,22 @@ document.addEventListener("DOMContentLoaded", function(){
   tabla=document.getElementById("tabla");
   p=document.getElementById("fail");
 
-  iniciar();
-//Intentamos sacar la puntuación de local storage
-//Si no hay nada, se añade el array creado al principio
+  if(restored){
+    iniciar();
+  }else{
+    restored=0;
+  }
+  //Intentamos sacar la puntuación de local storage
+  //Si no hay nada, se añade el array creado al principio
   var JSONnewscores=localStorage.getItem('scores');
   if(JSONnewscores===null){
     JSONnewscores= setNewScores(scores);
   }
-//guardamos las nuevas puntuaciones recibidas de localStorage
+  //guardamos las nuevas puntuaciones recibidas de localStorage
   var newscores=JSON.parse(JSONnewscores);
 
-//añadimos las nuevas Puntuaciones
-//y se meten en la tabla
+  //añadimos las nuevas Puntuaciones
+  //y se meten en la tabla
   addNewScore(totalScore,newscores);
   var i=newscores.length;
   while(i--){
