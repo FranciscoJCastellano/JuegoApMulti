@@ -84,8 +84,8 @@ function Player(){
     switch(food){
       //enemigo
       case 0:this.color="#ff0000";
-      this.len*=sizeFactor*0.5;
-      this.tic=4;
+      this.len*=sizeFactor*0.8;
+      this.tic=8;
       break;
       //comida y orbe
       case 1:

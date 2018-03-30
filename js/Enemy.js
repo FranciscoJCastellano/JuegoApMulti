@@ -11,7 +11,7 @@ function Enemy(){
   this.maxVel=2.5;
   this.limiter=0.67*level;
   this.prize=2;
-  this.color='#4501ff';
+  this.color='#0080ff';
 
   if(this.limiter> this.maxVe){
     this.limiter= this.maxVe;

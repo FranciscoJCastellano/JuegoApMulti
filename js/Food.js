@@ -6,8 +6,7 @@ Definición: constructor del objeto tipo para la comida que debe recoger el juga
 function Food(){
   this.x=Math.random()*w-1;
   this.y=Math.random()*h-1;
-  this.len=5;
-  this.through=false;//propiedad para atravesar las paredes
+  this.len=7;
   this.minVel=3;
   this.maxVel=5;
   this.hasCollided=false;
@@ -37,7 +36,7 @@ function Food(){
 
     if(ctx){
       ctx.save();
-      ctx.fillStyle = '#f002ff';
+      ctx.fillStyle = '#7a00cc';
       ctx.fillRect(this.x,this.y,this.len,this.len);
       ctx.restore();
     }

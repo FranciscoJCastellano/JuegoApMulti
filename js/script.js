@@ -116,7 +116,7 @@ function setup(){
 
   player.score=totalScore;
 player.life=accLife;
- 
+
 
   document.getElementById('score').innerHTML = "Puntuación: " + totalScore;
   document.getElementById('life').innerHTML = "Vida: " + player.life;
@@ -454,10 +454,11 @@ function lucha(player,enemies){
   while(i--){
     if(player.hasCollided==false){
       if (coincide(player,enemies[i])){
-        player.colourChange(0);
         player.life-=enemies[i].power;
         enemies[i].life-=player.power;
-
+        player.colourChange(0);
+        player.x=50;
+        player.y=50;
         if(i>-1){
           if(enemies[i].life<=0){
             player.score+=enemies[i].prize;
@@ -534,16 +535,16 @@ function coincideWall(player,wall){
     player.speedX=0;
     player.speedY=0;
 
-    if(c.keys && tec[40]){
+    if(c.keys && tec[40]){//down
       player.speedY = step;
     }
-    if(c.keys && tec[39]){
+    if(c.keys && tec[39]){//right
       player.speedX = step;
     }
-    if(c.keys && tec[38]){
+    if(c.keys && tec[38]){//up
       player.speedY = -step;
     }
-    if(c.keys && tec[37]){
+    if(c.keys && tec[37]){//left
       player.speedX = -step;
     }
     player.movePlayer();
