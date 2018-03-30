@@ -110,7 +110,7 @@
 <section id="descripcion" class="ocultx">
   <h1>Descripción</h1>
   <p class="texto1"><span class="texto2">"Survive The Night"</span> es un juego arcade en el que podemos diferenciar dos
-    fases principales: Día y noche. Intenta comer todo lo posible durante el día para poder
+    fases principales: Día y Noche. Intenta comer todo lo posible durante el día para poder
     sobrevivir a los ataques de los malvados seres de la noche.</p>
     <br>
     <p class="texto1"><span class="texto2">Día: ¡Come todo lo que puedas!</span> Tienes 15
@@ -119,18 +119,18 @@
       <br>
       <p class="texto1"><span class="texto2">Noche: ¡Esquiva a los malos!</span> Ahora te enfrentas
         a 15 segundos de tensión en los que tendrás que evitar los bloques azules haciendo
-        gala de todos tus skills. Todas las noches aparecerá un orbe que subirá tu puntuación:
+        gala de todas tus skills. Todas las noches aparecerá un orbe que subirá tu puntuación:
         ¡Intenta cogerlo sin ser golpeado!</p>
         <br>
-        <p class="texto1"><span class="texto2">Más información.</span> "Survive The Night" comienza
-          en el nivel 1 y después de cada noche el nivel se incrementa, aumentando la velocidad de
-          los enemigos y el número de obstáculos que encuentras en el camino.</p>
+        <p class="texto1"><span class="texto2">Más información.</span> "Survive The Night" es un juego de dificultad ascendente,
+          donde se aumenta la velocidad de los enemigos y el número de obstáculos que encuentras en el camino a medida que vas avanzando
+          de nivel.</p>
           <br>
           <p class="texto1"><span class="texto2">¿Cómo se juega?</span> Simplemente tendrás que utilizar las
             flechas de dirección del teclado para ir arriba/abajo/derecha/izquierda (incluso te
             puedes mover en diagonal). ¡Así de fácil!</p>
             <br>
-            <p class="texto1"><span class="texto2">¡Supera tu máxima puntuación!</span> Juega para ver si puedes conseguir más puntos</p>
+            <p class="texto1"><span class="texto2">¡Supera tu máxima puntuación!</span> Juega para ver si puedes conseguir más puntos.</p>
           </section>
 
 
@@ -140,27 +140,37 @@
           <section id="proceso" class="ocultx">
             <h1>Proceso Desarrollo</h1>
             <p class="texto1"><span class="texto2">Idea. </span>Encontrar una idea relativamente original
-              y que cumpliese los requisitos necesarios para este primer proyecto de Aplicaciones Multimedia,
+              y que cumpliese los requisitos necesarios para este primer proyecto de Aplicaciones Multimedia
               no fue una tarea fácil. Nos pareció una buena idea desarrollar un juego arcade y reinventarlo
               de alguna manera insertando material audiovisual con el que el juego pudiese interactuar.</p>
               <br>
               <p class="texto1"><span class="texto2">Interacción multimedia. </span>"Survive The Night"
-                tiene dos fases, el día y la noche. Un vídeo de 30 segundos (15 para el día y 15 para la noche),
-                usado como fondo de la aplicación, diferencia cada fase. Un escuchador se encarga de leer y detectar
+                tiene dos fases, el día y la noche. Se usa un vídeo de 30 segundos como fondo de la aplicación que sirve
+                para diferenciar cada fase del juego (15 para el día y 15 para la noche). Un escuchador se encarga de leer y detectar
                 cuando el vídeo se encuentra justamente por la mitad, y en ese momento se pasará del día a la noche,
-                desaparecerán los bloques de alimento y aparecerán los enemigos que tendrás que evitar. Lo mismo
-                sucede cuando termina el vídeo, pero en este caso se pasa de la noche al día.</p>
+                desaparecerán los bloques de alimento y aparecerán los enemigos que tendrás que evitar. Cuando termina el vídeo,
+                se pasa de la noche al día empezando el vídeo jueg y aumentando el nivel (el mapa se vuelve más difícil y aumenta el número
+                de enemigos y su velocidad por la noche).</p>
                 <br>
                 <p class="texto1"><span class="texto2">Dificultades encontradas. </span><br>La principal dificultad
-                  que hemos encontrado ha sido optimizar la carga de los muros al principio de cada nivel.
+                  que hemos encontrado ha sido optimizar la creación de los muros al principio de cada nivel.
                   Una vez el tiempo de carga de los muros era aceptable, nos pusimos a optimizar al máximo los bucles
-                  que usamos para comprobar colisiones de el jugador con los muros.
+                  que usamos para comprobar colisiones de el jugador con los muros, comida y enemigos.
+                  <br> Otra dificultad fue el movimiento del player, que carecía de fluidez y empeoraba la experiencia de juego. Para resolver este
+                  problema utilizamos eventos de teclado múltiples. Gracias a esto conseguimos una mejor jugabilidad y movimiento del jugador en diagonal.
                   <br>En cuanto a los eventos multimedia, era nuestra intención que fuesen una parte principal de la dinámica de juego.
                   Tuvimos algunas dudas sobre el modo de implementar la función que se llama con el escuchador "ontimeupdate". Una vez tuvimos claro
                   cómo lo queríamos hacer, pusimos el escuchador en el archivo javascript principal. En ese momento ya conseguimos la base del juego.
                   <br>
                   Para la implementación de la pantalla de Game Over tuvimos que emplear tiempo en perfeccionar el uso de localStorage
-                  para poder mantener las puntuaciones durante varias partidas y poder mostrar las puntuaciones en una tabla
+                  para poder mantener las puntuaciones durante varias partidas y poder mostrar las puntuaciones en una tabla.
+                </p>
+                <br>
+                <p class="texto1"><span class="texto2">Bugs resueltos. </span>
+                <br> - Pasar de un lado del canvas al otro donde hubiese un muro (se quedaba inmovilizado el player).
+                <br> - El orbe situandose dentro de un muro y que no se pudiese coger.
+                <br> - Ralentización del juego producido a medida que aumentaba el nivel por la cantidad de muros creados.
+                <br> - A medida que avanzaba el juego se desincronizaba el vídeo del audio.
                 </p>
                 <br>
                 <p class="texto1"><span class="texto2">Realización. </span>Para el desarrollo de toda la aplicación hemos utilizado
