@@ -37,6 +37,7 @@ function iniciar(){
   var data5=new Data(0);
   scores.push(data1,data2,data3,data4,data5);
   sortData(scores);
+  return scores
 }
 
 var totalScore=JSON.parse(localStorage.getItem('latestScore'));
@@ -46,6 +47,10 @@ var totalScore=JSON.parse(localStorage.getItem('latestScore'));
 función para añadir una puntuación nueva si entra en el top 5
 ********************/
 function addNewScore(newScore,oldScores){
+  if(oldScores===undefined||oldScores===null){
+    scores=iniciar();
+    oldScores=scores;
+  }
   if(newScore>oldScores[0].score){
     oldScores.splice(0,1,new Data(newScore));//elimina el ultimo elemento y mete uno nuevo
     oldScores[0].set();
@@ -109,7 +114,7 @@ function restoreScore(){
     eliminarFilas();
     localStorage.removeItem('scores');
     scores.length=0;
-    iniciar();
+    scores=iniciar();
     let JSONrestoredScores=setNewScores(scores);//añadimos la version restaurada de scores
     let restoredScores=JSON.parse(JSONrestoredScores);
 
@@ -130,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function(){
   p=document.getElementById("fail");
 
   if(restored){
-    iniciar();
+    scores=iniciar();
   }else{
     restored=0;
   }
@@ -145,12 +150,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
   //añadimos las nuevas Puntuaciones
   //y se meten en la tabla
-  if(newscores!==null){
     addNewScore(totalScore,newscores);
-  }else{
-    iniciar();
-    newscores=scores;
-  }
+
   var i=newscores.length;
   while(i--){
     añadirATabla(newscores[i]);
