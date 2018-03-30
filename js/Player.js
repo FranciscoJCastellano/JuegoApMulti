@@ -12,7 +12,7 @@ function Player(){
   this.len=20;
   this.score=0;
   this.level=level;
-  this.life=Math.floor(2*minLife+(this.level*0.3)*0.23);
+  this.life=accLife;
   this.power=Math.round((factor*this.level*0.4));
   this.hasCollided=false;
   this.color='#ffffff';

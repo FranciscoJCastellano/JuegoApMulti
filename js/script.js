@@ -28,6 +28,7 @@ var levelChange=false;
 var isLoading=false;
 var show=true;
 var fps=60;
+var accLife=1;
 function cargaContextoCanvas(idCanvas){
   elemento = document.getElementById(idCanvas);
   if(elemento && elemento.getContext){
@@ -114,6 +115,8 @@ function setup(){
   localStorage.setItem('latestScore',JSON.stringify(0));//empieza una partida nueva
 
   player.score=totalScore;
+player.life=accLife;
+ 
 
   document.getElementById('score').innerHTML = "Puntuación: " + totalScore;
   document.getElementById('life').innerHTML = "Vida: " + player.life;
@@ -518,23 +521,7 @@ function coincideWall(player,wall){
   Def: actualiza la velocidad del player segun la tecla pulsada
   *******************************************/
   function restart(){
-    primerPlay=0;
-    isDay=true;
-    gameIsOn=false;
-    level=1;
-    player.x=50;
-    player.y=50;
-    clearArrays(0);//enemigos
-    clearArrays(1);//walls y wallspos
-    clearArrays(2);//comida
-    clearArrays(3);//orbe
-    setup();
-    pause(videoJuego);
-
-    videoJuego.currentTime=0;
-
-    play(videoJuego);
-
+	      window.location.href= "./index.html";
   }
 
 
