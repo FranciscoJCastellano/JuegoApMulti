@@ -1,4 +1,4 @@
-﻿/*código del juego*/
+/*código del juego*/
 var step=4;
 var player;
 var orbe=[];
@@ -99,9 +99,9 @@ function setup(){
   });//Evento:se pulsa una tecla
 
   addEvent(window, 'keyup', function (e) {
-      ctx.key = false;
-      tec[e.keyCode]=false;
-    });
+    ctx.key = false;
+    tec[e.keyCode]=false;
+  });
 
   pags.className = "ocultx";
   loadWheel.className = "visiblx";
@@ -112,10 +112,12 @@ function setup(){
   createOrbe();
   isLoading=false;
   loading();
-  localStorage.setItem('latestScore',JSON.stringify(0));//empieza una partida nueva
+  if(localStorage){
+    localStorage.setItem('latestScore',JSON.stringify(0));//empieza una partida nueva
+  }
 
   player.score=totalScore;
-player.life=accLife;
+  player.life=accLife;
 
 
   document.getElementById('score').innerHTML = "Puntuación: " + totalScore;
@@ -181,7 +183,13 @@ function gameUpdate(){
   if(player.life<=0){
     gameIsOn=false;
     console.log('YOU LOSE');
-    window.location.href= "./gameOver.html";
+    if(localStorage){
+      window.location.href= "./gameOver.html";
+
+    }else{
+      console.log("Internet Explorer no se lleva bien con localStorage; Use chrome");
+      window.location.href= "index.html";
+    }
     return 0;
   }
   repoblate(0);//rellena comida si no queda
@@ -428,7 +436,9 @@ function comer(player,comida){
         player.score+=comida[i].prize;
         //actualizamos la puntuación total
         totalScore=player.score;
-        localStorage.setItem('latestScore',JSON.stringify(totalScore));
+        if(localStorage){
+          localStorage.setItem('latestScore',JSON.stringify(totalScore));
+        }
         player.colourChange(1);
 
         if(i>-1){
@@ -465,7 +475,9 @@ function lucha(player,enemies){
             enemies.splice(i,1);
             //actualizamos la puntuación total
             totalScore=player.score;
-            localStorage.setItem('latestScore',JSON.stringify(totalScore));
+            if(localStorage){
+              localStorage.setItem('latestScore',JSON.stringify(totalScore));
+            }
           }
         }
         player.hasCollided=true;
@@ -522,7 +534,7 @@ function coincideWall(player,wall){
   Def: actualiza la velocidad del player segun la tecla pulsada
   *******************************************/
   function restart(){
-	      window.location.href= "./index.html";
+    window.location.href= "./index.html";
   }
 
 

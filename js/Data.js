@@ -40,17 +40,20 @@ function iniciar(){
   return scores
 }
 
-var totalScore=JSON.parse(localStorage.getItem('latestScore'));
+var JSONlatestScore=0;
+if(localStorage){
+  JSONlatestScore=localStorage.getItem('latestScore');
+}else{
+  console.log("Internet Explorer no se lleva bien con localStorage; Use chrome");
+}
+var totalScore=JSON.parse(JSONlatestScore);
 
 
 /*******************
 función para añadir una puntuación nueva si entra en el top 5
 ********************/
 function addNewScore(newScore,oldScores){
-  if(oldScores===undefined||oldScores===null){
-    scores=iniciar();
-    oldScores=scores;
-  }
+
   if(newScore>oldScores[0].score){
     oldScores.splice(0,1,new Data(newScore));//elimina el ultimo elemento y mete uno nuevo
     oldScores[0].set();
@@ -66,7 +69,9 @@ Añade las nuevas puntuaciones en local storage
 ****************************/
 function setNewScores(scores){
   let JSONscores=JSON.stringify(scores);
-  localStorage.setItem('scores',JSONscores);
+  if(localStorage){
+    localStorage.setItem('scores',JSONscores);
+  }
   return JSONscores;
 }
 /*********************
@@ -112,7 +117,9 @@ function restoreScore(){
   if(!restored){
     restored=1;
     eliminarFilas();
-    localStorage.removeItem('scores');
+    if(localStorage){
+      localStorage.removeItem('scores');
+    }
     scores.length=0;
     scores=iniciar();
     let JSONrestoredScores=setNewScores(scores);//añadimos la version restaurada de scores
@@ -141,16 +148,26 @@ document.addEventListener("DOMContentLoaded", function(){
   }
   //Intentamos sacar la puntuación de local storage
   //Si no hay nada, se añade el array creado al principio
-  var JSONnewscores=localStorage.getItem('scores');
-  if(JSONnewscores===null||!localStorage.getItem('scores')){
+  var JSONscore="0"
+  if(localStorage){
+    JSONscore=localStorage.getItem('scores');
+  }
+  var JSONnewscores=JSONscore;
+  if(JSONnewscores===null||!JSONscore){
     JSONnewscores= setNewScores(scores);
   }
   //guardamos las nuevas puntuaciones recibidas de localStorage
   var newscores=JSON.parse(JSONnewscores);
 
+  //necesario para que funcione en firefox
+  if(newscores.length==0||newscores===undefined||newscores===null){
+    scores=iniciar();
+    newscores=scores;
+    console.log(newscores);
+  }
   //añadimos las nuevas Puntuaciones
   //y se meten en la tabla
-    addNewScore(totalScore,newscores);
+  addNewScore(totalScore,newscores);
 
   var i=newscores.length;
   while(i--){

@@ -94,7 +94,7 @@ function instante(video){
 			isDay=!isDay;
 			if(!levelChange){
 				level++;
-				    accLife=player.life;
+				accLife=player.life;
 
 				levelChange=false;
 				clearArrays(0);//enemigos
