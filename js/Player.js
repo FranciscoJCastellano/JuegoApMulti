@@ -3,7 +3,6 @@ Autor: Francisco Javier Castellano Farrak
 Fecha: 10/3/18
 Definición: constructor del objeto player
 *************************************/
-var minLife=10;
 function Player(){
   this.x=50;
   this.y=50;
@@ -84,7 +83,7 @@ function Player(){
     switch(food){
       //enemigo
       case 0:this.color="#ff0000";
-      this.len*=sizeFactor*0.8;
+      // this.len*=sizeFactor*0.8;
       this.tic=8;
       break;
       //comida y orbe

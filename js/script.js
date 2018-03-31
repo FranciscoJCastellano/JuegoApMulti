@@ -124,9 +124,6 @@ function setup(){
   document.getElementById('life').innerHTML = "Vida: " + player.life;
   document.getElementById('level').innerHTML = "Nivel: " + player.level;
   document.getElementById('time').innerHTML = "Tiempo: " + Math.floor(videoJuego.currentTime);
-  //document.getElementById('enemies').innerHTML = "Enemies: " + enemies.length;
-  //document.getElementById('food').innerHTML = "Food: " + food.length;
-
   gameShow();
 
 }
@@ -137,7 +134,6 @@ function gameShow(){
 
   if(ctx){
 
-    //listenKeyPressed(ctx);
     multiKeyPressed(ctx);//mejora de listenKeyPressed()
 
     borra_todo();
@@ -193,7 +189,6 @@ function gameUpdate(){
     return 0;
   }
   repoblate(0);//rellena comida si no queda
-  //repoblate(1);//rellena orbe// no hace falta, el orbe se genera en cada nivel
   repoblate(2);//rellena enemigo
 }
 
@@ -252,7 +247,6 @@ function crearParedes(){
   if(k>numMax){
     k=numMax;
   }
-  // for(var i=0;i<k;i++){
   for(var i=0;i<k;i++){
     works = 0; // Si work = 0 el muro no es válido
     while (!works){ // repetir hasta que salga un muro válido
@@ -322,8 +316,6 @@ function crearParedes(){
   wallspos = unique_array;
 
   wallspos.sort(); // ordenamos para facilitar la búsqueda
-  //console.log(walls.length);
-
 }
 /*************************
 Fecha: 25/3/18
@@ -467,8 +459,7 @@ function lucha(player,enemies){
         player.life-=enemies[i].power;
         enemies[i].life-=player.power;
         player.colourChange(0);
-        player.x=50;
-        player.y=50;
+      
         if(i>-1){
           if(enemies[i].life<=0){
             player.score+=enemies[i].prize;

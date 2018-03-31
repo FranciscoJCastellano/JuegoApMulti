@@ -3,6 +3,8 @@ Autor: Francisco Javier Castellano Farrak
 Fecha: 10/3/18
 Definición: constructor del objeto tipo para los enemigos
 *************************************/
+var minLife=10;
+
 function Enemy(){
   this.x=Math.random()*w-1;
   this.y=Math.random()*h-1;
